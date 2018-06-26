@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs/FamilyHub/v15
+/FamilyHub.API/obj
+/FamilyHub.Data/obj
+/FamilyHub.EFCore/obj
+/FamilyHub.Repository/obj
+/FamilyHub.Service/obj

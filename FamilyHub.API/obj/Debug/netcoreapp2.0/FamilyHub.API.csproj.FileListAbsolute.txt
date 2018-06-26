@@ -3,7 +3,6 @@ H:\FamilyHub\FamilyHub\FamilyHub.API\bin\Debug\netcoreapp2.0\FamilyHub.API.runti
 H:\FamilyHub\FamilyHub\FamilyHub.API\bin\Debug\netcoreapp2.0\FamilyHub.API.runtimeconfig.dev.json
 H:\FamilyHub\FamilyHub\FamilyHub.API\bin\Debug\netcoreapp2.0\FamilyHub.API.dll
 H:\FamilyHub\FamilyHub\FamilyHub.API\bin\Debug\netcoreapp2.0\FamilyHub.API.pdb
-H:\FamilyHub\FamilyHub\FamilyHub.API\obj\Debug\netcoreapp2.0\FamilyHub.API.csprojResolveAssemblyReference.cache
 H:\FamilyHub\FamilyHub\FamilyHub.API\obj\Debug\netcoreapp2.0\FamilyHub.API.csproj.CoreCompileInputs.cache
 H:\FamilyHub\FamilyHub\FamilyHub.API\obj\Debug\netcoreapp2.0\FamilyHub.API.AssemblyInfoInputs.cache
 H:\FamilyHub\FamilyHub\FamilyHub.API\obj\Debug\netcoreapp2.0\FamilyHub.API.AssemblyInfo.cs
