@@ -8,3 +8,4 @@ H:\FamilyHub\FamilyHub\FamilyHub.API\obj\Debug\netcoreapp2.0\FamilyHub.API.Assem
 H:\FamilyHub\FamilyHub\FamilyHub.API\obj\Debug\netcoreapp2.0\FamilyHub.API.AssemblyInfo.cs
 H:\FamilyHub\FamilyHub\FamilyHub.API\obj\Debug\netcoreapp2.0\FamilyHub.API.dll
 H:\FamilyHub\FamilyHub\FamilyHub.API\obj\Debug\netcoreapp2.0\FamilyHub.API.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.API\obj\Debug\netcoreapp2.0\FamilyHub.API.csprojResolveAssemblyReference.cache
