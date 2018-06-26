@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FamilyHub.EFCore\FamilyHub.DataAccess.EFCore.csproj" />
+    <ProjectReference Include="..\FamilyHub.Repository\FamilyHub.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

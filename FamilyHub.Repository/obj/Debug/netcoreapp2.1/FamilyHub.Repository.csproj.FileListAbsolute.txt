@@ -1,0 +1,13 @@
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\bin\Debug\netcoreapp2.1\FamilyHub.Repository.deps.json
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\bin\Debug\netcoreapp2.1\FamilyHub.Repository.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\bin\Debug\netcoreapp2.1\FamilyHub.Repository.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\bin\Debug\netcoreapp2.1\FamilyHub.Data.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\bin\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\bin\Debug\netcoreapp2.1\FamilyHub.Data.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\bin\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\obj\Debug\netcoreapp2.1\FamilyHub.Repository.csprojResolveAssemblyReference.cache
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\obj\Debug\netcoreapp2.1\FamilyHub.Repository.csproj.CoreCompileInputs.cache
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\obj\Debug\netcoreapp2.1\FamilyHub.Repository.AssemblyInfoInputs.cache
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\obj\Debug\netcoreapp2.1\FamilyHub.Repository.AssemblyInfo.cs
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\obj\Debug\netcoreapp2.1\FamilyHub.Repository.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Repository\obj\Debug\netcoreapp2.1\FamilyHub.Repository.pdb

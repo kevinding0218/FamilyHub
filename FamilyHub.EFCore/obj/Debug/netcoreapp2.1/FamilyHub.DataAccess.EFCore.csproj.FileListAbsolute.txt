@@ -1,0 +1,11 @@
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\bin\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.deps.json
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\bin\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.dll
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\bin\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\bin\Debug\netcoreapp2.1\FamilyHub.Data.dll
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\bin\Debug\netcoreapp2.1\FamilyHub.Data.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\obj\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.csprojResolveAssemblyReference.cache
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\obj\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.csproj.CoreCompileInputs.cache
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\obj\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.AssemblyInfoInputs.cache
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\obj\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.AssemblyInfo.cs
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\obj\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.dll
+H:\FamilyHub\FamilyHub\FamilyHub.EFCore\obj\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.pdb
