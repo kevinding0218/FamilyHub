@@ -29,14 +29,14 @@ namespace FamilyHub.Repository.Repository.Common
             else if (withContact)
             {
                 return await GetSingleOrDefaultAsync(
-                        predicate: u => u.UserID == user.UserID,
+                        predicate: u => (u.Email == user.Email || u.UserID == user.UserID),
                         include: obj => obj.Include(entity => entity.ContactAddressFk)
                     );
             }
             else
             {
                 return await GetSingleOrDefaultAsync(
-                        predicate: u => u.UserID == user.UserID
+                        predicate: u => (u.Email == user.Email || u.UserID == user.UserID)
                     );
             }
         }

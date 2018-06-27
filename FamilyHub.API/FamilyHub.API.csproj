@@ -12,6 +12,7 @@
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FamilyHub.Auth\FamilyHub.AuthService.csproj" />
     <ProjectReference Include="..\FamilyHub.Data\FamilyHub.Data.csproj" />
     <ProjectReference Include="..\FamilyHub.EFCore\FamilyHub.DataAccess.EFCore.csproj" />
     <ProjectReference Include="..\FamilyHub.Service\FamilyHub.Service.csproj" />

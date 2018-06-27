@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyHub.Service", "Family
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyHub.API", "FamilyHub.API\FamilyHub.API.csproj", "{A1B86CF5-D9E2-48ED-9847-BB37CA3187D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyHub.Repository", "FamilyHub.Repository\FamilyHub.Repository.csproj", "{632C5574-92B1-412D-877C-1FE04126FB81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyHub.Repository", "FamilyHub.Repository\FamilyHub.Repository.csproj", "{632C5574-92B1-412D-877C-1FE04126FB81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyHub.AuthService", "FamilyHub.Auth\FamilyHub.AuthService.csproj", "{B5AE6C32-ACD6-49DC-9936-C57FE81F288C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{632C5574-92B1-412D-877C-1FE04126FB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{632C5574-92B1-412D-877C-1FE04126FB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{632C5574-92B1-412D-877C-1FE04126FB81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5AE6C32-ACD6-49DC-9936-C57FE81F288C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5AE6C32-ACD6-49DC-9936-C57FE81F288C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5AE6C32-ACD6-49DC-9936-C57FE81F288C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5AE6C32-ACD6-49DC-9936-C57FE81F288C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,14 +18,19 @@ namespace FamilyHub.Service.Services
         {
         }
 
-        public async Task<ISingleResponse<User>> GetUserAsync(string email, bool checkIfExisted = false)
+        public async Task<ISingleResponse<User>> GetUserAsync(
+            string email,
+            bool withCredential = false,
+            bool withContact = false,
+            bool checkIfExisted = false
+        )
         {
             var response = new SingleResponse<User>();
 
             try
             {
                 var existedUser = await UserRepository
-                    .GetUserInfo(new User(email));
+                    .GetUserInfo(new User(email), withCredential, withContact);
 
                 if (!checkIfExisted)
                 {
