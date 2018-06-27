@@ -1,4 +1,3 @@
-H:\FamilyHub\FamilyHub\FamilyHub.Auth\obj\Debug\netcoreapp2.1\FamilyHub.AuthService.csprojResolveAssemblyReference.cache
 H:\FamilyHub\FamilyHub\FamilyHub.Auth\obj\Debug\netcoreapp2.1\FamilyHub.AuthService.csproj.CoreCompileInputs.cache
 H:\FamilyHub\FamilyHub\FamilyHub.Auth\obj\Debug\netcoreapp2.1\FamilyHub.AuthService.AssemblyInfoInputs.cache
 H:\FamilyHub\FamilyHub\FamilyHub.Auth\obj\Debug\netcoreapp2.1\FamilyHub.AuthService.AssemblyInfo.cs
