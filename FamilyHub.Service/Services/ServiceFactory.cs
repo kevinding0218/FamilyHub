@@ -8,14 +8,14 @@ using System.Text;
 
 namespace FamilyHub.Service.Services
 {
-    public abstract class CoreService : ICoreService
+    public abstract class ServiceFactory : IServiceFactory
     {
         protected bool Disposed;
         protected readonly FamilyHubDbContext _dbContext;
 
         protected IUserRepository _userRepository;
 
-        public CoreService(FamilyHubDbContext dbContext)
+        public ServiceFactory(FamilyHubDbContext dbContext)
         {
             _dbContext = dbContext;
         }

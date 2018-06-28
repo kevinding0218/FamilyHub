@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FamilyHub.API.HttpResponse;
 using FamilyHub.API.ViewModel;
+using FamilyHub.AuthService;
 using FamilyHub.AuthService.Contracts;
 using FamilyHub.Data.Common;
 using FamilyHub.Service.Contracts;
@@ -10,6 +11,7 @@ using FamilyHub.Service.Responses;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,7 @@ namespace FamilyHub.API.Controllers.Common
         private readonly IMapper _mapper;
         private readonly IPasswordHasher _passwordHasher;
         private readonly ITokenService _tokenService;
+        private readonly JwtIssuerOptions _jwtOptions;
 
         protected ICommonService _commonService;
         private readonly IConfiguration _configuration;
@@ -35,12 +38,14 @@ namespace FamilyHub.API.Controllers.Common
             IPasswordHasher passwordHasher,
             ITokenService tokenService,
             ICommonService commonService,
+            IOptions<JwtIssuerOptions> jwtOptions,
             IConfiguration configuration)
         {
             _mapper = mapper;
             _passwordHasher = passwordHasher;
             _tokenService = tokenService;
             _commonService = commonService;
+            _jwtOptions = jwtOptions.Value;
             _configuration = configuration;
         }
 
@@ -80,29 +85,7 @@ namespace FamilyHub.API.Controllers.Common
                 else
                 {
                     // otherwise assign token and refreshtoken
-                    var userFromDb = internalUserResponse.Model;
-                    var usersClaims = new[]
-                    {
-                        new Claim(ClaimTypes.Name, userFromDb.Email),
-                        //new Claim(ClaimTypes.Email, userFromDb.Email),
-                        //new Claim(ClaimTypes.Role, "ADMIN"),
-                        new Claim(ClaimTypes.NameIdentifier, userFromDb.UserID.ToString())
-                    };
-
-                    var jwtToken = _tokenService.GenerateAccessToken(
-                        usersClaims,
-                        _configuration["JwtIssuerOptions:Issuer"].ToString(),
-                        _configuration["JwtIssuerOptions:Audience"].ToString(),
-                        Encoding.UTF8.GetBytes(_configuration["JwtIssuerOptions:ServerSigningPassword"]),
-                        int.Parse(_configuration["JwtIssuerOptions:AccessTokenDurationInMinutes"]));
-
-                    var refreshToken = _tokenService.GenerateRefreshToken();
-
-                    userFromDb.RefreshToken = refreshToken;
-
-                    await _commonService.UpdateUserRefreshTokenAsync(userFromDb);
-
-                    loginResponse.Model = new vmLoginUserResponse(userFromDb.UserID, userFromDb.Email, jwtToken, refreshToken);
+                    loginResponse.Model = await AssignTokenToUserAsync(internalUserResponse.Model);
                     loginResponse.Message = ResponseMessageDisplay.Success;
                 }
             }
@@ -113,6 +96,22 @@ namespace FamilyHub.API.Controllers.Common
 
 
             return loginResponse.ToHttpResponse();
+        }
+
+        private async Task<vmLoginUserResponse> AssignTokenToUserAsync(User userFromDb)
+        {
+            var jwtToken = _tokenService.GenerateAccessToken(
+                userFromDb.Email,
+                userFromDb.UserID.ToString(),
+                _jwtOptions);
+
+            var refreshToken = _tokenService.GenerateRefreshToken();
+
+            userFromDb.RefreshToken = refreshToken;
+
+            await _commonService.UpdateUserRefreshTokenAsync(userFromDb);
+
+            return new vmLoginUserResponse(userFromDb.UserID, userFromDb.Email, jwtToken, refreshToken);
         }
     }
 }

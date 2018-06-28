@@ -1,5 +1,6 @@
 ﻿using FamilyHub.API.HttpResponse;
 using FamilyHub.API.ViewModel;
+using FamilyHub.AuthService;
 using FamilyHub.AuthService.Contracts;
 using FamilyHub.Service.Contracts;
 using FamilyHub.Service.Display;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,7 @@ namespace FamilyHub.API.Controllers.Common
     {
         private readonly IPasswordHasher _passwordHasher;
         private readonly ITokenService _tokenService;
+        private readonly JwtIssuerOptions _jwtOptions;
         private readonly ICommonService _commonService;
         private readonly IConfiguration _configuration;
 
@@ -31,11 +34,13 @@ namespace FamilyHub.API.Controllers.Common
             IPasswordHasher passwordHasher,
             ITokenService tokenService,
             ICommonService commonService,
+            IOptions<JwtIssuerOptions> jwtOptions,
             IConfiguration configuration)
         {
             _passwordHasher = passwordHasher;
             _tokenService = tokenService;
             _commonService = commonService;
+            _jwtOptions = jwtOptions.Value;
             _configuration = configuration;
         }
 
@@ -46,16 +51,20 @@ namespace FamilyHub.API.Controllers.Common
 
             try
             {
-                var principal = _tokenService.GetPrincipalFromExpiredToken(refreshTokenRequest.Token,
+                #region Get Principal Info from Token
+                var principal = _tokenService.GetPrincipalFromExpiredToken(refreshTokenRequest.JwtToken,
                     Encoding.UTF8.GetBytes(_configuration["JwtIssuerOptions:ServerSigningPassword"]));
                 var userEmail = principal.Identity.Name; //this is mapped to the Name claim by default
+                #endregion
 
+                #region Get Claims Info from token principal
                 //var name = principal.Claims.Where(c => c.Type == ClaimTypes.Name)
                 //   .Select(c => c.Value).SingleOrDefault();
                 //var role = principal.Claims.Where(c => c.Type == ClaimTypes.Role)
                 //   .Select(c => c.Value).SingleOrDefault();
                 //var email = principal.Claims.Where(c => c.Type == ClaimTypes.Email)
                 //   .Select(c => c.Value).SingleOrDefault();
+                #endregion
 
                 var internalUserResponse = await _commonService.GetUserAsync(userEmail);
 
@@ -65,11 +74,9 @@ namespace FamilyHub.API.Controllers.Common
                 var userFromDb = internalUserResponse.Model;
 
                 var newJwtToken = _tokenService.GenerateAccessToken(
-                    principal.Claims,
-                    _configuration["JwtIssuerOptions:Issuer"].ToString(),
-                    _configuration["JwtIssuerOptions:Audience"].ToString(),
-                    Encoding.UTF8.GetBytes(_configuration["JwtIssuerOptions:ServerSigningPassword"]),
-                    int.Parse(_configuration["JwtIssuerOptions:AccessTokenDurationInMinutes"]));
+                        userFromDb.Email,
+                        userFromDb.UserID.ToString(),
+                        _jwtOptions);
                 var newRefreshToken = _tokenService.GenerateRefreshToken();
 
                 userFromDb.RefreshToken = newRefreshToken;

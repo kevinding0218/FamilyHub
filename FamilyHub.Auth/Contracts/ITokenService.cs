@@ -8,12 +8,8 @@ namespace FamilyHub.AuthService.Contracts
 {
     public interface ITokenService
     {
-        string GenerateAccessToken(IEnumerable<Claim> claims, string Issuer, string Audience, byte[] ServerSigningPassword, int AccessTokenDurationInMinutes);
+        string GenerateAccessToken(string Email, string UID, JwtIssuerOptions jwtOptions);
         string GenerateRefreshToken();
         ClaimsPrincipal GetPrincipalFromExpiredToken(string token, byte[] ServerSigningPassword);
-
-        Task<string> GenerateEncodedToken(string userName, ClaimsIdentity identity, bool InternalUser = false);
-        ClaimsIdentity GenerateClaimsIdentity(string userName, string id);
-        ClaimsIdentity GenerateClaimsIdentityAdmin(string userName, string id);
     }
 }

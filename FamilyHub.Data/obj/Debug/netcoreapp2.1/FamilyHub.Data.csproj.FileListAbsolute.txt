@@ -1,6 +1,7 @@
 H:\FamilyHub\FamilyHub\FamilyHub.Data\bin\Debug\netcoreapp2.1\FamilyHub.Data.deps.json
 H:\FamilyHub\FamilyHub\FamilyHub.Data\bin\Debug\netcoreapp2.1\FamilyHub.Data.dll
 H:\FamilyHub\FamilyHub\FamilyHub.Data\bin\Debug\netcoreapp2.1\FamilyHub.Data.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Data\obj\Debug\netcoreapp2.1\FamilyHub.Data.csprojResolveAssemblyReference.cache
 H:\FamilyHub\FamilyHub\FamilyHub.Data\obj\Debug\netcoreapp2.1\FamilyHub.Data.csproj.CoreCompileInputs.cache
 H:\FamilyHub\FamilyHub\FamilyHub.Data\obj\Debug\netcoreapp2.1\FamilyHub.Data.AssemblyInfoInputs.cache
 H:\FamilyHub\FamilyHub\FamilyHub.Data\obj\Debug\netcoreapp2.1\FamilyHub.Data.AssemblyInfo.cs

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FamilyHub.Service.Services
 {
-    public class CommonService : CoreService, ICommonService
+    public class CommonService : ServiceFactory, ICommonService
     {
         public CommonService(FamilyHubDbContext dbContext)
             : base(dbContext)

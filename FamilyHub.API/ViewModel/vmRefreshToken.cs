@@ -7,7 +7,7 @@ namespace FamilyHub.API.ViewModel
 {
     public class vmRefreshTokenRequest
     {
-        public string Token { get; set; }
+        public string JwtToken { get; set; }
         public string RefreshToken { get; set; }
 
         public vmRefreshTokenRequest()
@@ -18,7 +18,7 @@ namespace FamilyHub.API.ViewModel
 
     public class vmRefreshTokenResponse
     {
-        public string Token { get; set; }
+        public string JwtToken { get; set; }
         public string RefreshToken { get; set; }
 
         public vmRefreshTokenResponse()
@@ -26,9 +26,9 @@ namespace FamilyHub.API.ViewModel
 
         }
 
-        public vmRefreshTokenResponse(string token, string refreshToken)
+        public vmRefreshTokenResponse(string jwtToken, string refreshToken)
         {
-            this.Token = token;
+            this.JwtToken = jwtToken;
             this.RefreshToken = refreshToken;
         }
     }

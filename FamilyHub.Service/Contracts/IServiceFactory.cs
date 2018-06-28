@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FamilyHub.Service.Contracts
 {
-    public interface ICoreService : IDisposable
+    public interface IServiceFactory : IDisposable
     {
     }
 }
