@@ -10,17 +10,43 @@ using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 using System.Security.Principal;
 using System.Linq;
+using FamilyHub.Data.Common;
+using FamilyHub.Service.Contracts;
+using FamilyHub.ViewModel;
 
 namespace FamilyHub.AuthService.AuthServices
 {
     public class TokenService : ITokenService
     {
         private readonly JwtIssuerOptions _jwtOptions;
+        private readonly ICommonService _commonService;
 
-        public TokenService(IOptions<JwtIssuerOptions> jwtOptions)
+        public TokenService(IOptions<JwtIssuerOptions> jwtOptions, ICommonService commonService)
         {
             _jwtOptions = jwtOptions.Value;
             ThrowIfInvalidOptions(_jwtOptions);
+
+            _commonService = commonService;
+        }
+
+        protected static void ThrowIfInvalidOptions(JwtIssuerOptions options)
+        {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+
+            if (options.ValidFor <= TimeSpan.Zero)
+            {
+                throw new ArgumentException("Must be a non-zero TimeSpan.", nameof(JwtIssuerOptions.ValidFor));
+            }
+
+            if (options.SigningCredentials == null)
+            {
+                throw new ArgumentNullException(nameof(JwtIssuerOptions.SigningCredentials));
+            }
+
+            if (options.JtiGenerator == null)
+            {
+                throw new ArgumentNullException(nameof(JwtIssuerOptions.JtiGenerator));
+            }
         }
 
         public string GenerateAccessToken(string Email, string UID, JwtIssuerOptions jwtOptions)
@@ -96,24 +122,36 @@ namespace FamilyHub.AuthService.AuthServices
             return principal;
         }
 
-        protected static void ThrowIfInvalidOptions(JwtIssuerOptions options)
+        public async Task<vmLoginUserResponse> AssignTokenToLoginUserAsync(User userFromDb)
         {
-            if (options == null) throw new ArgumentNullException(nameof(options));
+            var jwtToken = GenerateAccessToken(
+                userFromDb.Email,
+                userFromDb.UserID.ToString(),
+                _jwtOptions);
 
-            if (options.ValidFor <= TimeSpan.Zero)
-            {
-                throw new ArgumentException("Must be a non-zero TimeSpan.", nameof(JwtIssuerOptions.ValidFor));
-            }
+            var refreshToken = GenerateRefreshToken();
 
-            if (options.SigningCredentials == null)
-            {
-                throw new ArgumentNullException(nameof(JwtIssuerOptions.SigningCredentials));
-            }
+            userFromDb.RefreshToken = refreshToken;
 
-            if (options.JtiGenerator == null)
-            {
-                throw new ArgumentNullException(nameof(JwtIssuerOptions.JtiGenerator));
-            }
+            await _commonService.UpdateUserRefreshTokenAsync(userFromDb);
+
+            return new vmLoginUserResponse(userFromDb.UserID, userFromDb.Email, jwtToken, refreshToken);
+        }
+
+        public async Task<vmRefreshTokenResponse> AssignRefreshTokenAsync(User userFromDb)
+        {
+            var jwtToken = GenerateAccessToken(
+                userFromDb.Email,
+                userFromDb.UserID.ToString(),
+                _jwtOptions);
+
+            var refreshToken = GenerateRefreshToken();
+
+            userFromDb.RefreshToken = refreshToken;
+
+            await _commonService.UpdateUserRefreshTokenAsync(userFromDb);
+
+            return new vmRefreshTokenResponse(jwtToken, refreshToken);
         }
     }
 }

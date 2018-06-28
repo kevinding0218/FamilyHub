@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FamilyHub.API.HttpResponse;
-using FamilyHub.API.ViewModel;
+using FamilyHub.ViewModel;
 using FamilyHub.AuthService;
 using FamilyHub.AuthService.Contracts;
 using FamilyHub.Data.Common;
@@ -50,7 +50,7 @@ namespace FamilyHub.API.Controllers.Common
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Signup([FromBody]vmRegisterUser registerUser)
+        public async Task<IActionResult> Signup([FromBody]vmRegisterUserRequest registerUser)
         {
             var validEmailResponse = await _commonService.GetUserAsync(registerUser.Email, checkIfExisted: true);
 
@@ -60,7 +60,7 @@ namespace FamilyHub.API.Controllers.Common
             {
                 registerUser.Password = _passwordHasher.GenerateIdentityV3Hash(registerUser.Password);
 
-                var addedUser = _mapper.Map<vmRegisterUser, User>(registerUser);
+                var addedUser = _mapper.Map<vmRegisterUserRequest, User>(registerUser);
                 var registerUserResponse = await _commonService.RegisterNewUser(addedUser);
 
                 return registerUserResponse.ToHttpResponse();
@@ -68,24 +68,24 @@ namespace FamilyHub.API.Controllers.Common
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody]vmLoginUser loggingUser)
+        public async Task<IActionResult> Login([FromBody]vmLoginUserRequest loggingUser)
         {
             var loginResponse = new SingleResponse<vmLoginUserResponse>();
 
             try
             {
-                var internalUserResponse = await _commonService.GetUserAsync(loggingUser.Email, withCredential: true);
+                var existedUserResponse = await _commonService.GetUserAsync(loggingUser.Email, withCredential: true);
 
                 // if User does not exist or authentication fails
-                if (internalUserResponse.Model == null || internalUserResponse.Model.UserID == 0 ||
-                    !_passwordHasher.VerifyIdentityV3Hash(loggingUser.Password, internalUserResponse.Model.UserPasswords.First().Password))
+                if (existedUserResponse.Model == null || existedUserResponse.Model.UserID == 0 ||
+                    !_passwordHasher.VerifyIdentityV3Hash(loggingUser.Password, existedUserResponse.Model.UserPasswords.First().Password))
                 {
                     throw new FamilyHubException(string.Format(CommonMessageDisplays.FailedAuthenticationExceptionMessage));
                 }
                 else
                 {
                     // otherwise assign token and refreshtoken
-                    loginResponse.Model = await AssignTokenToUserAsync(internalUserResponse.Model);
+                    loginResponse.Model = await _tokenService.AssignTokenToLoginUserAsync(existedUserResponse.Model);
                     loginResponse.Message = ResponseMessageDisplay.Success;
                 }
             }
@@ -96,22 +96,6 @@ namespace FamilyHub.API.Controllers.Common
 
 
             return loginResponse.ToHttpResponse();
-        }
-
-        private async Task<vmLoginUserResponse> AssignTokenToUserAsync(User userFromDb)
-        {
-            var jwtToken = _tokenService.GenerateAccessToken(
-                userFromDb.Email,
-                userFromDb.UserID.ToString(),
-                _jwtOptions);
-
-            var refreshToken = _tokenService.GenerateRefreshToken();
-
-            userFromDb.RefreshToken = refreshToken;
-
-            await _commonService.UpdateUserRefreshTokenAsync(userFromDb);
-
-            return new vmLoginUserResponse(userFromDb.UserID, userFromDb.Email, jwtToken, refreshToken);
         }
     }
 }

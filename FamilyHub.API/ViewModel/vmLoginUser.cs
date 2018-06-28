@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FamilyHub.API.ViewModel
 {
-    public class vmLoginUser
+    public class vmLoginUserRequest
     {
         public string Email { get; set; }
         public string Password { get; set; }

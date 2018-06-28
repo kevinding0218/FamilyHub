@@ -4304,6 +4304,9 @@
       },
       "FamilyHub.AuthService/1.0.0": {
         "dependencies": {
+          "FamilyHub.Data": "1.0.0",
+          "FamilyHub.Service": "1.0.0",
+          "FamilyHub.ViewModel": "1.0.0",
           "Microsoft.Extensions.Options": "2.1.1",
           "Newtonsoft.Json": "11.0.2"
         },
@@ -4357,6 +4360,14 @@
         },
         "compile": {
           "FamilyHub.Service.dll": {}
+        }
+      },
+      "FamilyHub.ViewModel/1.0.0": {
+        "runtime": {
+          "FamilyHub.ViewModel.dll": {}
+        },
+        "compile": {
+          "FamilyHub.ViewModel.dll": {}
         }
       },
       "Microsoft.NETCore.App/2.1.0": {
@@ -6571,6 +6582,11 @@
       "sha512": ""
     },
     "FamilyHub.Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FamilyHub.ViewModel/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

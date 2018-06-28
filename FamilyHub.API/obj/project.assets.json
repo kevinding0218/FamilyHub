@@ -4701,6 +4701,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
+          "FamilyHub.Data": "1.0.0",
+          "FamilyHub.Service": "1.0.0",
+          "FamilyHub.ViewModel": "1.0.0",
           "Microsoft.Extensions.Options": "2.1.1",
           "Newtonsoft.Json": "11.0.2"
         },
@@ -4762,6 +4765,16 @@
         },
         "runtime": {
           "bin/placeholder/FamilyHub.Service.dll": {}
+        }
+      },
+      "FamilyHub.ViewModel/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "compile": {
+          "bin/placeholder/FamilyHub.ViewModel.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FamilyHub.ViewModel.dll": {}
         }
       }
     }
@@ -12510,6 +12523,11 @@
       "type": "project",
       "path": "../FamilyHub.Service/FamilyHub.Service.csproj",
       "msbuildProject": "../FamilyHub.Service/FamilyHub.Service.csproj"
+    },
+    "FamilyHub.ViewModel/1.0.0": {
+      "type": "project",
+      "path": "../FamilyHub.ViewModel/FamilyHub.ViewModel.csproj",
+      "msbuildProject": "../FamilyHub.ViewModel/FamilyHub.ViewModel.csproj"
     }
   },
   "projectFileDependencyGroups": {

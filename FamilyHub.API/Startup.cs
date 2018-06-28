@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using FamilyHub.API.Middleware;
-using FamilyHub.API.ViewModel;
+using FamilyHub.ViewModel;
 using FamilyHub.AuthService;
 using FamilyHub.AuthService.AuthServices;
 using FamilyHub.AuthService.Contracts;
@@ -55,14 +55,16 @@ namespace FamilyHub.API
             services.AddAutoMapper();
             #endregion
 
-            #region Inject Auth Service Layer
-            services.AddTransient<ITokenService, TokenService>();
-            services.AddTransient<IPasswordHasher, PasswordHasher>();
-            #endregion
-
             #region Inject Business Service Layer
             services.AddScoped<ICommonService, CommonService>();
             #endregion
+
+            #region Inject Auth Service Layer
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddTransient<IPasswordHasher, PasswordHasher>();
+            #endregion
+
+
 
             #region Configure JwtIssuerOptions
             // Get options from app settings

@@ -1,5 +1,5 @@
 ﻿using FamilyHub.API.HttpResponse;
-using FamilyHub.API.ViewModel;
+using FamilyHub.ViewModel;
 using FamilyHub.AuthService;
 using FamilyHub.AuthService.Contracts;
 using FamilyHub.Service.Contracts;
@@ -66,23 +66,12 @@ namespace FamilyHub.API.Controllers.Common
                 //   .Select(c => c.Value).SingleOrDefault();
                 #endregion
 
-                var internalUserResponse = await _commonService.GetUserAsync(userEmail);
+                var existedUserResponse = await _commonService.GetUserAsync(userEmail);
 
-                if (internalUserResponse.Model == null || internalUserResponse.Model.RefreshToken != refreshTokenRequest.RefreshToken)
+                if (existedUserResponse.Model == null || existedUserResponse.Model.RefreshToken != refreshTokenRequest.RefreshToken)
                     throw new FamilyHubException(string.Format(CommonMessageDisplays.UserNotFoundExceptionMessage, userEmail));
 
-                var userFromDb = internalUserResponse.Model;
-
-                var newJwtToken = _tokenService.GenerateAccessToken(
-                        userFromDb.Email,
-                        userFromDb.UserID.ToString(),
-                        _jwtOptions);
-                var newRefreshToken = _tokenService.GenerateRefreshToken();
-
-                userFromDb.RefreshToken = newRefreshToken;
-                await _commonService.UpdateUserRefreshTokenAsync(userFromDb);
-
-                refreshTokenResponse.Model = new vmRefreshTokenResponse(newJwtToken, newRefreshToken);
+                refreshTokenResponse.Model = await _tokenService.AssignRefreshTokenAsync(existedUserResponse.Model);
                 refreshTokenResponse.Message = ResponseMessageDisplay.Success;
             }
             catch (Exception ex)

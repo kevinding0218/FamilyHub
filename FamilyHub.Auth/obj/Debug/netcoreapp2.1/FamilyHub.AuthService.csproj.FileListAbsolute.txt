@@ -13,3 +13,13 @@ H:\FamilyHub\FamilyHub\FamilyHub.Auth\obj\Debug\netcoreapp2.1\FamilyHub.AuthServ
 H:\FamilyHub\FamilyHub\FamilyHub.Auth\obj\Debug\netcoreapp2.1\FamilyHub.AuthService.AssemblyInfo.cs
 H:\FamilyHub\FamilyHub\FamilyHub.Auth\obj\Debug\netcoreapp2.1\FamilyHub.AuthService.dll
 H:\FamilyHub\FamilyHub\FamilyHub.Auth\obj\Debug\netcoreapp2.1\FamilyHub.AuthService.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.Data.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.Repository.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.Service.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.ViewModel.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.Data.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.Service.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.ViewModel.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.DataAccess.EFCore.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Auth\bin\Debug\netcoreapp2.1\FamilyHub.Repository.pdb

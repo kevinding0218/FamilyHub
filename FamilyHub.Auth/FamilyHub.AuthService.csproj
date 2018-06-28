@@ -10,6 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FamilyHub.Data\FamilyHub.Data.csproj" />
+    <ProjectReference Include="..\FamilyHub.Service\FamilyHub.Service.csproj" />
+    <ProjectReference Include="..\FamilyHub.ViewModel\FamilyHub.ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation">
       <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.cryptography.keyderivation\2.0.1\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
     </Reference>

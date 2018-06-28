@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using FamilyHub.API.ViewModel;
+using FamilyHub.ViewModel;
 using FamilyHub.Data.Common;
+using FamilyHub.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace FamilyHub.API.Mapping
     {
         public MappingProfile()
         {
-            this.CreateMap<vmRegisterUser, User>()
+            this.CreateMap<vmRegisterUserRequest, User>()
                     //.ForMember(target => target.UserID, source => source.Ignore())
                     //.ForMember(target => target.MiddleInitial, source => source.Ignore())
                     //.ForMember(target => target.Active, source => source.Ignore())

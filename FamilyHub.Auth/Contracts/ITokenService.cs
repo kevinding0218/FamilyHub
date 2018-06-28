@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FamilyHub.Data.Common;
+using FamilyHub.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
@@ -11,5 +13,8 @@ namespace FamilyHub.AuthService.Contracts
         string GenerateAccessToken(string Email, string UID, JwtIssuerOptions jwtOptions);
         string GenerateRefreshToken();
         ClaimsPrincipal GetPrincipalFromExpiredToken(string token, byte[] ServerSigningPassword);
+
+        Task<vmLoginUserResponse> AssignTokenToLoginUserAsync(User userFromDb);
+        Task<vmRefreshTokenResponse> AssignRefreshTokenAsync(User userFromDb);
     }
 }
