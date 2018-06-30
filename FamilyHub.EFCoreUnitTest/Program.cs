@@ -15,7 +15,7 @@ namespace FamilyHub.EFCoreUnitTest
             try
             {
                 Console.WriteLine("Hello World!");
-                TestAddNewPaymentPayor();
+                //TestAddNewPaymentPayor();
             }
             catch (Exception ex)
             {
@@ -40,10 +40,6 @@ namespace FamilyHub.EFCoreUnitTest
                 newEntity.PaymentPayorName = "Self";
                 newEntity.Active = true;
                 newEntity.PaymentSplit = false;
-
-                //var relationship = _context.Set<PaymentPayorRelationship>()
-                //                        .SingleOrDefault(s => s.PaymentPayorRelationshipID == 7);
-                //newEntity.PaymentPayorRelationshipFk = relationship;
                 newEntity.PaymentPayorRelationshipID = 7;
                 newEntity.CreatedBy = 1;
 

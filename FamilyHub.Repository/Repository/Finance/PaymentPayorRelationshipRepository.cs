@@ -15,9 +15,11 @@ namespace FamilyHub.Repository.Repository.Finance
         {
         }
 
-        public async Task<PaymentPayorRelationship> GetSinglePaymentPayorRelationshipAsync(int paymentPayorRelationshipID)
-        {
-            return await GetSingleOrDefaultAsync(predicate: pr => pr.PaymentPayorRelationshipID == paymentPayorRelationshipID);
-        }
+        public async Task<PaymentPayorRelationship> GetSinglePaymentPayorRelationshipByIDAsync(int paymentPayorRelationshipID)
+            => await GetSingleOrDefaultAsync(predicate: pr => pr.PaymentPayorRelationshipID == paymentPayorRelationshipID);
+
+        public async Task<IEnumerable<PaymentPayorRelationship>> GetListPaymentPayorRelationshipAsync()
+            => await GetListAsync();
+
     }
 }

@@ -1,6 +1,8 @@
 ﻿using FamilyHub.Data.Finance;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Finance;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +15,27 @@ namespace FamilyHub.Repository.Repository.Finance
         public PaymentPayorRepository(FamilyHubDbContext dbContext)
             : base(dbContext)
         {
+        }
+
+        public async Task<IEnumerable<PaymentPayor>> GetPaymentPayorListAsync(
+            int createdBy,
+            bool includeRelationship = false,
+            bool includeTransactionDetails = false)
+        {
+            if (includeRelationship)
+                return await GetListAsync(
+                        predicate: pp => (pp.CreatedBy == createdBy),
+                        include: (obj => obj.Include(entity => entity.PaymentPayorRelationshipFk))
+                    );
+            else if (includeTransactionDetails)
+                return await GetListAsync(
+                        predicate: pp => (pp.CreatedBy == createdBy),
+                        include: (obj => obj.Include(entity => entity.TransactionDetails))
+                    );
+            else
+                return await GetListAsync(
+                        predicate: pp => (pp.CreatedBy == createdBy)
+                    );
         }
 
         public async Task<int> AddPaymentPayorAsync(PaymentPayor entity)

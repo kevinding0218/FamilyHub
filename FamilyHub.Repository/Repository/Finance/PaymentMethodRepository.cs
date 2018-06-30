@@ -15,12 +15,12 @@ namespace FamilyHub.Repository.Repository.Finance
         {
         }
 
-        public async Task<IEnumerable<PaymentMethod>> GetPaymentMethodListAsync(int CreatedByUid = 0, int paymentMethodTypeId = 0, bool active = true)
+        public async Task<IEnumerable<PaymentMethod>> GetPaymentMethodListAsync(int createdBy = 0, int paymentMethodTypeId = 0, bool active = true)
         {
-            if (CreatedByUid > 0)
+            if (createdBy > 0)
             {
                 return await GetListAsync(
-                        predicate: (p => p.CreatedBy == CreatedByUid && p.Active == active)
+                        predicate: (p => p.CreatedBy == createdBy && p.Active == active)
                     );
             }
             else if (paymentMethodTypeId > 0)

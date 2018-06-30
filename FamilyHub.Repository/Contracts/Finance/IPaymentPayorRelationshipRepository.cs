@@ -8,6 +8,7 @@ namespace FamilyHub.Repository.Contracts.Finance
 {
     public interface IPaymentPayorRelationshipRepository : IRepository<PaymentPayorRelationship>
     {
-        Task<PaymentPayorRelationship> GetSinglePaymentPayorRelationshipAsync(int paymentPayorRelationshipID);
+        Task<PaymentPayorRelationship> GetSinglePaymentPayorRelationshipByIDAsync(int paymentPayorRelationshipID);
+        Task<IEnumerable<PaymentPayorRelationship>> GetListPaymentPayorRelationshipAsync();
     }
 }

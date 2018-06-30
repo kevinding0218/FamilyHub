@@ -21,7 +21,7 @@ namespace FamilyHub.API.Controllers.Finance
             _financeService = financeService;
         }
 
-        [HttpPost("addpaymentpayor")]
+        [HttpPost("addPaymentPayor")]
         public async Task<IActionResult> AddPaymentPayor()
         {
             PaymentPayor newPaymentPayor = new PaymentPayor();

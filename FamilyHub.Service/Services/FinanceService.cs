@@ -43,7 +43,7 @@ namespace FamilyHub.Service.Services
             try
             {
                 // Create new user
-                var paymentPayorRelationshipFromDb = await PaymentPayorRelationshipRepository.GetSinglePaymentPayorRelationshipAsync(paymentPayorRelationshipID);
+                var paymentPayorRelationshipFromDb = await PaymentPayorRelationshipRepository.GetSinglePaymentPayorRelationshipByIDAsync(paymentPayorRelationshipID);
 
                 response.Message = ResponseMessageDisplay.Success;
                 response.Model = paymentPayorRelationshipFromDb;
