@@ -28,14 +28,16 @@ namespace FamilyHub.Data.Common
 
         public String ZipCode { get; set; }
 
-        public int CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
 
         public DateTime? CreatedOn { get; set; }
 
-        public int LastUpdatedBy { get; set; }
+        public int? LastUpdatedBy { get; set; }
 
         public DateTime? LastUpdatedOn { get; set; }
 
-        public virtual Collection<User> Users { get; set; }
+        public Byte[] Timestamp { get; set; }
+
+        public virtual Collection<User> Users { get; set; } = new Collection<User>();
     }
 }

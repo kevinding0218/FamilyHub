@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Common
 {
-    public class UserPasswordConfiguration : IEntityTypeConfiguration<UserPassword>
+    internal class UserPasswordConfiguration : IEntityTypeConfiguration<UserPassword>
     {
         public void Configure(EntityTypeBuilder<UserPassword> builder)
         {
@@ -26,6 +26,9 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Common
             builder.Property(p => p.Password).HasColumnType("nvarchar(25)").IsRequired();
             builder.Property(p => p.PasswordCreated).HasColumnType("datetime2").IsRequired();
             builder.Property(p => p.UserID).HasColumnType("int").IsRequired();
+
+            // Set concurrency token for entity
+            builder.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
 
             // Add configuration for foreign keys
             builder

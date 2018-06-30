@@ -112,20 +112,20 @@ namespace FamilyHub.API
                 options.Events = new JwtBearerEvents
                 {
                     #region Jwt After Validation Authenticated
-                    OnTokenValidated = async context =>
-                    {
-                        #region Get user's immutable object id from claims that came from ClaimsPrincipal
-                        //var userEmail = context.Principal.Claims.Where(c => c.Type == ClaimTypes.Name)
-                        //       .Select(c => c.Value).SingleOrDefault();
-                        //var role = context.Principal.Claims.Where(c => c.Type == ClaimTypes.Role)
-                        //       .Select(c => c.Value).SingleOrDefault();
-                        #endregion
+                    //OnTokenValidated = async context =>
+                    //{
+                    //    #region Get user's immutable object id from claims that came from ClaimsPrincipal
+                    //    //var userEmail = context.Principal.Claims.Where(c => c.Type == ClaimTypes.Name)
+                    //    //       .Select(c => c.Value).SingleOrDefault();
+                    //    //var role = context.Principal.Claims.Where(c => c.Type == ClaimTypes.Role)
+                    //    //       .Select(c => c.Value).SingleOrDefault();
+                    //    #endregion
 
-                        #region Use Service
-                        //var _commonService = context.HttpContext.RequestServices.GetRequiredService<ICommonService>();
-                        //var internalUserResponse = await _commonService.GetUserAsync(userEmail);
-                        #endregion
-                    },
+                    //    #region Use Service
+                    //    //var _commonService = context.HttpContext.RequestServices.GetRequiredService<ICommonService>();
+                    //    //var internalUserResponse = await _commonService.GetUserAsync(userEmail);
+                    //    #endregion
+                    //},
                     #endregion
 
                     #region Jwt After Validation Failed

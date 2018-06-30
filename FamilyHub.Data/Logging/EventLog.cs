@@ -19,5 +19,7 @@ namespace FamilyHub.Data.Logging
         public String Message { get; set; }
 
         public DateTime? EntryDate { get; set; }
+
+        public Byte[] Timestamp { get; set; }
     }
 }

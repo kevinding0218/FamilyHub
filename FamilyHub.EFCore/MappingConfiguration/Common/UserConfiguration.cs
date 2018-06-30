@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Common
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
@@ -37,6 +37,9 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Common
             builder.Property(p => p.Note).HasColumnType("nvarchar(255)");
             builder.Property(p => p.RefreshToken).HasColumnType("nvarchar(300)");
             builder.Property(p => p.ContactAddressID).HasColumnType("int");
+
+            // Set concurrency token for entity
+            builder.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
 
             // Add configuration for foreign keys
             builder

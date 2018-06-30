@@ -2,6 +2,11 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+*.suo
+*.user
+bin
+obj
+packages
 /.vs/FamilyHub/v15
 /FamilyHub.API/obj/
 /FamilyHub.API/obj/

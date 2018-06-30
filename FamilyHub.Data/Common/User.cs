@@ -42,15 +42,17 @@ namespace FamilyHub.Data.Common
 
         public String RefreshToken { get; set; }
 
-        public int CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
 
         public DateTime? CreatedOn { get; set; }
 
-        public int LastUpdatedBy { get; set; }
+        public int? LastUpdatedBy { get; set; }
 
         public DateTime? LastUpdatedOn { get; set; }
 
         public Int32? ContactAddressID { get; set; }
+
+        public Byte[] Timestamp { get; set; }
 
         public virtual ContactAddress ContactAddressFk { get; set; }
 

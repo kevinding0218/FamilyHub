@@ -7,7 +7,7 @@ using System.Text;
 
 namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Logging
 {
-    public class ChangeLogConfiguration : IEntityTypeConfiguration<ChangeLog>
+    internal class ChangeLogConfiguration : IEntityTypeConfiguration<ChangeLog>
     {
         public void Configure(EntityTypeBuilder<ChangeLog> builder)
         {
@@ -28,6 +28,9 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Logging
             builder.Property(p => p.CurrentValue).HasColumnType("varchar(max)");
             builder.Property(p => p.UserID).HasColumnType("int").IsRequired();
             builder.Property(p => p.ChangeDate).HasColumnType("varchar(128)").IsRequired();
+
+            // Set concurrency token for entity
+            builder.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }
 }

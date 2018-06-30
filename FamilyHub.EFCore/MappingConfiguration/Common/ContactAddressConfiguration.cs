@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Common
 {
-    public class ContactAddressConfiguration : IEntityTypeConfiguration<ContactAddress>
+    internal class ContactAddressConfiguration : IEntityTypeConfiguration<ContactAddress>
     {
         public void Configure(EntityTypeBuilder<ContactAddress> builder)
         {
@@ -26,10 +26,13 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Common
             builder.Property(p => p.City).HasColumnType("nvarchar(30)");
             builder.Property(p => p.State).HasColumnType("nvarchar(5)");
             builder.Property(p => p.ZipCode).HasColumnType("nvarchar(15)");
-            builder.Property(p => p.CreatedBy).HasColumnType("int").IsRequired();
-            builder.Property(p => p.CreatedOn).HasColumnType("datetime").IsRequired();
+            builder.Property(p => p.CreatedBy).HasColumnType("int");
+            builder.Property(p => p.CreatedOn).HasColumnType("datetime");
             builder.Property(p => p.LastUpdatedBy).HasColumnType("int");
             builder.Property(p => p.LastUpdatedOn).HasColumnType("datetime");
+
+            // Set concurrency token for entity
+            builder.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }
 }

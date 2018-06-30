@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Logging
 {
-    public class ChangeLogExclusionConfiguration : IEntityTypeConfiguration<ChangeLogExclusion>
+    internal class ChangeLogExclusionConfiguration : IEntityTypeConfiguration<ChangeLogExclusion>
     {
         public void Configure(EntityTypeBuilder<ChangeLogExclusion> builder)
         {
@@ -23,6 +23,9 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Logging
             // Set mapping for columns
             builder.Property(p => p.EntityName).HasColumnType("varchar(128)").IsRequired();
             builder.Property(p => p.PropertyName).HasColumnType("varchar(128)").IsRequired();
+
+            // Set concurrency token for entity
+            builder.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }
 }

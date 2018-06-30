@@ -15,5 +15,7 @@ namespace FamilyHub.Data.Logging
         public string EntityName { get; set; }
 
         public string PropertyName { get; set; }
+
+        public Byte[] Timestamp { get; set; }
     }
 }

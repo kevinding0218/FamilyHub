@@ -36,6 +36,8 @@ namespace FamilyHub.Data.Common
 
         public Int32 UserID { get; set; }
 
+        public Byte[] Timestamp { get; set; }
+
         public virtual User UserFk { get; set; }
     }
 }

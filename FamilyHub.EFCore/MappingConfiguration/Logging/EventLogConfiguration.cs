@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Logging
 {
-    public class EventLogConfiguration : IEntityTypeConfiguration<EventLog>
+    internal class EventLogConfiguration : IEntityTypeConfiguration<EventLog>
     {
         public void Configure(EntityTypeBuilder<EventLog> builder)
         {
@@ -22,6 +22,9 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Logging
             builder.Property(p => p.Key).HasColumnType("varchar(255)").IsRequired();
             builder.Property(p => p.Message).HasColumnType("varchar(max)").IsRequired();
             builder.Property(p => p.EntryDate).HasColumnType("datetime").IsRequired();
+
+            // Set concurrency token for entity
+            builder.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }
 }

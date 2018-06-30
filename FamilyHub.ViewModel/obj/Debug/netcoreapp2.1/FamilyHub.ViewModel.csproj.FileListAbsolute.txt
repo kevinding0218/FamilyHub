@@ -1,7 +1,6 @@
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\bin\Debug\netcoreapp2.1\FamilyHub.ViewModel.deps.json
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\bin\Debug\netcoreapp2.1\FamilyHub.ViewModel.dll
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\bin\Debug\netcoreapp2.1\FamilyHub.ViewModel.pdb
-H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.csprojResolveAssemblyReference.cache
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.csproj.CoreCompileInputs.cache
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.AssemblyInfoInputs.cache
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.AssemblyInfo.cs

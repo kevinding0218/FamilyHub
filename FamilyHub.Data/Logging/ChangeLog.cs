@@ -25,5 +25,7 @@ namespace FamilyHub.Data.Logging
         public int UserID { get; set; }
 
         public DateTime? ChangeDate { get; set; }
+
+        public Byte[] Timestamp { get; set; }
     }
 }

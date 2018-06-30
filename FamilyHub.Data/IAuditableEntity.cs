@@ -6,11 +6,11 @@ namespace FamilyHub.Data
 {
     public interface IAuditableEntity : IEntity
     {
-        int CreatedBy { get; set; }
+        int? CreatedBy { get; set; }
 
         DateTime? CreatedOn { get; set; }
 
-        int LastUpdatedBy { get; set; }
+        int? LastUpdatedBy { get; set; }
 
         DateTime? LastUpdatedOn { get; set; }
     }
