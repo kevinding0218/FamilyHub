@@ -7,6 +7,9 @@
 bin
 obj
 packages
+*.bin
+*.obj
+*.packages
 /.vs/FamilyHub/v15
 /FamilyHub.API/obj/
 /FamilyHub.API/obj/

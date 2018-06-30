@@ -1,6 +1,8 @@
 ﻿using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Common;
+using FamilyHub.Repository.Contracts.Finance;
 using FamilyHub.Repository.Repository.Common;
+using FamilyHub.Repository.Repository.Finance;
 using FamilyHub.Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,8 @@ namespace FamilyHub.Service.Services
         protected readonly FamilyHubDbContext _dbContext;
 
         protected IUserRepository _userRepository;
+        protected IPaymentPayorRepository _paymentPayorRepository;
+        protected IPaymentPayorRelationshipRepository _paymentPayorRelationshipRepository;
 
         public ServiceFactory(FamilyHubDbContext dbContext)
         {
@@ -32,5 +36,9 @@ namespace FamilyHub.Service.Services
 
         protected IUserRepository UserRepository
             => _userRepository ?? (_userRepository = new UserRepository(_dbContext));
+        protected IPaymentPayorRepository PaymentPayorRepository
+            => _paymentPayorRepository ?? (_paymentPayorRepository = new PaymentPayorRepository(_dbContext));
+        protected IPaymentPayorRelationshipRepository PaymentPayorRelationshipRepository
+            => _paymentPayorRelationshipRepository ?? (_paymentPayorRelationshipRepository = new PaymentPayorRelationshipRepository(_dbContext));
     }
 }

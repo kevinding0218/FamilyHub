@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace FamilyHub.API.HttpResponse
+namespace FamilyHub.API
 {
     public static class Extensions
     {

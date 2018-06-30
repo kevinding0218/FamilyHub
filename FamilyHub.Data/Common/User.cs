@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FamilyHub.Data.Common
 {
-    public class User : IAuditableEntity
+    public class User : IAuditableEntity, IActivateEntity
     {
         public User()
         {

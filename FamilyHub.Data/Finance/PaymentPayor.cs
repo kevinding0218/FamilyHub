@@ -6,12 +6,12 @@ using System.Text;
 
 namespace FamilyHub.Data.Finance
 {
-    public class PaymentPayor : IAuditableEntity
+    public class PaymentPayor : IAuditableEntity, IActivateEntity
     {
         public int PaymentPayorID { get; set; }
         public string PaymentPayorName { get; set; }
         public string PaymentPayorDescription { get; set; }
-        public bool Active { get; set; }
+        public Boolean Active { get; set; }
         public bool PaymentSplit { get; set; }
         public bool PaymentSplitFactor { get; set; }
         public int PaymentPayorRelationshipID { get; set; }

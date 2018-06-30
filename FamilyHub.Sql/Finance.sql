@@ -65,7 +65,7 @@ VALUES
 (   N'MOBILE PAYMENT', -- PaymentMethodTypeName - nvarchar(50)
     N'All Mobile Payment Type Such As ALIPAY/WEIXIN/ANDROID/APPLE PAY'  -- PaymentMethodTypeDescription - nvarchar(250)
 );
-
+GO
 --SELECT * FROM Finance.PaymentMethodType
 
 CREATE TABLE Finance.PaymentMethod
@@ -86,6 +86,7 @@ CREATE TABLE Finance.PaymentMethod
 );
 GO
 
+--Spouse/Children/Parent/Relative/Friends/Colleague
 CREATE TABLE Finance.PaymentPayorRelationship
 (
 	[PaymentPayorRelationshipID] [INT] IDENTITY(1,1) NOT NULL,
@@ -95,6 +96,73 @@ CREATE TABLE Finance.PaymentPayorRelationship
 	PRIMARY KEY (PaymentPayorRelationshipID),
 );
 GO
+
+INSERT INTO Finance.PaymentPayorRelationship
+(
+    PaymentPayorRelationshipName,
+    PaymentPayorRelationshipDescription
+)
+VALUES
+(   N'Owner', -- PaymentPayorRelationshipName - nvarchar(50)
+    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
+);
+INSERT INTO Finance.PaymentPayorRelationship
+(
+    PaymentPayorRelationshipName,
+    PaymentPayorRelationshipDescription
+)
+VALUES
+(   N'Parent', -- PaymentPayorRelationshipName - nvarchar(50)
+    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
+);
+INSERT INTO Finance.PaymentPayorRelationship
+(
+    PaymentPayorRelationshipName,
+    PaymentPayorRelationshipDescription
+)
+VALUES
+(   N'Spouse', -- PaymentPayorRelationshipName - nvarchar(50)
+    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
+);
+INSERT INTO Finance.PaymentPayorRelationship
+(
+    PaymentPayorRelationshipName,
+    PaymentPayorRelationshipDescription
+)
+VALUES
+(   N'Children', -- PaymentPayorRelationshipName - nvarchar(50)
+    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
+);
+INSERT INTO Finance.PaymentPayorRelationship
+(
+    PaymentPayorRelationshipName,
+    PaymentPayorRelationshipDescription
+)
+VALUES
+(   N'Relative', -- PaymentPayorRelationshipName - nvarchar(50)
+    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
+);
+INSERT INTO Finance.PaymentPayorRelationship
+(
+    PaymentPayorRelationshipName,
+    PaymentPayorRelationshipDescription
+)
+VALUES
+(   N'Friends', -- PaymentPayorRelationshipName - nvarchar(50)
+    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
+);
+INSERT INTO Finance.PaymentPayorRelationship
+(
+    PaymentPayorRelationshipName,
+    PaymentPayorRelationshipDescription
+)
+VALUES
+(   N'Colleague', -- PaymentPayorRelationshipName - nvarchar(50)
+    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
+);
+GO
+
+--SELECT * FROM Finance.PaymentPayorRelationship
 
 CREATE TABLE Finance.PaymentPayor
 (

@@ -45,5 +45,10 @@ namespace FamilyHub.Repository.Contracts
 
         void RemoveRange(IEnumerable<TEntity> entities);
         #endregion
+
+        #region ACTIVATE/DEACTIVATE
+        void Activate(TEntity entity);
+        void Deactive(TEntity entity);
+        #endregion
     }
 }

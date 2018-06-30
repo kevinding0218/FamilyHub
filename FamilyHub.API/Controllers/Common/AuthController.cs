@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FamilyHub.API.HttpResponse;
 using FamilyHub.ViewModel;
 using FamilyHub.AuthService;
 using FamilyHub.AuthService.Contracts;

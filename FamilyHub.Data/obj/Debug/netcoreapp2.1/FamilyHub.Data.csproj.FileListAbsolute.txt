@@ -6,3 +6,4 @@ H:\FamilyHub\FamilyHub\FamilyHub.Data\obj\Debug\netcoreapp2.1\FamilyHub.Data.Ass
 H:\FamilyHub\FamilyHub\FamilyHub.Data\obj\Debug\netcoreapp2.1\FamilyHub.Data.AssemblyInfo.cs
 H:\FamilyHub\FamilyHub\FamilyHub.Data\obj\Debug\netcoreapp2.1\FamilyHub.Data.dll
 H:\FamilyHub\FamilyHub\FamilyHub.Data\obj\Debug\netcoreapp2.1\FamilyHub.Data.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Data\obj\Debug\netcoreapp2.1\FamilyHub.Data.csprojResolveAssemblyReference.cache

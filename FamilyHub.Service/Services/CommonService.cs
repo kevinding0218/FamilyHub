@@ -30,7 +30,7 @@ namespace FamilyHub.Service.Services
             try
             {
                 var existedUser = await UserRepository
-                    .GetUserInfo(new User(email), withCredential, withContact);
+                    .GetUserInfoAsync(new User(email), withCredential, withContact);
 
                 if (!checkIfExisted)
                 {
@@ -63,7 +63,7 @@ namespace FamilyHub.Service.Services
             try
             {
                 response.Model = await UserRepository
-                    .GetUserInfo(new User(userId), withContact: true);
+                    .GetUserInfoAsync(new User(userId), withContact: true);
             }
             catch (Exception ex)
             {

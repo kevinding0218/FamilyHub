@@ -1,4 +1,4 @@
-﻿using FamilyHub.API.HttpResponse;
+﻿using FamilyHub.API;
 using FamilyHub.ViewModel;
 using FamilyHub.AuthService;
 using FamilyHub.AuthService.Contracts;

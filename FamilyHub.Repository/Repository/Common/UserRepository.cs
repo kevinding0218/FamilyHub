@@ -17,7 +17,7 @@ namespace FamilyHub.Repository.Repository.Common
         {
         }
 
-        public async Task<User> GetUserInfo(User user, bool withCredential = false, bool withContact = false)
+        public async Task<User> GetUserInfoAsync(User user, bool withCredential = false, bool withContact = false)
         {
             if (withCredential)
             {
@@ -50,9 +50,9 @@ namespace FamilyHub.Repository.Repository.Common
 
 
 
-        public async Task<int> UpdateUserAsync(User changes)
+        public async Task<int> UpdateUserAsync(User entity)
         {
-            Update(changes);
+            Update(entity);
 
             return await CommitChangesAsync();
         }

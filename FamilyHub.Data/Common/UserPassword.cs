@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FamilyHub.Data.Common
 {
-    public class UserPassword : IEntity
+    public class UserPassword : IEntity, IActivateEntity
     {
         public UserPassword()
         {

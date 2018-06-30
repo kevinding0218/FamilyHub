@@ -139,6 +139,26 @@ namespace FamilyHub.Repository.Repository
         public void RemoveRange(IEnumerable<TEntity> entities) => _dbSet.RemoveRange(entities);
         #endregion
 
+        #region ACTIVATE/DEACTIVATE
+        public void Activate(TEntity entity)
+        {
+            var activeEntity = entity as IActivateEntity;
+            if (activeEntity != null)
+            {
+                activeEntity.Active = true;
+            }
+        }
+
+        public void Deactive(TEntity entity)
+        {
+            var activeEntity = entity as IActivateEntity;
+            if (activeEntity != null)
+            {
+                activeEntity.Active = false;
+            }
+        }
+        #endregion
+
         #region Unit Of Work
         protected virtual IEnumerable<ChangeLog> GetChanges()
         {

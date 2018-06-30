@@ -6,3 +6,4 @@ H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.Vie
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.AssemblyInfo.cs
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.dll
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.csprojResolveAssemblyReference.cache
