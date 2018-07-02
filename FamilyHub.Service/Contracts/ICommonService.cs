@@ -9,16 +9,20 @@ namespace FamilyHub.Service.Contracts
 {
     public interface ICommonService
     {
-        Task<ISingleResponse<User>> GetUserAsync(
+        #region User
+        Task<ISingleResponse<User>> GetSingleUserAsync(
             string email,
             bool withCredential = false,
             bool withContact = false,
             bool checkIfExisted = false);
 
-        Task<ISingleResponse<User>> GetUserContactAddressAsync(int userId);
-
         Task<ISingleResponse<User>> RegisterNewUser(User newUser);
 
         Task<ISingleResponse<User>> UpdateUserRefreshTokenAsync(User loginUser);
+        #endregion
+
+        #region User Contact Address
+        Task<ISingleResponse<User>> GetUserContactAddressAsync(int userId);
+        #endregion
     }
 }

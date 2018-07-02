@@ -15,7 +15,10 @@ namespace FamilyHub.Repository.Repository.Finance
         {
         }
 
-        public async Task<IEnumerable<PaymentMethod>> GetPaymentMethodListAsync(int createdBy = 0, int paymentMethodTypeId = 0, bool active = true)
+        public async Task<PaymentMethod> GetSinglePaymentMethodByIDAsync(int paymentMethodID)
+            => await GetSingleOrDefaultAsync(predicate: pm => pm.PaymentMethodID == paymentMethodID);
+
+        public async Task<IEnumerable<PaymentMethod>> GetListPaymentMethodAsync(int createdBy = 0, int paymentMethodTypeId = 0, bool active = true)
         {
             if (createdBy > 0)
             {

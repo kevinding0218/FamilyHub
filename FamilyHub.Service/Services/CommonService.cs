@@ -18,7 +18,8 @@ namespace FamilyHub.Service.Services
         {
         }
 
-        public async Task<ISingleResponse<User>> GetUserAsync(
+        #region User
+        public async Task<ISingleResponse<User>> GetSingleUserAsync(
             string email,
             bool withCredential = false,
             bool withContact = false,
@@ -30,7 +31,7 @@ namespace FamilyHub.Service.Services
             try
             {
                 var existedUser = await UserRepository
-                    .GetUserInfoAsync(new User(email), withCredential, withContact);
+                    .GetSingleUserInfoAsync(new User(email), withCredential, withContact);
 
                 if (!checkIfExisted)
                 {
@@ -47,23 +48,6 @@ namespace FamilyHub.Service.Services
                         throw new FamilyHubException(string.Format(CommonMessageDisplays.ExistedUserExceptionMessage, email));
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                response.SetError(ex);
-            }
-
-            return response;
-        }
-
-        public async Task<ISingleResponse<User>> GetUserContactAddressAsync(int userId)
-        {
-            var response = new SingleResponse<User>();
-
-            try
-            {
-                response.Model = await UserRepository
-                    .GetUserInfoAsync(new User(userId), withContact: true);
             }
             catch (Exception ex)
             {
@@ -113,5 +97,25 @@ namespace FamilyHub.Service.Services
 
             return response;
         }
+        #endregion
+
+        #region User Contact Address
+        public async Task<ISingleResponse<User>> GetUserContactAddressAsync(int userId)
+        {
+            var response = new SingleResponse<User>();
+
+            try
+            {
+                response.Model = await UserRepository
+                    .GetSingleUserInfoAsync(new User(userId), withContact: true);
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
+        }
+        #endregion
     }
 }

@@ -21,6 +21,7 @@ namespace FamilyHub.API.Controllers.Finance
             _financeService = financeService;
         }
 
+        #region Payment Payor
         [HttpPost("addPaymentPayor")]
         public async Task<IActionResult> AddPaymentPayor()
         {
@@ -37,5 +38,6 @@ namespace FamilyHub.API.Controllers.Finance
 
             return saveResponse.ToHttpResponse();
         }
+        #endregion
     }
 }

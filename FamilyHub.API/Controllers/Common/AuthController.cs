@@ -48,10 +48,11 @@ namespace FamilyHub.API.Controllers.Common
             _configuration = configuration;
         }
 
+        #region Sign Up
         [HttpPost("register")]
         public async Task<IActionResult> Signup([FromBody]vmRegisterUserRequest registerUser)
         {
-            var validEmailResponse = await _commonService.GetUserAsync(registerUser.Email, checkIfExisted: true);
+            var validEmailResponse = await _commonService.GetSingleUserAsync(registerUser.Email, checkIfExisted: true);
 
             if (validEmailResponse.Message.Equals(ResponseMessageDisplay.IsExisted))
                 return validEmailResponse.ToHttpResponse();
@@ -65,7 +66,9 @@ namespace FamilyHub.API.Controllers.Common
                 return registerUserResponse.ToHttpResponse();
             }
         }
+        #endregion
 
+        #region Sign In
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]vmLoginUserRequest loggingUser)
         {
@@ -73,7 +76,7 @@ namespace FamilyHub.API.Controllers.Common
 
             try
             {
-                var existedUserResponse = await _commonService.GetUserAsync(loggingUser.Email, withCredential: true);
+                var existedUserResponse = await _commonService.GetSingleUserAsync(loggingUser.Email, withCredential: true);
 
                 // if User does not exist or authentication fails
                 if (existedUserResponse.Model == null || existedUserResponse.Model.UserID == 0 ||
@@ -96,5 +99,6 @@ namespace FamilyHub.API.Controllers.Common
 
             return loginResponse.ToHttpResponse();
         }
+        #endregion
     }
 }

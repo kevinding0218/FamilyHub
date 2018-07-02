@@ -8,7 +8,7 @@ namespace FamilyHub.Repository.Contracts.Common
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<User> GetUserInfoAsync(User user, bool withCredential = false, bool withContact = false);
+        Task<User> GetSingleUserInfoAsync(User user, bool withCredential = false, bool withContact = false);
 
         Task<Int32> AddUserAsync(User entity);
 

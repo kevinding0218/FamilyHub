@@ -66,7 +66,7 @@ namespace FamilyHub.API.Controllers.Common
                 //   .Select(c => c.Value).SingleOrDefault();
                 #endregion
 
-                var existedUserResponse = await _commonService.GetUserAsync(userEmail);
+                var existedUserResponse = await _commonService.GetSingleUserAsync(userEmail);
 
                 if (existedUserResponse.Model == null || existedUserResponse.Model.RefreshToken != refreshTokenRequest.RefreshToken)
                     throw new FamilyHubException(string.Format(CommonMessageDisplays.UserNotFoundExceptionMessage, userEmail));
@@ -87,7 +87,7 @@ namespace FamilyHub.API.Controllers.Common
         {
             var userEmail = User.Identity.Name;
 
-            var internalUserResponse = await _commonService.GetUserAsync(userEmail);
+            var internalUserResponse = await _commonService.GetSingleUserAsync(userEmail);
 
             if (internalUserResponse == null) return BadRequest();
 

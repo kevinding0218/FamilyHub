@@ -8,7 +8,6 @@ namespace FamilyHub.Service.Contracts
 {
     public interface IFinanceService
     {
-        Task<ISingleResponse<PaymentPayor>> AddPaymentPayorAsync(PaymentPayor newPaymentPayor);
-        Task<ISingleResponse<PaymentPayorRelationship>> GetSinglePaymentPayorRelationshipAsync(int paymentPayorRelationshipID);
+
     }
 }

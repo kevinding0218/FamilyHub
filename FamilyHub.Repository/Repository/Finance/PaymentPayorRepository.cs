@@ -17,7 +17,10 @@ namespace FamilyHub.Repository.Repository.Finance
         {
         }
 
-        public async Task<IEnumerable<PaymentPayor>> GetPaymentPayorListAsync(
+        public async Task<PaymentPayor> GetSinglePaymentPayorByIDAsync(int paymentPayorID)
+            => await GetSingleOrDefaultAsync(predicate: pp => pp.PaymentPayorID == paymentPayorID);
+
+        public async Task<IEnumerable<PaymentPayor>> GetListPaymentPayorAsync(
             int createdBy,
             bool includeRelationship = false,
             bool includeTransactionDetails = false)

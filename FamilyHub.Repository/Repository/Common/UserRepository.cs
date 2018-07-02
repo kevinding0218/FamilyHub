@@ -17,7 +17,7 @@ namespace FamilyHub.Repository.Repository.Common
         {
         }
 
-        public async Task<User> GetUserInfoAsync(User user, bool withCredential = false, bool withContact = false)
+        public async Task<User> GetSingleUserInfoAsync(User user, bool withCredential = false, bool withContact = false)
         {
             if (withCredential)
             {
