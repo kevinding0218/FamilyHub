@@ -1,4 +1,5 @@
-﻿using FamilyHub.Data.Common;
+﻿using FamilyHub.Data;
+using FamilyHub.Data.Common;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Common;
 using System;
@@ -12,6 +13,11 @@ namespace FamilyHub.Repository.Repository.Common
     {
         public UserPasswordRepository(FamilyHubDbContext dbContext)
             : base(dbContext)
+        {
+        }
+
+        public UserPasswordRepository(IUserInfo userInfo, FamilyHubDbContext dbContext)
+            : base(userInfo, dbContext)
         {
         }
 

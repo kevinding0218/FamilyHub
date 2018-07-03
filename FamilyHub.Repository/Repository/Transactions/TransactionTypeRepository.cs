@@ -1,4 +1,5 @@
-﻿using FamilyHub.Data.Transactions;
+﻿using FamilyHub.Data;
+using FamilyHub.Data.Transactions;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Transactions;
 using System;
@@ -12,6 +13,11 @@ namespace FamilyHub.Repository.Repository.Transactions
     {
         public TransactionTypeRepository(FamilyHubDbContext dbContext)
             : base(dbContext)
+        {
+        }
+
+        public TransactionTypeRepository(IUserInfo userInfo, FamilyHubDbContext dbContext)
+            : base(userInfo, dbContext)
         {
         }
 

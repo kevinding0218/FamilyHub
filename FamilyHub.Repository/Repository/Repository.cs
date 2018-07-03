@@ -15,11 +15,19 @@ namespace FamilyHub.Repository.Repository
 {
     public abstract class Repository<TEntity> : IRepository<TEntity>, IUnitOfWork where TEntity : class
     {
+        protected IUserInfo _userInfo;
         protected DbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
 
         public Repository(DbContext context)
         {
+            _dbContext = context;
+            _dbSet = context.Set<TEntity>();
+        }
+
+        public Repository(IUserInfo userInfo, DbContext context)
+        {
+            _userInfo = userInfo;
             _dbContext = context;
             _dbSet = context.Set<TEntity>();
         }
@@ -83,12 +91,14 @@ namespace FamilyHub.Repository.Repository
             _dbSet.AddRange(entities);
         }
 
-        private static void AttachCreatedOn(TEntity e)
+        protected void AttachCreatedOn(TEntity e)
         {
             var auditEntity = e as IAuditableEntity;
             if (auditEntity != null)
             {
-                auditEntity.CreatedOn = DateTime.Now;
+                auditEntity.CreatedBy = _userInfo.UID ?? auditEntity.CreatedBy;
+                if (!auditEntity.CreatedOn.HasValue)
+                    auditEntity.CreatedOn = DateTime.Now;
             }
         }
         #endregion
@@ -122,11 +132,12 @@ namespace FamilyHub.Repository.Repository
             );
         }
 
-        private static void AttachLastUpdatedOn(TEntity e)
+        protected void AttachLastUpdatedOn(TEntity e)
         {
             var auditEntity = e as IAuditableEntity;
             if (auditEntity != null)
             {
+                auditEntity.LastUpdatedBy = _userInfo.UID ?? auditEntity.LastUpdatedBy;
                 if (!auditEntity.LastUpdatedOn.HasValue)
                     auditEntity.LastUpdatedOn = DateTime.Now;
             }
@@ -147,6 +158,7 @@ namespace FamilyHub.Repository.Repository
             {
                 activeEntity.Active = true;
             }
+            AttachLastUpdatedOn(entity);
         }
 
         public void Deactive(TEntity entity)
@@ -156,6 +168,7 @@ namespace FamilyHub.Repository.Repository
             {
                 activeEntity.Active = false;
             }
+            AttachLastUpdatedOn(entity);
         }
         #endregion
 
@@ -200,7 +213,7 @@ namespace FamilyHub.Repository.Repository
                         Key = key,
                         OriginalValue = originalValue == null ? string.Empty : originalValue.ToString(),
                         CurrentValue = currentValue == null ? string.Empty : currentValue.ToString(),
-                        UserID = property.Name == "UpdatedBy" ? Convert.ToInt32(currentValue) : 0,
+                        UserID = _userInfo.UID.Value,
                         ChangeDate = DateTime.Now
                     };
                 }
@@ -211,10 +224,10 @@ namespace FamilyHub.Repository.Repository
         {
             var dbSet = _dbContext.Set<ChangeLog>();
 
-            foreach (var change in GetChanges().ToList())
-            {
-                dbSet.Add(change);
-            }
+            //foreach (var change in GetChanges().ToList())
+            //{
+            //    dbSet.Add(change);
+            //}
 
             return await _dbContext.SaveChangesAsync();
         }

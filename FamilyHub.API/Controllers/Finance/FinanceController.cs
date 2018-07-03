@@ -1,5 +1,8 @@
-﻿using FamilyHub.Data.Finance;
+﻿using FamilyHub.Data;
+using FamilyHub.Data.Finance;
 using FamilyHub.Service.Contracts;
+using FamilyHub.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,32 +14,39 @@ namespace FamilyHub.API.Controllers.Finance
 {
     [EnableCors("SiteCorsPolicy")]
     [Route("/api/finance")]
-    public class FinanceController
+    public class FinanceController : Controller
     {
-        private readonly IFinanceService _financeService;
+        private readonly IUserInfo userInfo;
+        private readonly IPaymentService _paymentService;
 
         public FinanceController(
-            IFinanceService financeService)
+            IUserInfo _userInfo,
+            IPaymentService paymentService)
         {
-            _financeService = financeService;
+            userInfo = _userInfo;
+            _paymentService = paymentService;
         }
 
         #region Payment Payor
-        [HttpPost("addPaymentPayor")]
+        [HttpPost("addPaymentPayor"), Authorize]
         public async Task<IActionResult> AddPaymentPayor()
         {
-            PaymentPayor newPaymentPayor = new PaymentPayor();
-            newPaymentPayor.PaymentPayorName = "Self";
-            newPaymentPayor.Active = true;
-            newPaymentPayor.PaymentSplit = false;
+            var test = userInfo;
+            var userEmail = User.Identity.Name;
 
-            var relationship = await _financeService.GetSinglePaymentPayorRelationshipAsync(7);
-            newPaymentPayor.PaymentPayorRelationshipFk = relationship.Model;
-            //newPaymentPayor.PaymentPayorRelationshipID = 7;
-            newPaymentPayor.CreatedBy = 1;
-            var saveResponse = await _financeService.AddPaymentPayorAsync(newPaymentPayor);
+            //PaymentPayor newPaymentPayor = new PaymentPayor();
+            //newPaymentPayor.PaymentPayorName = "Self";
+            //newPaymentPayor.Active = true;
+            //newPaymentPayor.PaymentSplit = false;
 
-            return saveResponse.ToHttpResponse();
+            var relationship = await _paymentService.GetSinglePaymentPayorRelationshipAsync(7);
+            //newPaymentPayor.PaymentPayorRelationshipFk = relationship.Model;
+            ////newPaymentPayor.PaymentPayorRelationshipID = 7;
+            //newPaymentPayor.CreatedBy = 1;
+            //var saveResponse = await _paymentService.AddPaymentPayorAsync(newPaymentPayor);
+
+            //return saveResponse.ToHttpResponse();
+            return Ok();
         }
         #endregion
     }

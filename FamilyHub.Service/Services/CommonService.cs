@@ -1,4 +1,5 @@
-﻿using FamilyHub.Data.Common;
+﻿using FamilyHub.Data;
+using FamilyHub.Data.Common;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Service.Contracts;
 using FamilyHub.Service.Display;
@@ -15,6 +16,11 @@ namespace FamilyHub.Service.Services
     {
         public CommonService(FamilyHubDbContext dbContext)
             : base(dbContext)
+        {
+        }
+
+        public CommonService(IUserInfo userInfo, FamilyHubDbContext dbContext)
+            : base(userInfo, dbContext)
         {
         }
 

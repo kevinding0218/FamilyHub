@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using FamilyHub.Data;
 using FamilyHub.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,17 +14,20 @@ namespace FamilyHub.API.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        public ValuesController()
+        private readonly IUserInfo userInfo;
+        public ValuesController(IUserInfo _userInfo)
         {
-
+            userInfo = _userInfo;
         }
         // GET api/values
-        [HttpGet, Authorize(Policy = AuthService.Helper.Constants.JwtPolicys.RoleAdminRequired)]
+        // Authorize(Policy = AuthService.Helper.Constants.JwtPolicys.RoleAdminRequired)
+        [HttpGet, Authorize]
         public IEnumerable<string> Get()
         {
             #region Test to get Identity Claims
-            //var userEmail = User.Identity.Name;
-            //var userClaims = User.Claims;
+            var test = userInfo;
+            var userEmail = User.Identity.Name;
+            var userClaims = User.Claims;
             //var name = userClaims.Where(c => c.Type == ClaimTypes.Name)
             //                   .Select(c => c.Value).SingleOrDefault();
             //var role = userClaims.Where(c => c.Type == ClaimTypes.Role)
@@ -44,6 +48,7 @@ namespace FamilyHub.API.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            var userEmail = User.Identity.Name;
         }
 
         // PUT api/values/5

@@ -1,4 +1,5 @@
-﻿using FamilyHub.Data.Finance;
+﻿using FamilyHub.Data;
+using FamilyHub.Data.Finance;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Finance;
 using System;
@@ -12,6 +13,11 @@ namespace FamilyHub.Repository.Repository.Finance
     {
         public PaymentMethodRepository(FamilyHubDbContext dbContext)
             : base(dbContext)
+        {
+        }
+
+        public PaymentMethodRepository(IUserInfo userInfo, FamilyHubDbContext dbContext)
+            : base(userInfo, dbContext)
         {
         }
 

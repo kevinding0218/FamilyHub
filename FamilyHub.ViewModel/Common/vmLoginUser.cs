@@ -31,15 +31,4 @@ namespace FamilyHub.ViewModel
         public string JwtToken { get; set; }
         public string RefreshToken { get; set; }
     }
-
-    public class UserInfo
-    {
-        public UserInfo()
-        {
-        }
-
-        public string Email { get; set; }
-
-        public string[] Roles { get; set; }
-    }
 }

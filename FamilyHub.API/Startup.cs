@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using FamilyHub.API.Middleware;
-using FamilyHub.ViewModel;
 using FamilyHub.AuthService;
 using FamilyHub.AuthService.AuthServices;
 using FamilyHub.AuthService.Contracts;
@@ -25,6 +24,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using FamilyHub.Data;
 
 namespace FamilyHub.API
 {
@@ -57,6 +57,7 @@ namespace FamilyHub.API
 
             #region Inject Business Service Layer
             services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IFinanceService, FinanceService>();
             #endregion
 
@@ -65,6 +66,18 @@ namespace FamilyHub.API
             services.AddTransient<IPasswordHasher, PasswordHasher>();
             #endregion
 
+            #region Inject IUserInfo by registering it as a service
+            services.AddScoped<IUserInfo>(provider =>
+            {
+                var context = provider.GetService<IHttpContextAccessor>();
+
+                return new UserInfo
+                {
+                    UID = Convert.ToInt32(context.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)),
+                    Email = context.HttpContext.User.FindFirstValue(ClaimTypes.Name)
+                };
+            });
+            #endregion
 
 
             #region Configure JwtIssuerOptions

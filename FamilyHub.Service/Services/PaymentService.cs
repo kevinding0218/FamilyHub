@@ -1,4 +1,5 @@
-﻿using FamilyHub.Data.Finance;
+﻿using FamilyHub.Data;
+using FamilyHub.Data.Finance;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Service.Contracts;
 using FamilyHub.Service.Display;
@@ -14,6 +15,11 @@ namespace FamilyHub.Service.Services
     {
         public PaymentService(FamilyHubDbContext dbContext)
             : base(dbContext)
+        {
+        }
+
+        public PaymentService(IUserInfo userInfo, FamilyHubDbContext dbContext)
+            : base(userInfo, dbContext)
         {
         }
 

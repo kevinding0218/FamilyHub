@@ -1,4 +1,5 @@
-﻿using FamilyHub.Data.Common;
+﻿using FamilyHub.Data;
+using FamilyHub.Data.Common;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Common;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,11 @@ namespace FamilyHub.Repository.Repository.Common
     {
         public UserRepository(FamilyHubDbContext dbContext)
             : base(dbContext)
+        {
+        }
+
+        public UserRepository(IUserInfo userInfo, FamilyHubDbContext dbContext)
+            : base(userInfo, dbContext)
         {
         }
 

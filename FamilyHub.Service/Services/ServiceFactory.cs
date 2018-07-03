@@ -1,4 +1,5 @@
-﻿using FamilyHub.DataAccess.EFCore;
+﻿using FamilyHub.Data;
+using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Common;
 using FamilyHub.Repository.Contracts.Finance;
 using FamilyHub.Repository.Contracts.Transactions;
@@ -15,6 +16,7 @@ namespace FamilyHub.Service.Services
     public abstract class ServiceFactory : IServiceFactory
     {
         protected bool Disposed;
+        private readonly IUserInfo _userInfo;
         protected readonly FamilyHubDbContext _dbContext;
 
         #region Common Contracts
@@ -39,6 +41,12 @@ namespace FamilyHub.Service.Services
             _dbContext = dbContext;
         }
 
+        public ServiceFactory(IUserInfo userInfo, FamilyHubDbContext dbContext)
+        {
+            _userInfo = userInfo;
+            _dbContext = dbContext;
+        }
+
         public void Dispose()
         {
             if (!Disposed)
@@ -51,27 +59,27 @@ namespace FamilyHub.Service.Services
 
         #region Common Instances
         protected IUserRepository UserRepository
-            => _userRepository ?? (_userRepository = new UserRepository(_dbContext));
+            => _userRepository ?? (_userRepository = new UserRepository(_userInfo, _dbContext));
         #endregion
 
         #region Payment Instances
         protected IPaymentPayorRepository PaymentPayorRepository
-            => _paymentPayorRepository ?? (_paymentPayorRepository = new PaymentPayorRepository(_dbContext));
+            => _paymentPayorRepository ?? (_paymentPayorRepository = new PaymentPayorRepository(_userInfo, _dbContext));
         protected IPaymentPayorRelationshipRepository PaymentPayorRelationshipRepository
-            => _paymentPayorRelationshipRepository ?? (_paymentPayorRelationshipRepository = new PaymentPayorRelationshipRepository(_dbContext));
+            => _paymentPayorRelationshipRepository ?? (_paymentPayorRelationshipRepository = new PaymentPayorRelationshipRepository(_userInfo, _dbContext));
         protected IPaymentMethodRepository PaymentMethodRepository
-            => _paymentMethodRepository ?? (_paymentMethodRepository = new PaymentMethodRepository(_dbContext));
+            => _paymentMethodRepository ?? (_paymentMethodRepository = new PaymentMethodRepository(_userInfo, _dbContext));
         #endregion
 
         #region Transaction Instances
         protected ITransactionCategoryRepository TransactionCategoryRepository
-            => _transactionCategoryRepository ?? (_transactionCategoryRepository = new TransactionCategoryRepository(_dbContext));
+            => _transactionCategoryRepository ?? (_transactionCategoryRepository = new TransactionCategoryRepository(_userInfo, _dbContext));
         protected ITransactionTypeRepository TransactionTypeRepository
-            => _transactionTypeRepository ?? (_transactionTypeRepository = new TransactionTypeRepository(_dbContext));
+            => _transactionTypeRepository ?? (_transactionTypeRepository = new TransactionTypeRepository(_userInfo, _dbContext));
         protected ITransactionDetailRepository TransactionDetailRepository
-            => _transactionDetailRepository ?? (_transactionDetailRepository = new TransactionDetailRepository(_dbContext));
+            => _transactionDetailRepository ?? (_transactionDetailRepository = new TransactionDetailRepository(_userInfo, _dbContext));
         protected ITransactionRepository TransactionRepository
-            => _transactionRepository ?? (_transactionRepository = new TransactionRepository(_dbContext));
+            => _transactionRepository ?? (_transactionRepository = new TransactionRepository(_userInfo, _dbContext));
         #endregion
 
     }
