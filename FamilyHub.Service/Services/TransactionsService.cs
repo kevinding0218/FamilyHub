@@ -30,9 +30,9 @@ namespace FamilyHub.Service.Services
         {
         }
 
-        public async Task<ISingleResponse<vmTransactionCreateRequest>> GetCreateTransactionRequestAsync(int currentUid)
+        public async Task<ISingleResponse<vmTransactionPrepareRequest>> PrepareTransactionRelatedRequestAsync(int currentUid)
         {
-            var response = new SingleResponse<vmTransactionCreateRequest>();
+            var response = new SingleResponse<vmTransactionPrepareRequest>();
 
             try
             {

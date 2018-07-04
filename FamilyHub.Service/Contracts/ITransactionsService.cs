@@ -10,6 +10,6 @@ namespace FamilyHub.Service.Contracts
 {
     public interface ITransactionsService
     {
-        Task<ISingleResponse<vmTransactionCreateRequest>> GetCreateTransactionRequestAsync(int currentUid);
+        Task<ISingleResponse<vmTransactionPrepareRequest>> PrepareTransactionRelatedRequestAsync(int currentUid);
     }
 }

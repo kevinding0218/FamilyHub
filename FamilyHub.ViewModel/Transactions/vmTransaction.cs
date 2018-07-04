@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FamilyHub.ViewModel.Transactions
 {
-    public class vmTransactionCreateRequest
+    public class vmTransactionPrepareRequest
     {
         public IEnumerable<TransactionType> TransactionTypes { get; set; }
         public IEnumerable<TransactionCategory> TransactionCategorys { get; set; }

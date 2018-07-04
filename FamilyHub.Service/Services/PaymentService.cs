@@ -54,7 +54,7 @@ namespace FamilyHub.Service.Services
         #endregion
 
         #region Payment Payor Relationship
-        public async Task<IListResponse<PaymentPayorRelationship>> GetListPaymentPayorRelationshipAsync()
+        public async Task<IListResponse<PaymentPayorRelationship>> PreparePaymentPayorRelatedAsync()
         {
             var response = new ListResponse<PaymentPayorRelationship>();
 
@@ -74,7 +74,7 @@ namespace FamilyHub.Service.Services
         #endregion
 
         #region Payment Method
-        public async Task<IListResponse<PaymentMethodType>> GetCreatePaymentMethodRequestAsync()
+        public async Task<IListResponse<PaymentMethodType>> PreparePaymentMethodRelatedRequestAsync()
         {
             var response = new ListResponse<PaymentMethodType>();
 

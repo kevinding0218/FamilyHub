@@ -29,11 +29,11 @@ namespace FamilyHub.API.Controllers.Payment
         }
 
         #region Payment Method
-        [HttpGet("createPaymentMethod")]
-        public async Task<IActionResult> GetCreatePaymentMethodRequestAsync(int uid)
+        [HttpGet("preparePaymentMethodRelated")]
+        public async Task<IActionResult> PreparePaymentMethodRelatedAsync()
         {
             // Get response from business logic
-            var response = await _paymentService.GetCreatePaymentMethodRequestAsync();
+            var response = await _paymentService.PreparePaymentMethodRelatedRequestAsync();
 
             // Return as http response
             return response.ToHttpResponse();
@@ -81,11 +81,11 @@ namespace FamilyHub.API.Controllers.Payment
         #endregion
 
         #region Payment Payor
-        [HttpPost("createPaymentPayor")]
-        public async Task<IActionResult> CreatePaymentPayor()
+        [HttpPost("preparePaymentPayorRelated")]
+        public async Task<IActionResult> preparePaymentPayorRelatedAsync()
         {
             // Get response from business logic
-            var response = await _paymentService.GetListPaymentPayorRelationshipAsync();
+            var response = await _paymentService.PreparePaymentPayorRelatedAsync();
 
             // Return as http response
             return response.ToHttpResponse();

@@ -25,11 +25,11 @@ namespace FamilyHub.API.Controllers.Finance
         }
 
         #region Transaction
-        [HttpGet("createTransactionRequest")]
-        public async Task<IActionResult> GetCreateOrderRequestAsync(int uid)
+        [HttpGet("prepareTransactionRelated")]
+        public async Task<IActionResult> PrepareTransactionRelatedAsync(int uid)
         {
             // Get response from business logic
-            var response = await _transactionsService.GetCreateTransactionRequestAsync(uid);
+            var response = await _transactionsService.PrepareTransactionRelatedRequestAsync(uid);
 
             // Return as http response
             return response.ToHttpResponse();
