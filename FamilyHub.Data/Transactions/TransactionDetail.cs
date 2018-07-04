@@ -1,4 +1,4 @@
-﻿using FamilyHub.Data.Finance;
+﻿using FamilyHub.Data.Payment;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

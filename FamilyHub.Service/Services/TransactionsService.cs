@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FamilyHub.Data;
-using FamilyHub.Data.Finance;
+using FamilyHub.Data.Payment;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Service.Contracts;
 using FamilyHub.Service.Display;
@@ -30,9 +30,9 @@ namespace FamilyHub.Service.Services
         {
         }
 
-        public async Task<ISingleResponse<vmCreateTransactionRequest>> GetCreateTransactionRequestAsync(int currentUid)
+        public async Task<ISingleResponse<vmTransactionCreateRequest>> GetCreateTransactionRequestAsync(int currentUid)
         {
-            var response = new SingleResponse<vmCreateTransactionRequest>();
+            var response = new SingleResponse<vmTransactionCreateRequest>();
 
             try
             {

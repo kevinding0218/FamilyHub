@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FamilyHub.ViewModel.Finance
+namespace FamilyHub.ViewModel.Payment
 {
-    public class vmCreatePaymentPayor
+    public class vmPaymentPayorCreate
     {
 
     }

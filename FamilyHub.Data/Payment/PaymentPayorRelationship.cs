@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace FamilyHub.Data.Finance
+namespace FamilyHub.Data.Payment
 {
     public class PaymentPayorRelationship
     {

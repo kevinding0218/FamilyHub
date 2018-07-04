@@ -1,13 +1,13 @@
 ﻿using FamilyHub.Data;
-using FamilyHub.Data.Finance;
+using FamilyHub.Data.Payment;
 using FamilyHub.DataAccess.EFCore;
-using FamilyHub.Repository.Contracts.Finance;
+using FamilyHub.Repository.Contracts.Payment;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FamilyHub.Repository.Repository.Finance
+namespace FamilyHub.Repository.Repository.Payment
 {
     public class PaymentMethodRepository : Repository<PaymentMethod>, IPaymentMethodRepository
     {
@@ -23,6 +23,9 @@ namespace FamilyHub.Repository.Repository.Finance
 
         public async Task<PaymentMethod> GetSinglePaymentMethodByIDAsync(int paymentMethodID)
             => await GetSingleOrDefaultAsync(predicate: pm => pm.PaymentMethodID == paymentMethodID);
+
+        public async Task<PaymentMethod> GetSinglePaymentMethodByNameAsync(string paymentMethodName)
+            => await GetSingleOrDefaultAsync(predicate: pm => pm.PaymentMethodName == paymentMethodName);
 
         public async Task<IEnumerable<PaymentMethod>> GetListPaymentMethodAsync(int createdBy = 0, int paymentMethodTypeId = 0, bool active = true)
         {
@@ -58,6 +61,13 @@ namespace FamilyHub.Repository.Repository.Finance
             Update(entity);
 
             return await CommitChangesAsync();
+        }
+
+        public async Task ActivatePaymentMethodAsync(PaymentMethod entity)
+        {
+            Activate(entity);
+
+            await CommitChangesAsync();
         }
 
         public async Task DeactivatePaymentMethodAsync(PaymentMethod entity)

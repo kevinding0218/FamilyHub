@@ -14,7 +14,7 @@ namespace FamilyHub.AuthService.Contracts
         string GenerateRefreshToken();
         ClaimsPrincipal GetPrincipalFromExpiredToken(string token, byte[] ServerSigningPassword);
 
-        Task<vmAuthorizedUserResponse> AssignTokenToLoginUserAsync(vmValidateLoginUserResponse validateLoginUserResponse);
+        Task<vmAuthorizedUserResponse> AssignTokenToLoginUserAsync(vmValidateUserResponse validateLoginUserResponse);
         Task<vmRefreshTokenResponse> AssignRefreshTokenAsync(User userFromDb);
     }
 }

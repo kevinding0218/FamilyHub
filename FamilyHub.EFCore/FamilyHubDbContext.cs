@@ -1,6 +1,6 @@
 ﻿using System;
 using FamilyHub.DataAccess.EFCore.MappingConfiguration.Common;
-using FamilyHub.DataAccess.EFCore.MappingConfiguration.Finance;
+using FamilyHub.DataAccess.EFCore.MappingConfiguration.Payment;
 using FamilyHub.DataAccess.EFCore.MappingConfiguration.Logging;
 using FamilyHub.DataAccess.EFCore.MappingConfiguration.Transactions;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +31,7 @@ namespace FamilyHub.DataAccess.EFCore
                 .ApplyConfiguration(new UserPasswordConfiguration());
             #endregion
 
-            #region Finance
+            #region Payment
             modelBuilder
                 .ApplyConfiguration(new PaymentMethodTypeConfiguration())
                 .ApplyConfiguration(new PaymentMethodConfiguration())

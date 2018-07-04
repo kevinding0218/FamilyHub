@@ -122,7 +122,7 @@ namespace FamilyHub.AuthService.AuthServices
             return principal;
         }
 
-        public async Task<vmAuthorizedUserResponse> AssignTokenToLoginUserAsync(vmValidateLoginUserResponse validateLoginUserResponse)
+        public async Task<vmAuthorizedUserResponse> AssignTokenToLoginUserAsync(vmValidateUserResponse validateLoginUserResponse)
         {
             var jwtToken = GenerateAccessToken(
                 validateLoginUserResponse.Email,

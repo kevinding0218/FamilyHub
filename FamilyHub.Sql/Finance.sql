@@ -1,8 +1,8 @@
-CREATE SCHEMA Finance
+CREATE SCHEMA Payment
 GO
 
 -- VISA/MASTER/DISCOVERY/CHECKING ACCOUNT/SAVING ACCOUNT...
-CREATE TABLE Finance.PaymentMethodType
+CREATE TABLE Payment.PaymentMethodType
 (
 	[PaymentMethodTypeID] [INT] IDENTITY(1,1) NOT NULL,
 	[PaymentMethodTypeName] NVARCHAR(30) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE Finance.PaymentMethodType
 	PRIMARY KEY (PaymentMethodTypeID),
 );
 GO
-INSERT INTO Finance.PaymentMethodType
+INSERT INTO Payment.PaymentMethodType
 (
     PaymentMethodTypeName,
     PaymentMethodTypeDescription
@@ -20,7 +20,7 @@ VALUES
 (   N'CASH', -- PaymentMethodTypeName - nvarchar(50)
     N'All CASH Type Such As CASH/MONEY ORDER'  -- PaymentMethodTypeDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentMethodType
+INSERT INTO Payment.PaymentMethodType
 (
     PaymentMethodTypeName,
     PaymentMethodTypeDescription
@@ -29,7 +29,7 @@ VALUES
 (   N'CREDIT CARD', -- PaymentMethodTypeName - nvarchar(50)
     N'All Credit Card Type Such As VISA/MASTER/AMERICAN EXPRESS/DISCOVERY'  -- PaymentMethodTypeDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentMethodType
+INSERT INTO Payment.PaymentMethodType
 (
     PaymentMethodTypeName,
     PaymentMethodTypeDescription
@@ -38,7 +38,7 @@ VALUES
 (   N'DEBIT CARD', -- PaymentMethodTypeName - nvarchar(50)
     N'All Debit Card Type Such As VISA/MASTER'  -- PaymentMethodTypeDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentMethodType
+INSERT INTO Payment.PaymentMethodType
 (
     PaymentMethodTypeName,
     PaymentMethodTypeDescription
@@ -47,7 +47,7 @@ VALUES
 (   N'BANK CHECKING ACCOUNT', -- PaymentMethodTypeName - nvarchar(50)
     N'All Bank Checking Account Type'  -- PaymentMethodTypeDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentMethodType
+INSERT INTO Payment.PaymentMethodType
 (
     PaymentMethodTypeName,
     PaymentMethodTypeDescription
@@ -56,7 +56,7 @@ VALUES
 (   N'BANK SAVING ACCOUNT', -- PaymentMethodTypeName - nvarchar(50)
     N'All Bank Saving Account Type'  -- PaymentMethodTypeDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentMethodType
+INSERT INTO Payment.PaymentMethodType
 (
     PaymentMethodTypeName,
     PaymentMethodTypeDescription
@@ -66,9 +66,9 @@ VALUES
     N'All Mobile Payment Type Such As ALIPAY/WEIXIN/ANDROID/APPLE PAY'  -- PaymentMethodTypeDescription - nvarchar(250)
 );
 GO
---SELECT * FROM Finance.PaymentMethodType
+--SELECT * FROM Payment.PaymentMethodType
 
-CREATE TABLE Finance.PaymentMethod
+CREATE TABLE Payment.PaymentMethod
 (
 	[PaymentMethodID] [INT] IDENTITY(1,1) NOT NULL,
 	[PaymentMethodName] NVARCHAR(50) NOT NULL,
@@ -82,12 +82,12 @@ CREATE TABLE Finance.PaymentMethod
 	[Timestamp] rowversion NULL,
 	PRIMARY KEY (PaymentMethodID),
 	CONSTRAINT FK_PaymentMethodType FOREIGN KEY (PaymentMethodTypeID)
-    REFERENCES Finance.PaymentMethodType(PaymentMethodTypeID)
+    REFERENCES Payment.PaymentMethodType(PaymentMethodTypeID)
 );
 GO
 
 --Spouse/Children/Parent/Relative/Friends/Colleague
-CREATE TABLE Finance.PaymentPayorRelationship
+CREATE TABLE Payment.PaymentPayorRelationship
 (
 	[PaymentPayorRelationshipID] [INT] IDENTITY(1,1) NOT NULL,
 	[PaymentPayorRelationshipName] NVARCHAR(50) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE Finance.PaymentPayorRelationship
 );
 GO
 
-INSERT INTO Finance.PaymentPayorRelationship
+INSERT INTO Payment.PaymentPayorRelationship
 (
     PaymentPayorRelationshipName,
     PaymentPayorRelationshipDescription
@@ -106,7 +106,7 @@ VALUES
 (   N'Owner', -- PaymentPayorRelationshipName - nvarchar(50)
     N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentPayorRelationship
+INSERT INTO Payment.PaymentPayorRelationship
 (
     PaymentPayorRelationshipName,
     PaymentPayorRelationshipDescription
@@ -115,7 +115,7 @@ VALUES
 (   N'Parent', -- PaymentPayorRelationshipName - nvarchar(50)
     N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentPayorRelationship
+INSERT INTO Payment.PaymentPayorRelationship
 (
     PaymentPayorRelationshipName,
     PaymentPayorRelationshipDescription
@@ -124,7 +124,7 @@ VALUES
 (   N'Spouse', -- PaymentPayorRelationshipName - nvarchar(50)
     N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentPayorRelationship
+INSERT INTO Payment.PaymentPayorRelationship
 (
     PaymentPayorRelationshipName,
     PaymentPayorRelationshipDescription
@@ -133,7 +133,7 @@ VALUES
 (   N'Children', -- PaymentPayorRelationshipName - nvarchar(50)
     N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentPayorRelationship
+INSERT INTO Payment.PaymentPayorRelationship
 (
     PaymentPayorRelationshipName,
     PaymentPayorRelationshipDescription
@@ -142,7 +142,7 @@ VALUES
 (   N'Relative', -- PaymentPayorRelationshipName - nvarchar(50)
     N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentPayorRelationship
+INSERT INTO Payment.PaymentPayorRelationship
 (
     PaymentPayorRelationshipName,
     PaymentPayorRelationshipDescription
@@ -151,7 +151,7 @@ VALUES
 (   N'Friends', -- PaymentPayorRelationshipName - nvarchar(50)
     N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
 );
-INSERT INTO Finance.PaymentPayorRelationship
+INSERT INTO Payment.PaymentPayorRelationship
 (
     PaymentPayorRelationshipName,
     PaymentPayorRelationshipDescription
@@ -162,9 +162,9 @@ VALUES
 );
 GO
 
---SELECT * FROM Finance.PaymentPayorRelationship
+--SELECT * FROM Payment.PaymentPayorRelationship
 
-CREATE TABLE Finance.PaymentPayor
+CREATE TABLE Payment.PaymentPayor
 (
 	[PaymentPayorID] [INT] IDENTITY(1,1) NOT NULL,
 	[PaymentPayorName] NVARCHAR(50) NOT NULL,
@@ -180,7 +180,7 @@ CREATE TABLE Finance.PaymentPayor
 	[Timestamp] rowversion NULL,
 	PRIMARY KEY (PaymentPayorID),
 	CONSTRAINT PaymentPayorPaymentPayorRelationship FOREIGN KEY (PaymentPayorRelationshipID)
-    REFERENCES Finance.PaymentPayorRelationship(PaymentPayorRelationshipID)
+    REFERENCES Payment.PaymentPayorRelationship(PaymentPayorRelationshipID)
 );
 GO
 
@@ -243,11 +243,11 @@ CREATE TABLE [Transactions].TransactionDetail
 	CONSTRAINT TransactionDetailDetailType FOREIGN KEY (TransactionTypeID)
     REFERENCES [Transactions].TransactionType(TransactionTypeID),
 	CONSTRAINT TransactionDetailDetailPayor FOREIGN KEY (PaymentPayorID)
-    REFERENCES Finance.PaymentPayor(PaymentPayorID),
+    REFERENCES Payment.PaymentPayor(PaymentPayorID),
 	CONSTRAINT TransactionDetailDetailCategory FOREIGN KEY (TransactionCategoryID)
     REFERENCES [Transactions].TransactionCategory(TransactionCategoryID),
 	CONSTRAINT TransactionDetailDetailPaymentMethod FOREIGN KEY (PaymentMethodID)
-    REFERENCES Finance.PaymentMethod(PaymentMethodID)
+    REFERENCES Payment.PaymentMethod(PaymentMethodID)
  );
 GO
 

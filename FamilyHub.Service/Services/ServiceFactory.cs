@@ -2,10 +2,10 @@
 using FamilyHub.Data;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Common;
-using FamilyHub.Repository.Contracts.Finance;
+using FamilyHub.Repository.Contracts.Payment;
 using FamilyHub.Repository.Contracts.Transactions;
 using FamilyHub.Repository.Repository.Common;
-using FamilyHub.Repository.Repository.Finance;
+using FamilyHub.Repository.Repository.Payment;
 using FamilyHub.Repository.Repository.Transactions;
 using FamilyHub.Service.Contracts;
 using FamilyHub.ViewModel.Mapping;
@@ -32,6 +32,7 @@ namespace FamilyHub.Service.Services
         #region Payment Contracts
         protected IPaymentPayorRepository _paymentPayorRepository;
         protected IPaymentPayorRelationshipRepository _paymentPayorRelationshipRepository;
+        protected IPaymentMethodTypeRepository _paymentMethodTypeRepository;
         protected IPaymentMethodRepository _paymentMethodRepository;
         #endregion
 
@@ -80,6 +81,8 @@ namespace FamilyHub.Service.Services
             => _paymentPayorRepository ?? (_paymentPayorRepository = new PaymentPayorRepository(_userInfo, _dbContext));
         protected IPaymentPayorRelationshipRepository PaymentPayorRelationshipRepository
             => _paymentPayorRelationshipRepository ?? (_paymentPayorRelationshipRepository = new PaymentPayorRelationshipRepository(_userInfo, _dbContext));
+        protected IPaymentMethodTypeRepository PaymentMethodTypeRepository
+            => _paymentMethodTypeRepository ?? (_paymentMethodTypeRepository = new PaymentMethodTypeRepository(_dbContext));
         protected IPaymentMethodRepository PaymentMethodRepository
             => _paymentMethodRepository ?? (_paymentMethodRepository = new PaymentMethodRepository(_userInfo, _dbContext));
         #endregion

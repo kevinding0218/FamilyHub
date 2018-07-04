@@ -1,7 +1,7 @@
 ﻿using FamilyHub.Data;
-using FamilyHub.Data.Finance;
+using FamilyHub.Data.Payment;
 using FamilyHub.DataAccess.EFCore;
-using FamilyHub.Repository.Contracts.Finance;
+using FamilyHub.Repository.Contracts.Payment;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FamilyHub.Repository.Repository.Finance
+namespace FamilyHub.Repository.Repository.Payment
 {
     public class PaymentPayorRepository : Repository<PaymentPayor>, IPaymentPayorRepository
     {

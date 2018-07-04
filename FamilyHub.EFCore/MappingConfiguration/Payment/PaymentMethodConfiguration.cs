@@ -1,18 +1,18 @@
-﻿using FamilyHub.Data.Finance;
+﻿using FamilyHub.Data.Payment;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Finance
+namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Payment
 {
     internal class PaymentMethodConfiguration : IEntityTypeConfiguration<PaymentMethod>
     {
         public void Configure(EntityTypeBuilder<PaymentMethod> builder)
         {
             // Mapping for table
-            builder.ToTable("PaymentMethod", "Finance");
+            builder.ToTable("PaymentMethod", "Payment");
 
             // Set key for entity
             builder.HasKey(p => p.PaymentMethodID);

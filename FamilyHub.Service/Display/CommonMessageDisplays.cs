@@ -6,11 +6,11 @@ namespace FamilyHub.Service.Display
 {
     public class CommonMessageDisplays
     {
-        public static string ExistedUserExceptionMessage
+        public static string UserAlreadyRegisteredMessage
             => "User with Email: '{0}', has already been registered.";
-        public static string FailedAuthenticationExceptionMessage
+        public static string FailedAuthenticationMessage
             => "User email or password does not match.";
-        public static string UserNotFoundExceptionMessage
+        public static string UserNotFoundMessage
             => "User with Email: '{0}' not found.";
     }
 }

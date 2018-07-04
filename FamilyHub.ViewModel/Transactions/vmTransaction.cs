@@ -1,4 +1,4 @@
-﻿using FamilyHub.Data.Finance;
+﻿using FamilyHub.Data.Payment;
 using FamilyHub.Data.Transactions;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FamilyHub.ViewModel.Transactions
 {
-    public class vmCreateTransactionRequest
+    public class vmTransactionCreateRequest
     {
         public IEnumerable<TransactionType> TransactionTypes { get; set; }
         public IEnumerable<TransactionCategory> TransactionCategorys { get; set; }

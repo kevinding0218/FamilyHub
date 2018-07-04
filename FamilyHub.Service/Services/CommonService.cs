@@ -41,12 +41,12 @@ namespace FamilyHub.Service.Services
                 var existedUser = await UserRepository
                     .GetSingleUserInfoAsync(new User(email));
 
-                if (existedUser == null) response.Message = ResponseMessageDisplay.NonExisted;
+                if (existedUser == null) response.Message = ResponseMessageDisplay.NotFound;
                 else
                 {
-                    response.Message = ResponseMessageDisplay.IsExisted;
+                    response.Message = ResponseMessageDisplay.Found;
                     // Throw exception if duplicate email account existed
-                    throw new FamilyHubException(string.Format(CommonMessageDisplays.ExistedUserExceptionMessage, email));
+                    throw new FamilyHubException(string.Format(CommonMessageDisplays.UserAlreadyRegisteredMessage, email));
                 }
             }
             catch (Exception ex)
@@ -57,16 +57,16 @@ namespace FamilyHub.Service.Services
             return response;
         }
 
-        public async Task<ISingleResponse<vmValidateLoginUserResponse>> GetSingleUserForLoginAsync(string email, bool withCredential = true)
+        public async Task<ISingleResponse<vmValidateUserResponse>> GetSingleUserForLoginAsync(string email, bool withCredential = true)
         {
-            var response = new SingleResponse<vmValidateLoginUserResponse>();
+            var response = new SingleResponse<vmValidateUserResponse>();
 
             try
             {
                 var existedUser = await UserRepository.GetSingleUserInfoAsync(new User(email), withCredential: withCredential);
 
                 response.Message = ResponseMessageDisplay.Valid;
-                response.Model = _mapper.Map<User, vmValidateLoginUserResponse>(existedUser);
+                response.Model = _mapper.Map<User, vmValidateUserResponse>(existedUser);
             }
             catch (Exception ex)
             {

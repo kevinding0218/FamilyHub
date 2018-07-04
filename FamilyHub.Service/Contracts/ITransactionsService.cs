@@ -1,4 +1,4 @@
-﻿using FamilyHub.Data.Finance;
+﻿using FamilyHub.Data.Payment;
 using FamilyHub.Service.Responses;
 using FamilyHub.ViewModel.Transactions;
 using System;
@@ -10,6 +10,6 @@ namespace FamilyHub.Service.Contracts
 {
     public interface ITransactionsService
     {
-        Task<ISingleResponse<vmCreateTransactionRequest>> GetCreateTransactionRequestAsync(int currentUid);
+        Task<ISingleResponse<vmTransactionCreateRequest>> GetCreateTransactionRequestAsync(int currentUid);
     }
 }

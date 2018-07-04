@@ -60,7 +60,7 @@ namespace FamilyHub.API.Controllers.Common
                 var existedUserResponse = await _commonService.GetSingleUserForUpdateAsync(userEmail);
 
                 if (existedUserResponse.Model == null || existedUserResponse.Model.RefreshToken != refreshTokenRequest.RefreshToken)
-                    throw new FamilyHubException(string.Format(CommonMessageDisplays.UserNotFoundExceptionMessage, userEmail));
+                    throw new FamilyHubException(string.Format(CommonMessageDisplays.UserNotFoundMessage, userEmail));
 
                 refreshTokenResponse.Model = await _tokenService.AssignRefreshTokenAsync(existedUserResponse.Model);
                 refreshTokenResponse.Message = ResponseMessageDisplay.Success;

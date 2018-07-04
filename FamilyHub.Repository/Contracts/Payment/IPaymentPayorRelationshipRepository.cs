@@ -1,10 +1,10 @@
-﻿using FamilyHub.Data.Finance;
+﻿using FamilyHub.Data.Payment;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FamilyHub.Repository.Contracts.Finance
+namespace FamilyHub.Repository.Contracts.Payment
 {
     public interface IPaymentPayorRelationshipRepository : IRepository<PaymentPayorRelationship>
     {

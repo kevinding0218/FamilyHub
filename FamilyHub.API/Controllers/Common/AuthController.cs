@@ -46,7 +46,7 @@ namespace FamilyHub.API.Controllers.Common
         {
             var validEmailResponse = await _commonService.CheckSingleUserExistedAsync(registerUser.Email);
 
-            if (validEmailResponse.Message.Equals(ResponseMessageDisplay.IsExisted))
+            if (validEmailResponse.Message.Equals(ResponseMessageDisplay.Found))
                 return validEmailResponse.ToHttpResponse();
             else
             {
@@ -72,7 +72,7 @@ namespace FamilyHub.API.Controllers.Common
                 if (existedUserResponse.Model == null || existedUserResponse.Model.UserID == 0 ||
                     !_passwordHasher.VerifyIdentityV3Hash(loggingUser.Password, existedUserResponse.Model.Password))
                 {
-                    throw new FamilyHubException(string.Format(CommonMessageDisplays.FailedAuthenticationExceptionMessage));
+                    throw new FamilyHubException(string.Format(CommonMessageDisplays.FailedAuthenticationMessage));
                 }
                 else
                 {

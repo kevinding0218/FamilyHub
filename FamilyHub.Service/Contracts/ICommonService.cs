@@ -13,7 +13,7 @@ namespace FamilyHub.Service.Contracts
         #region User
         Task<IResponse> CheckSingleUserExistedAsync(string email);
 
-        Task<ISingleResponse<vmValidateLoginUserResponse>> GetSingleUserForLoginAsync(
+        Task<ISingleResponse<vmValidateUserResponse>> GetSingleUserForLoginAsync(
             string email,
             bool withCredential = true);
 

@@ -24,7 +24,7 @@ namespace FamilyHub.ViewModel
         public string RefreshToken { get; set; }
     }
 
-    public class vmValidateLoginUserResponse
+    public class vmValidateUserResponse
     {
         public int UserID { get; set; }
         public string Email { get; set; }

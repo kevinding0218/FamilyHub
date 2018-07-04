@@ -52,14 +52,14 @@ namespace FamilyHub.API
             services.AddDbContext<FamilyHubDbContext>(options => options.UseSqlServer(Configuration["AppSettings:ConnectionString"]));
             #endregion
 
-            #region Inject AutoMapper
+            #region Register AutoMapper Service
             services.AddAutoMapper(typeof(FamilyHubAutoMapperConfiguration));
             #endregion
 
             #region Inject Business Service Layer
             services.AddScoped<ICommonService, CommonService>();
             services.AddScoped<ITransactionsService, TransactionsService>();
-            services.AddScoped<IFinanceService, FinanceService>();
+            services.AddScoped<IPaymentService, PaymentService>();
             #endregion
 
             #region Inject Auth Service Layer

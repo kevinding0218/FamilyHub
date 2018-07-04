@@ -18,10 +18,10 @@ namespace FamilyHub.Service.Display
             => "Invalid";
         public static string NotAuthorized
             => "NotAuthorized";
-        public static string IsExisted
-            => "Existed";
-        public static string NonExisted
-            => "NonExisted";
+        public static string Found
+            => "Found";
+        public static string NotFound
+            => "NotFound";
         public static string Duplicate
             => "Duplicate";
     }

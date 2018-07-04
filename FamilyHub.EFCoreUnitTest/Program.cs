@@ -1,6 +1,6 @@
-﻿using FamilyHub.Data.Finance;
+﻿using FamilyHub.Data.Payment;
 using FamilyHub.DataAccess.EFCore;
-using FamilyHub.Repository.Repository.Finance;
+using FamilyHub.Repository.Repository.Payment;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
