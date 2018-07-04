@@ -1,4 +1,5 @@
-﻿using FamilyHub.Data;
+﻿using AutoMapper;
+using FamilyHub.Data;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Common;
 using FamilyHub.Repository.Contracts.Finance;
@@ -7,6 +8,7 @@ using FamilyHub.Repository.Repository.Common;
 using FamilyHub.Repository.Repository.Finance;
 using FamilyHub.Repository.Repository.Transactions;
 using FamilyHub.Service.Contracts;
+using FamilyHub.ViewModel.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +18,10 @@ namespace FamilyHub.Service.Services
     public abstract class ServiceFactory : IServiceFactory
     {
         protected bool Disposed;
+        #region Auto Mapper
+        public readonly IMapper _mapper;
+        #endregion
+
         private readonly IUserInfo _userInfo;
         protected readonly FamilyHubDbContext _dbContext;
 
@@ -41,8 +47,15 @@ namespace FamilyHub.Service.Services
             _dbContext = dbContext;
         }
 
-        public ServiceFactory(IUserInfo userInfo, FamilyHubDbContext dbContext)
+        public ServiceFactory(IMapper mapper, FamilyHubDbContext dbContext)
         {
+            _mapper = mapper;
+            _dbContext = dbContext;
+        }
+
+        public ServiceFactory(IMapper mapper, IUserInfo userInfo, FamilyHubDbContext dbContext)
+        {
+            _mapper = mapper;
             _userInfo = userInfo;
             _dbContext = dbContext;
         }

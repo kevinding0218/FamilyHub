@@ -24,44 +24,34 @@ namespace FamilyHub.API.Controllers.Common
     [Route("/api/auth")]
     public class AuthController
     {
-        private readonly IMapper _mapper;
         private readonly IPasswordHasher _passwordHasher;
         private readonly ITokenService _tokenService;
-        private readonly JwtIssuerOptions _jwtOptions;
 
         protected ICommonService _commonService;
-        private readonly IConfiguration _configuration;
 
         public AuthController(
-            IMapper mapper,
             IPasswordHasher passwordHasher,
             ITokenService tokenService,
             ICommonService commonService,
-            IOptions<JwtIssuerOptions> jwtOptions,
-            IConfiguration configuration)
+            IOptions<JwtIssuerOptions> jwtOptions)
         {
-            _mapper = mapper;
             _passwordHasher = passwordHasher;
             _tokenService = tokenService;
             _commonService = commonService;
-            _jwtOptions = jwtOptions.Value;
-            _configuration = configuration;
         }
 
         #region Sign Up
         [HttpPost("register")]
         public async Task<IActionResult> Signup([FromBody]vmRegisterUserRequest registerUser)
         {
-            var validEmailResponse = await _commonService.GetSingleUserAsync(registerUser.Email, checkIfExisted: true);
+            var validEmailResponse = await _commonService.CheckSingleUserExistedAsync(registerUser.Email);
 
             if (validEmailResponse.Message.Equals(ResponseMessageDisplay.IsExisted))
                 return validEmailResponse.ToHttpResponse();
             else
             {
                 registerUser.Password = _passwordHasher.GenerateIdentityV3Hash(registerUser.Password);
-
-                var addedUser = _mapper.Map<vmRegisterUserRequest, User>(registerUser);
-                var registerUserResponse = await _commonService.RegisterNewUser(addedUser);
+                var registerUserResponse = await _commonService.RegisterNewUser(registerUser);
 
                 return registerUserResponse.ToHttpResponse();
             }
@@ -72,15 +62,15 @@ namespace FamilyHub.API.Controllers.Common
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]vmLoginUserRequest loggingUser)
         {
-            var loginResponse = new SingleResponse<vmLoginUserResponse>();
+            var loginResponse = new SingleResponse<vmAuthorizedUserResponse>();
 
             try
             {
-                var existedUserResponse = await _commonService.GetSingleUserAsync(loggingUser.Email, withCredential: true);
+                var existedUserResponse = await _commonService.GetSingleUserForLoginAsync(loggingUser.Email);
 
                 // if User does not exist or authentication fails
                 if (existedUserResponse.Model == null || existedUserResponse.Model.UserID == 0 ||
-                    !_passwordHasher.VerifyIdentityV3Hash(loggingUser.Password, existedUserResponse.Model.UserPasswords.First().Password))
+                    !_passwordHasher.VerifyIdentityV3Hash(loggingUser.Password, existedUserResponse.Model.Password))
                 {
                     throw new FamilyHubException(string.Format(CommonMessageDisplays.FailedAuthenticationExceptionMessage));
                 }

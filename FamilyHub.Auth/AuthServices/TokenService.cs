@@ -56,7 +56,7 @@ namespace FamilyHub.AuthService.AuthServices
                 new Claim(ClaimTypes.Name, Email),
                 new Claim(ClaimTypes.NameIdentifier, UID),
                 //new Claim(ClaimTypes.Email, userFromDb.Email),
-                new Claim(ClaimTypes.Role, "ADMIN"),
+                //new Claim(ClaimTypes.Role, "ADMIN"),
             };
 
             var jwtToken = new JwtSecurityToken(
@@ -122,20 +122,22 @@ namespace FamilyHub.AuthService.AuthServices
             return principal;
         }
 
-        public async Task<vmLoginUserResponse> AssignTokenToLoginUserAsync(User userFromDb)
+        public async Task<vmAuthorizedUserResponse> AssignTokenToLoginUserAsync(vmValidateLoginUserResponse validateLoginUserResponse)
         {
             var jwtToken = GenerateAccessToken(
-                userFromDb.Email,
-                userFromDb.UserID.ToString(),
+                validateLoginUserResponse.Email,
+                validateLoginUserResponse.UserID.ToString(),
                 _jwtOptions);
 
             var refreshToken = GenerateRefreshToken();
 
-            userFromDb.RefreshToken = refreshToken;
+            var userFromDb = await _commonService.GetSingleUserForUpdateAsync(validateLoginUserResponse.Email);
 
-            await _commonService.UpdateUserRefreshTokenAsync(userFromDb);
+            userFromDb.Model.RefreshToken = refreshToken;
 
-            return new vmLoginUserResponse(userFromDb.UserID, userFromDb.Email, jwtToken, refreshToken);
+            await _commonService.UpdateUserRefreshTokenAsync(userFromDb.Model);
+
+            return new vmAuthorizedUserResponse() { UserID = validateLoginUserResponse.UserID, Email = validateLoginUserResponse.Email, JwtToken = jwtToken, RefreshToken = refreshToken };
         }
 
         public async Task<vmRefreshTokenResponse> AssignRefreshTokenAsync(User userFromDb)

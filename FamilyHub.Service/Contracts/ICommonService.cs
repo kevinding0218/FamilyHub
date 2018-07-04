@@ -1,5 +1,6 @@
 ﻿using FamilyHub.Data.Common;
 using FamilyHub.Service.Responses;
+using FamilyHub.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,13 +11,15 @@ namespace FamilyHub.Service.Contracts
     public interface ICommonService
     {
         #region User
-        Task<ISingleResponse<User>> GetSingleUserAsync(
-            string email,
-            bool withCredential = false,
-            bool withContact = false,
-            bool checkIfExisted = false);
+        Task<IResponse> CheckSingleUserExistedAsync(string email);
 
-        Task<ISingleResponse<User>> RegisterNewUser(User newUser);
+        Task<ISingleResponse<vmValidateLoginUserResponse>> GetSingleUserForLoginAsync(
+            string email,
+            bool withCredential = true);
+
+        Task<ISingleResponse<User>> GetSingleUserForUpdateAsync(string email);
+
+        Task<ISingleResponse<vmRegisterUserResponse>> RegisterNewUser(vmRegisterUserRequest registerUser);
 
         Task<ISingleResponse<User>> UpdateUserRefreshTokenAsync(User loginUser);
         #endregion

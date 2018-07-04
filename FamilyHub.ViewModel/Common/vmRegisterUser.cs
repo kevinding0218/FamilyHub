@@ -15,4 +15,10 @@ namespace FamilyHub.ViewModel
 
         public string Password { get; set; }
     }
+
+    public class vmRegisterUserResponse
+    {
+        public int UserID { get; set; }
+        public String Email { get; set; }
+    }
 }

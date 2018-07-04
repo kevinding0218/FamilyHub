@@ -7,3 +7,5 @@ H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.Vie
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.dll
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.pdb
 H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\obj\Debug\netcoreapp2.1\FamilyHub.ViewModel.csprojResolveAssemblyReference.cache
+H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\bin\Debug\netcoreapp2.1\FamilyHub.Data.dll
+H:\FamilyHub\FamilyHub\FamilyHub.ViewModel\bin\Debug\netcoreapp2.1\FamilyHub.Data.pdb

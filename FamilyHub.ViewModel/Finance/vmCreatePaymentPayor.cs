@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FamilyHub.ViewModel.Finance
 {
-    public class CreateTransactionRequest
+    public class vmCreatePaymentPayor
     {
 
     }

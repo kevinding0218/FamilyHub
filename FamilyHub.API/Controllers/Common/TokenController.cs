@@ -21,27 +21,21 @@ namespace FamilyHub.API.Controllers.Common
     [Route("/api/token")]
     public class TokenController : Controller
     {
-        private readonly IPasswordHasher _passwordHasher;
         private readonly ITokenService _tokenService;
-        private readonly JwtIssuerOptions _jwtOptions;
         private readonly ICommonService _commonService;
         private readonly IConfiguration _configuration;
 
         public TokenController(
-            IPasswordHasher passwordHasher,
             ITokenService tokenService,
             ICommonService commonService,
-            IOptions<JwtIssuerOptions> jwtOptions,
             IConfiguration configuration)
         {
-            _passwordHasher = passwordHasher;
             _tokenService = tokenService;
             _commonService = commonService;
-            _jwtOptions = jwtOptions.Value;
             _configuration = configuration;
         }
 
-        [HttpPost("refresh")]
+        [HttpPost("refresh"), Authorize]
         public async Task<IActionResult> Refresh([FromBody]vmRefreshTokenRequest refreshTokenRequest)
         {
             var refreshTokenResponse = new SingleResponse<vmRefreshTokenResponse>();
@@ -63,7 +57,7 @@ namespace FamilyHub.API.Controllers.Common
                 //   .Select(c => c.Value).SingleOrDefault();
                 #endregion
 
-                var existedUserResponse = await _commonService.GetSingleUserAsync(userEmail);
+                var existedUserResponse = await _commonService.GetSingleUserForUpdateAsync(userEmail);
 
                 if (existedUserResponse.Model == null || existedUserResponse.Model.RefreshToken != refreshTokenRequest.RefreshToken)
                     throw new FamilyHubException(string.Format(CommonMessageDisplays.UserNotFoundExceptionMessage, userEmail));
@@ -79,12 +73,12 @@ namespace FamilyHub.API.Controllers.Common
             return refreshTokenResponse.ToHttpResponse();
         }
 
-        [HttpPost("revoke"), Authorize]
+        [HttpPost("revoke")]
         public async Task<IActionResult> Revoke()
         {
             var userEmail = User.Identity.Name;
 
-            var internalUserResponse = await _commonService.GetSingleUserAsync(userEmail);
+            var internalUserResponse = await _commonService.GetSingleUserForUpdateAsync(userEmail);
 
             if (internalUserResponse == null) return BadRequest();
 

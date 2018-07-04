@@ -11,23 +11,24 @@ namespace FamilyHub.ViewModel
         public string Password { get; set; }
     }
 
-    public class vmLoginUserResponse
+    public class vmAuthorizedUserResponse
     {
-        public vmLoginUserResponse()
+        public vmAuthorizedUserResponse()
         {
 
-        }
-
-        public vmLoginUserResponse(int _userID, string _email, string _jwtToken, string _refreshToken)
-        {
-            UserID = _userID;
-            Email = _email;
-            JwtToken = _jwtToken;
-            RefreshToken = _refreshToken;
         }
 
         public int UserID { get; set; }
         public string Email { get; set; }
+        public string JwtToken { get; set; }
+        public string RefreshToken { get; set; }
+    }
+
+    public class vmValidateLoginUserResponse
+    {
+        public int UserID { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public string JwtToken { get; set; }
         public string RefreshToken { get; set; }
     }

@@ -4757,8 +4757,11 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
+          "AutoMapper": "7.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "4.0.1",
           "FamilyHub.DataAccess.EFCore": "1.0.0",
-          "FamilyHub.Repository": "1.0.0"
+          "FamilyHub.Repository": "1.0.0",
+          "FamilyHub.ViewModel": "1.0.0"
         },
         "compile": {
           "bin/placeholder/FamilyHub.Service.dll": {}
@@ -4770,6 +4773,11 @@
       "FamilyHub.ViewModel/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "AutoMapper": "7.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "4.0.1",
+          "FamilyHub.Data": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/FamilyHub.ViewModel.dll": {}
         },

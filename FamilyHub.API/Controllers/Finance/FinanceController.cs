@@ -16,22 +16,22 @@ namespace FamilyHub.API.Controllers.Finance
     [Route("/api/finance")]
     public class FinanceController : Controller
     {
-        private readonly IUserInfo userInfo;
-        private readonly IPaymentService _paymentService;
+        private readonly IUserInfo _userInfo;
+        private readonly ITransactionsService _transactionsService;
 
         public FinanceController(
-            IUserInfo _userInfo,
-            IPaymentService paymentService)
+            IUserInfo userInfo,
+            ITransactionsService transactionsService)
         {
-            userInfo = _userInfo;
-            _paymentService = paymentService;
+            _userInfo = userInfo;
+            _transactionsService = transactionsService;
         }
 
         #region Payment Payor
         [HttpPost("addPaymentPayor"), Authorize]
         public async Task<IActionResult> AddPaymentPayor()
         {
-            var test = userInfo;
+            var test = _userInfo;
             var userEmail = User.Identity.Name;
 
             //PaymentPayor newPaymentPayor = new PaymentPayor();
@@ -39,7 +39,7 @@ namespace FamilyHub.API.Controllers.Finance
             //newPaymentPayor.Active = true;
             //newPaymentPayor.PaymentSplit = false;
 
-            var relationship = await _paymentService.GetSinglePaymentPayorRelationshipAsync(7);
+            //var relationship = await _paymentService.GetSinglePaymentPayorRelationshipAsync(7);
             //newPaymentPayor.PaymentPayorRelationshipFk = relationship.Model;
             ////newPaymentPayor.PaymentPayorRelationshipID = 7;
             //newPaymentPayor.CreatedBy = 1;
@@ -47,6 +47,18 @@ namespace FamilyHub.API.Controllers.Finance
 
             //return saveResponse.ToHttpResponse();
             return Ok();
+        }
+        #endregion
+
+        #region Transaction
+        [HttpGet("CreateTransactionRequest")]
+        public async Task<IActionResult> GetCreateOrderRequestAsync(int uid)
+        {
+            // Get response from business logic
+            var response = await _transactionsService.GetCreateTransactionRequestAsync(uid);
+
+            // Return as http response
+            return response.ToHttpResponse();
         }
         #endregion
     }

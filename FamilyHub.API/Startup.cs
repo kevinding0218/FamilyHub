@@ -25,6 +25,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using FamilyHub.Data;
+using FamilyHub.ViewModel.Mapping;
 
 namespace FamilyHub.API
 {
@@ -52,12 +53,12 @@ namespace FamilyHub.API
             #endregion
 
             #region Inject AutoMapper
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(FamilyHubAutoMapperConfiguration));
             #endregion
 
             #region Inject Business Service Layer
             services.AddScoped<ICommonService, CommonService>();
-            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<ITransactionsService, TransactionsService>();
             services.AddScoped<IFinanceService, FinanceService>();
             #endregion
 
@@ -71,14 +72,18 @@ namespace FamilyHub.API
             {
                 var context = provider.GetService<IHttpContextAccessor>();
 
-                return new UserInfo
+                if (context.HttpContext != null)
                 {
-                    UID = Convert.ToInt32(context.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)),
-                    Email = context.HttpContext.User.FindFirstValue(ClaimTypes.Name)
-                };
+                    return new UserInfo
+                    {
+                        UID = Convert.ToInt32(context.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)),
+                        Email = context.HttpContext.User.FindFirstValue(ClaimTypes.Name)
+                    };
+                }
+                else
+                    return null;
             });
             #endregion
-
 
             #region Configure JwtIssuerOptions
             // Get options from app settings

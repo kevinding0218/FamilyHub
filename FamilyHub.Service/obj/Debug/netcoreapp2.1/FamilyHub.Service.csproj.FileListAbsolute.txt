@@ -13,3 +13,5 @@ H:\FamilyHub\FamilyHub\FamilyHub.Service\obj\Debug\netcoreapp2.1\FamilyHub.Servi
 H:\FamilyHub\FamilyHub\FamilyHub.Service\obj\Debug\netcoreapp2.1\FamilyHub.Service.AssemblyInfo.cs
 H:\FamilyHub\FamilyHub\FamilyHub.Service\obj\Debug\netcoreapp2.1\FamilyHub.Service.dll
 H:\FamilyHub\FamilyHub\FamilyHub.Service\obj\Debug\netcoreapp2.1\FamilyHub.Service.pdb
+H:\FamilyHub\FamilyHub\FamilyHub.Service\bin\Debug\netcoreapp2.1\FamilyHub.ViewModel.dll
+H:\FamilyHub\FamilyHub\FamilyHub.Service\bin\Debug\netcoreapp2.1\FamilyHub.ViewModel.pdb

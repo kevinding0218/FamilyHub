@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "ab13313bd6b3d42a7d69cd8562711e6ec5ed2992"
+    "signature": "493fb75410577859abc7c1b07dcf8f93ba658787"
   },
   "compilationOptions": {},
   "targets": {
@@ -19,6 +19,29 @@
         },
         "runtime": {
           "FamilyHub.AuthService.dll": {}
+        }
+      },
+      "AutoMapper/7.0.1": {
+        "dependencies": {
+          "System.ValueTuple": "4.5.0"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/AutoMapper.dll": {
+            "assemblyVersion": "7.0.1.0",
+            "fileVersion": "7.0.1.0"
+          }
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/4.0.1": {
+        "dependencies": {
+          "AutoMapper": "7.0.1",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "4.0.1.0"
+          }
         }
       },
       "Microsoft.EntityFrameworkCore/2.1.1": {
@@ -514,6 +537,7 @@
           "System.Runtime": "4.1.0"
         }
       },
+      "System.ValueTuple/4.5.0": {},
       "FamilyHub.Data/1.0.0": {
         "runtime": {
           "FamilyHub.Data.dll": {}
@@ -540,14 +564,22 @@
       },
       "FamilyHub.Service/1.0.0": {
         "dependencies": {
+          "AutoMapper": "7.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "4.0.1",
           "FamilyHub.DataAccess.EFCore": "1.0.0",
-          "FamilyHub.Repository": "1.0.0"
+          "FamilyHub.Repository": "1.0.0",
+          "FamilyHub.ViewModel": "1.0.0"
         },
         "runtime": {
           "FamilyHub.Service.dll": {}
         }
       },
       "FamilyHub.ViewModel/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "7.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "4.0.1",
+          "FamilyHub.Data": "1.0.0"
+        },
         "runtime": {
           "FamilyHub.ViewModel.dll": {}
         }
@@ -583,6 +615,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/7.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6xHbhsW09sWjjYuE1sqhYn25PQzB6UEUVPME5uhlaIz2NR2+L3+FGbVxvknJKug1BLp6VTLxDb5RcGXKMm0ieQ==",
+      "path": "automapper/7.0.1",
+      "hashPath": "automapper.7.0.1.nupkg.sha512"
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/4.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Fhl+XDdcR2ogcqyHIeTB5fGCB58wTXOdpiqDI4sh/durRx8LJw+QJw2ZGLO3DIXTPvvnHM/t0DZy0vf0cdIGEg==",
+      "path": "automapper.extensions.microsoft.dependencyinjection/4.0.1",
+      "hashPath": "automapper.extensions.microsoft.dependencyinjection.4.0.1.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore/2.1.1": {
       "type": "package",
@@ -961,6 +1007,13 @@
       "sha512": "sha512-0Dz3VBSUf/HKyra8Ppn7AQyGs3ngf5Yp59BXcJE8nu4LJRB05J+nUn3bzJdG8E1IgzheymMErsBqFG9r1QKvgA==",
       "path": "system.threading.tasks/4.0.11",
       "hashPath": "system.threading.tasks.4.0.11.nupkg.sha512"
+    },
+    "System.ValueTuple/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xZtSZNEHGa+tGsKuP4sh257vxJ/yemShz4EusmomkynMzuEDDjVaErBNewpzEF6swUgbcrSQAX3ELsEp1zCOwA==",
+      "path": "system.valuetuple/4.5.0",
+      "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
     },
     "FamilyHub.Data/1.0.0": {
       "type": "project",
