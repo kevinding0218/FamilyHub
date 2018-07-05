@@ -26,6 +26,9 @@ namespace FamilyHub.Repository.Repository.Payment
         public async Task<PaymentPayor> GetSinglePaymentPayorByIDAsync(int paymentPayorID)
             => await GetSingleOrDefaultAsync(predicate: pp => pp.PaymentPayorID == paymentPayorID);
 
+        public async Task<PaymentPayor> GetSinglePaymentPayorByNameAsync(string paymentPayorName)
+            => await GetSingleOrDefaultAsync(predicate: pp => pp.PaymentPayorName == paymentPayorName);
+
         public async Task<IEnumerable<PaymentPayor>> GetListPaymentPayorAsync(
             int createdBy,
             bool includeRelationship = false,
@@ -59,6 +62,13 @@ namespace FamilyHub.Repository.Repository.Payment
             Update(entity);
 
             return await CommitChangesAsync();
+        }
+
+        public async Task ActivatePaymentPayorAsync(PaymentPayor entity)
+        {
+            Activate(entity);
+
+            await CommitChangesAsync();
         }
 
         public async Task DeactivatePaymentPayorAsync(PaymentPayor entity)

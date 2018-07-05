@@ -1,7 +1,9 @@
 ﻿using FamilyHub.Data.Payment;
 using FamilyHub.DataAccess.EFCore;
+using FamilyHub.Repository.Contracts.Payment;
 using FamilyHub.Repository.Repository.Payment;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,11 +16,19 @@ namespace FamilyHub.EFCoreUnitTest
         {
             try
             {
+                //setup our DI
+                var serviceProvider = new ServiceCollection()
+                    .AddDbContext<FamilyHubDbContext>(options => options.UseSqlServer(ConnectionString))
+                    .AddSingleton<IPaymentPayorRepository, PaymentPayorRepository>()
+                    .BuildServiceProvider();
+
+                var _paymentPayorRepository = serviceProvider.GetService<IPaymentPayorRepository>();
                 Console.WriteLine("Hello World!");
-                //TestAddNewPaymentPayor();
+                //TestAddNewPaymentPayor(_paymentPayorRepository);
             }
             catch (Exception ex)
             {
+                var msg = ex.Message;
                 throw;
             }
         }
@@ -26,7 +36,7 @@ namespace FamilyHub.EFCoreUnitTest
         private static string ConnectionString
            => "Server=KD\\SQLEXPRESS; database=SmartFamily; Integrated Security=SSPI;";
 
-        private static async Task TestAddNewPaymentPayor()
+        private static async Task TestAddNewPaymentPayor(IPaymentPayorRepository _paymentPayorRepository)
         {
             var options = new DbContextOptionsBuilder<FamilyHubDbContext>()
                 .UseSqlServer(ConnectionString)
@@ -43,10 +53,7 @@ namespace FamilyHub.EFCoreUnitTest
                 newEntity.PaymentPayorRelationshipID = 7;
                 newEntity.CreatedBy = 1;
 
-                _context.Set<PaymentPayor>().Add(newEntity);
-                _context.SaveChanges();
-
-                //await _repository.AddPaymentPayorAsync(newEntity);
+                await _paymentPayorRepository.AddPaymentPayorAsync(newEntity);
             }
         }
     }

@@ -32,28 +32,6 @@ namespace FamilyHub.Service.Services
         }
 
         #region Payment Payor
-        public async Task<ISingleResponse<PaymentPayor>> AddPaymentPayorAsync(PaymentPayor newPaymentPayor)
-        {
-            var response = new SingleResponse<PaymentPayor>();
-
-            try
-            {
-                // Create new user
-                await PaymentPayorRepository.AddPaymentPayorAsync(newPaymentPayor);
-
-                response.Message = ResponseMessageDisplay.Success;
-                response.Model = newPaymentPayor;
-            }
-            catch (Exception ex)
-            {
-                response.SetError(ex);
-            }
-
-            return response;
-        }
-        #endregion
-
-        #region Payment Payor Relationship
         public async Task<IListResponse<PaymentPayorRelationship>> PreparePaymentPayorRelatedAsync()
         {
             var response = new ListResponse<PaymentPayorRelationship>();
@@ -71,6 +49,110 @@ namespace FamilyHub.Service.Services
 
             return response;
         }
+
+        public async Task<IResponse> AddPaymentPayorAsync(vmPaymentPayorCreateRequest newPaymentPayorRequest)
+        {
+            var response = new Response();
+
+            try
+            {
+                var duplicatePaymentPayor = await PaymentPayorRepository.GetSinglePaymentPayorByNameAsync(newPaymentPayorRequest.PaymentPayorName);
+
+                if (duplicatePaymentPayor != null)
+                {
+                    response.Message = ResponseMessageDisplay.Duplicate;
+                    // Throw exception if duplicate existed
+                    throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentPayorAlreadyExistedMessage, newPaymentPayorRequest.PaymentPayorName));
+                }
+                else
+                {
+                    var newPaymentPayor = _mapper.Map<vmPaymentPayorCreateRequest, PaymentPayor>(newPaymentPayorRequest);
+                    // Create new payment payor
+                    await PaymentPayorRepository.AddPaymentPayorAsync(newPaymentPayor);
+
+                    response.Message = ResponseMessageDisplay.Success;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
+        }
+
+        public async Task<IResponse> UpdatePaymentPayorAsync(int paymentPayorID, vmPaymentPayorUpdateRequest updatePaymentPayorRequest)
+        {
+            var response = new Response();
+
+            try
+            {
+                var duplicatePaymentPayor = await PaymentPayorRepository.GetSinglePaymentPayorByNameAsync(updatePaymentPayorRequest.PaymentPayorName);
+
+                if (duplicatePaymentPayor != null && duplicatePaymentPayor.PaymentPayorID != paymentPayorID)
+                {
+                    response.Message = ResponseMessageDisplay.Duplicate;
+                    // Throw exception if duplicate existed
+                    throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentPayorAlreadyExistedMessage, updatePaymentPayorRequest.PaymentPayorName));
+                }
+                else
+                {
+                    var paymentPayorFromDB = await PaymentPayorRepository.GetSinglePaymentPayorByIDAsync(paymentPayorID);
+                    if (paymentPayorFromDB == null)
+                    {
+                        response.Message = ResponseMessageDisplay.NotFound;
+                        // Throw exception if duplicate existed
+                        throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentPayorNotFoundMessage));
+                    }
+                    else
+                    {
+                        _mapper.Map<vmPaymentPayorUpdateRequest, PaymentPayor>(updatePaymentPayorRequest, paymentPayorFromDB);
+                        await PaymentPayorRepository.UpdatePaymentPayorAsync(paymentPayorFromDB);
+
+                        response.Message = ResponseMessageDisplay.Success;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
+        }
+
+        public async Task<IResponse> ToggleActivePaymentPayorAsync(int paymentPayorId, bool active)
+        {
+            var response = new Response();
+
+            try
+            {
+                var paymentPayorFromDB = await PaymentPayorRepository.GetSinglePaymentPayorByIDAsync(paymentPayorId);
+                if (paymentPayorFromDB == null)
+                {
+                    response.Message = ResponseMessageDisplay.NotFound;
+                    // Throw exception if duplicate existed
+                    throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentPayorNotFoundMessage));
+                }
+                else
+                {
+                    if (active) await PaymentPayorRepository.ActivatePaymentPayorAsync(paymentPayorFromDB);
+                    else await PaymentPayorRepository.DeactivatePaymentPayorAsync(paymentPayorFromDB);
+
+                    response.Message = ResponseMessageDisplay.Success;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
+        }
+        #endregion
+
+        #region Payment Payor Relationship
+
         #endregion
 
         #region Payment Method
@@ -97,11 +179,22 @@ namespace FamilyHub.Service.Services
 
             try
             {
-                var newPaymentMethod = _mapper.Map<vmPaymentMethodCreateRequest, PaymentMethod>(newPaymentMethodRequest);
-                // Create new payment method
-                await PaymentMethodRepository.AddPaymentMethodAsync(newPaymentMethod);
+                var duplicatePaymentMethod = await PaymentMethodRepository.GetSinglePaymentMethodByNameAsync(newPaymentMethodRequest.PaymentMethodName);
 
-                response.Message = ResponseMessageDisplay.Success;
+                if (duplicatePaymentMethod != null)
+                {
+                    response.Message = ResponseMessageDisplay.Duplicate;
+                    // Throw exception if duplicate existed
+                    throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentMethodAlreadyExistedMessage, newPaymentMethodRequest.PaymentMethodName));
+                }
+                else
+                {
+                    var newPaymentMethod = _mapper.Map<vmPaymentMethodCreateRequest, PaymentMethod>(newPaymentMethodRequest);
+                    // Create new payment method
+                    await PaymentMethodRepository.AddPaymentMethodAsync(newPaymentMethod);
+
+                    response.Message = ResponseMessageDisplay.Success;
+                }
             }
             catch (Exception ex)
             {
@@ -111,7 +204,7 @@ namespace FamilyHub.Service.Services
             return response;
         }
 
-        public async Task<IResponse> UpdatePaymentMethodAsync(int paymentMethodId, vmPaymentMethodUpdateRequest updatePaymentMethodRequest)
+        public async Task<IResponse> UpdatePaymentMethodAsync(int paymentMethodID, vmPaymentMethodUpdateRequest updatePaymentMethodRequest)
         {
             var response = new Response();
 
@@ -119,19 +212,19 @@ namespace FamilyHub.Service.Services
             {
                 var duplicatePaymentMethod = await PaymentMethodRepository.GetSinglePaymentMethodByNameAsync(updatePaymentMethodRequest.PaymentMethodName);
 
-                if (duplicatePaymentMethod != null)
+                if (duplicatePaymentMethod != null && duplicatePaymentMethod.PaymentMethodID != paymentMethodID)
                 {
                     response.Message = ResponseMessageDisplay.Duplicate;
-                    // Throw exception if duplicate email account existed
+                    // Throw exception if duplicate existed
                     throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentMethodAlreadyExistedMessage, updatePaymentMethodRequest.PaymentMethodName));
                 }
                 else
                 {
-                    var paymentMethodFromDB = await PaymentMethodRepository.GetSinglePaymentMethodByIDAsync(paymentMethodId);
+                    var paymentMethodFromDB = await PaymentMethodRepository.GetSinglePaymentMethodByIDAsync(paymentMethodID);
                     if (paymentMethodFromDB == null)
                     {
                         response.Message = ResponseMessageDisplay.NotFound;
-                        // Throw exception if duplicate email account existed
+                        // Throw exception if duplicate existed
                         throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentMethodNotFoundMessage));
                     }
                     else
@@ -161,7 +254,7 @@ namespace FamilyHub.Service.Services
                 if (paymentMethodFromDB == null)
                 {
                     response.Message = ResponseMessageDisplay.NotFound;
-                    // Throw exception if duplicate email account existed
+                    // Throw exception if duplicate existed
                     throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentMethodNotFoundMessage));
                 }
                 else

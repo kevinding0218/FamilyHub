@@ -10,12 +10,11 @@ namespace FamilyHub.Service.Contracts
 {
     public interface IPaymentService
     {
-        #region Payment Payor Relationship
-        Task<IListResponse<PaymentPayorRelationship>> PreparePaymentPayorRelatedAsync();
-        #endregion
-
         #region Payment Payor
-        Task<ISingleResponse<PaymentPayor>> AddPaymentPayorAsync(PaymentPayor newPaymentPayor);
+        Task<IListResponse<PaymentPayorRelationship>> PreparePaymentPayorRelatedAsync();
+        Task<IResponse> AddPaymentPayorAsync(vmPaymentPayorCreateRequest newPaymentPayorRequest);
+        Task<IResponse> UpdatePaymentPayorAsync(int paymentPayorID, vmPaymentPayorUpdateRequest updatePaymentPayorRequest);
+        Task<IResponse> ToggleActivePaymentPayorAsync(int paymentPayorId, bool active);
         #endregion
 
         #region Payment Method

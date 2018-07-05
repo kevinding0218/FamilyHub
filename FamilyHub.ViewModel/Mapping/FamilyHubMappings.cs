@@ -29,7 +29,9 @@ namespace FamilyHub.ViewModel.Mapping
                             PasswordCreated = DateTime.Now
                         });
                     });
+            #endregion
 
+            #region Payment
             this.CreateMap<vmPaymentMethodCreateRequest, PaymentMethod>()
                 .ForMember(target => target.PaymentMethodID, source => source.Ignore())
                 .ForMember(target => target.CreatedBy, source => source.Ignore())
@@ -49,6 +51,9 @@ namespace FamilyHub.ViewModel.Mapping
                 .ForMember(target => target.Timestamp, source => source.Ignore())
                 .ForMember(target => target.PaymentMethodTypeFk, source => source.Ignore())
                 .ForMember(target => target.TransactionDetails, source => source.Ignore());
+
+            this.CreateMap<vmPaymentPayorCreateRequest, PaymentPayor>();
+            this.CreateMap<vmPaymentPayorUpdateRequest, PaymentPayor>();
             #endregion
             #endregion
 
