@@ -9,6 +9,7 @@ namespace FamilyHub.Data.Transactions
         public int TransactionID { get; set; }
         public DateTime TransactionDate { get; set; }
         public string TransactionDescription { get; set; }
+        public Boolean Active { get; set; }
         public Double Amount { get; set; }
         public int TransactionDetailID { get; set; }
 

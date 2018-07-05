@@ -77,5 +77,12 @@ namespace FamilyHub.Repository.Repository.Transactions
 
             return await CommitChangesAsync();
         }
+
+        public async Task<int> DeleteTransactionAsync(Transaction entity)
+        {
+            Deactive(entity);
+
+            return await CommitChangesAsync();
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Transactions
             // Set mapping for columns
             builder.Property(p => p.TransactionDate).HasColumnType("datetime").IsRequired();
             builder.Property(p => p.TransactionDescription).HasColumnType("nvarchar(250)").IsRequired();
+            builder.Property(p => p.Active).HasColumnType("bit").IsRequired();
             builder.Property(p => p.Amount).HasColumnType("float").IsRequired();
             builder.Property(p => p.TransactionDetailID).HasColumnType("int").IsRequired();
 

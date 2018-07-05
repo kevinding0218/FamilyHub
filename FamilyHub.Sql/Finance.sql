@@ -257,6 +257,7 @@ CREATE TABLE [Transactions].[Transaction]
 	[TransactionDate] DATETIME NOT NULL,
 	[TransactionDescription] NVARCHAR(250) NOT NULL,
 	[Amount] FLOAT NOT NULL,
+	[Active] BIT NOT NULL,
 	[TransactionDetailID] [INT] NOT NULL,
 	CreatedBy INT NULL,
 	CreatedOn DATETIME NULL,

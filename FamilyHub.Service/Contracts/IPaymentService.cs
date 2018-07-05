@@ -11,6 +11,7 @@ namespace FamilyHub.Service.Contracts
     public interface IPaymentService
     {
         #region Payment Payor
+        Task<IListResponse<vmPaymentPayorListRequest>> GetListPaymentPayorAsync(int createdBy);
         Task<IListResponse<PaymentPayorRelationship>> PreparePaymentPayorRelatedAsync();
         Task<IResponse> AddPaymentPayorAsync(vmPaymentPayorCreateRequest newPaymentPayorRequest);
         Task<IResponse> UpdatePaymentPayorAsync(int paymentPayorID, vmPaymentPayorUpdateRequest updatePaymentPayorRequest);
@@ -18,6 +19,7 @@ namespace FamilyHub.Service.Contracts
         #endregion
 
         #region Payment Method
+        Task<IListResponse<vmPaymentMethodListRequest>> GetListPaymentMethodAsync(int createdBy);
         Task<IListResponse<PaymentMethodType>> PreparePaymentMethodRelatedRequestAsync();
         Task<IResponse> AddPaymentMethodAsync(vmPaymentMethodCreateRequest newPaymentMethodRequest);
         Task<IResponse> UpdatePaymentMethodAsync(int paymentMethodId, vmPaymentMethodUpdateRequest updatePaymentMethodRequest);

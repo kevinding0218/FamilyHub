@@ -14,5 +14,6 @@ namespace FamilyHub.Repository.Contracts.Transactions
         Task<IEnumerable<Transaction>> GetListFullTransactionAsync(int createdBy);
         Task<int> AddTransactionAsync(Transaction entity);
         Task<int> UpdateTransactionAsync(Transaction entity);
+        Task<int> DeleteTransactionAsync(Transaction entity);
     }
 }

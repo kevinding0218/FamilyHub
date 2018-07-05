@@ -30,6 +30,16 @@ namespace FamilyHub.Service.Services
         {
         }
 
+        public async Task<IListResponse<vmTransactionListSimpleRequest>> GetListTransactionSimpleAsync(int createdBy)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IListResponse<vmTransactionListFullRequest>> GetListTransactionFullAsync(int createdBy)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ISingleResponse<vmTransactionPrepareRequest>> PrepareTransactionRelatedRequestAsync(int currentUid)
         {
             var response = new SingleResponse<vmTransactionPrepareRequest>();
@@ -54,6 +64,21 @@ namespace FamilyHub.Service.Services
             }
 
             return response;
+        }
+
+        public async Task<IResponse> AddTransactionAsync(vmTransactionCreateRequest newTransactionRequest)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IResponse> UpdateTransactionAsync(int transactionID, vmTransactionUpdateRequest updateTransactionRequest)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IResponse> DeleteTransactionAsync(int transactionID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

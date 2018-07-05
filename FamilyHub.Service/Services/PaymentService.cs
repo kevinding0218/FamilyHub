@@ -10,6 +10,7 @@ using FamilyHub.Service.Services;
 using FamilyHub.ViewModel.Payment;
 using FamilyHub.ViewModel.Transactions;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FamilyHub.Service.Services
@@ -32,6 +33,24 @@ namespace FamilyHub.Service.Services
         }
 
         #region Payment Payor
+        public async Task<IListResponse<vmPaymentPayorListRequest>> GetListPaymentPayorAsync(int createdBy)
+        {
+            var response = new ListResponse<vmPaymentPayorListRequest>();
+
+            try
+            {
+                var listPaymentPayorFromDb = await PaymentPayorRepository.GetListPaymentPayorAsync(createdBy);
+                response.Model = _mapper.Map<IEnumerable<PaymentPayor>, IEnumerable<vmPaymentPayorListRequest>>(listPaymentPayorFromDb);
+                response.Message = ResponseMessageDisplay.Success;
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
+        }
+
         public async Task<IListResponse<PaymentPayorRelationship>> PreparePaymentPayorRelatedAsync()
         {
             var response = new ListResponse<PaymentPayorRelationship>();
@@ -156,6 +175,24 @@ namespace FamilyHub.Service.Services
         #endregion
 
         #region Payment Method
+        public async Task<IListResponse<vmPaymentMethodListRequest>> GetListPaymentMethodAsync(int createdBy)
+        {
+            var response = new ListResponse<vmPaymentMethodListRequest>();
+
+            try
+            {
+                var listPaymentMethodFromDb = await PaymentMethodRepository.GetListPaymentMethodAsync(createdBy);
+                response.Model = _mapper.Map<IEnumerable<PaymentMethod>, IEnumerable<vmPaymentMethodListRequest>>(listPaymentMethodFromDb);
+                response.Message = ResponseMessageDisplay.Success;
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
+        }
+
         public async Task<IListResponse<PaymentMethodType>> PreparePaymentMethodRelatedRequestAsync()
         {
             var response = new ListResponse<PaymentMethodType>();
