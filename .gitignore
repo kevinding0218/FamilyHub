@@ -23,3 +23,4 @@ packages
 /FamilyHub.EFCore/bin/
 /FamilyHub.Repository/bin/
 /FamilyHub.Service/bin/
+/FamilyHub.Client.Angular/node_modules
