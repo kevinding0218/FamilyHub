@@ -57,6 +57,17 @@ namespace FamilyHub.ViewModel.Mapping
             this.CreateMap<vmPaymentPayorUpdateRequest, PaymentPayor>();
             #endregion
 
+            #region Transaction Category
+            this.CreateMap<vmTransactionCategoryCreateRequest, TransactionCategory>()
+                .ForMember(target => target.TransactionCategoryID, source => source.Ignore())
+                .ForMember(target => target.Timestamp, source => source.Ignore())
+                .ForMember(target => target.TransactionDetails, source => source.Ignore());
+
+            this.CreateMap<vmTransactionCategoryUpdateRequest, TransactionCategory>()
+                .ForMember(target => target.Timestamp, source => source.Ignore())
+                .ForMember(target => target.TransactionDetails, source => source.Ignore());
+            #endregion
+
             #region Transaction
             this.CreateMap<vmTransactionCreateRequest, Transaction>()
                 .ForMember(target => target.TransactionID, source => source.Ignore())
@@ -69,22 +80,36 @@ namespace FamilyHub.ViewModel.Mapping
                     TransactionTypeID = s.TransactionTypeID,
                     TransactionCategoryID = s.TransactionCategoryID
                 }));
-            //.ForMember(target => target.TransactionDetailFk.PostedDate, source => source.MapFrom(s => s.PostedDate))
-            //.ForMember(target => target.TransactionDetailFk.PaymentMethodID, source => source.MapFrom(s => s.PaymentMethodID))
-            //.ForMember(target => target.TransactionDetailFk.PaymentPayorID, source => source.MapFrom(s => s.PaymentPayorID))
-            //.ForMember(target => target.TransactionDetailFk.TransactionTypeID, source => source.MapFrom(s => s.TransactionTypeID))
-            //.ForMember(target => target.TransactionDetailFk.TransactionCategoryID, source => source.MapFrom(s => s.TransactionCategoryID))
+
+            this.CreateMap<vmTransactionCreateRequest, TransactionDetail>()
+                .ForMember(target => target.TransactionDetailID, source => source.Ignore())
+                .ForMember(target => target.Timestamp, source => source.Ignore())
+                .ForMember(target => target.TransactionTypeFk, source => source.Ignore())
+                .ForMember(target => target.TransactionCategoryFk, source => source.Ignore())
+                .ForMember(target => target.PaymentMethodFk, source => source.Ignore())
+                .ForMember(target => target.PaymentPayorFk, source => source.Ignore())
+                .ForMember(target => target.TransactionFk, source => source.Ignore());
 
             this.CreateMap<vmTransactionUpdateRequest, Transaction>()
-                .ForMember(target => target.TransactionDetailFk, source => source.MapFrom(s => new TransactionDetail()
+                //.ForMember(target => target.TransactionDetailFk, source => source.MapFrom(s => new TransactionDetail()
+                //{
+                //    TransactionDetailID = s.TransactionDetailID,
+                //    PostedDate = s.PostedDate,
+                //    PaymentMethodID = s.PaymentMethodID,
+                //    PaymentPayorID = s.PaymentPayorID,
+                //    TransactionTypeID = s.TransactionTypeID,
+                //    TransactionCategoryID = s.TransactionCategoryID
+                //}))
+                .ForMember(target => target.TransactionDetailFk, source => source.Ignore())
+                .AfterMap((source, target) =>
                 {
-                    TransactionDetailID = s.TransactionDetailID,
-                    PostedDate = s.PostedDate,
-                    PaymentMethodID = s.PaymentMethodID,
-                    PaymentPayorID = s.PaymentPayorID,
-                    TransactionTypeID = s.TransactionTypeID,
-                    TransactionCategoryID = s.TransactionCategoryID
-                }));
+                    var existedTransactionDetail = target.TransactionDetailFk;
+                    existedTransactionDetail.PostedDate = source.PostedDate;
+                    existedTransactionDetail.PaymentMethodID = source.PaymentMethodID;
+                    existedTransactionDetail.PaymentPayorID = source.PaymentPayorID;
+                    existedTransactionDetail.TransactionTypeID = source.TransactionTypeID;
+                    existedTransactionDetail.TransactionCategoryID = source.TransactionCategoryID;
+                });
             #endregion
             #endregion
 
@@ -101,6 +126,11 @@ namespace FamilyHub.ViewModel.Mapping
                 .ForMember(target => target.PaymentMethodTypeName, source => source.MapFrom(s => s.PaymentMethodTypeFk.PaymentMethodTypeName));
             this.CreateMap<PaymentPayor, vmPaymentPayorListRequest>()
                 .ForMember(target => target.PaymentPayorRelationshipName, source => source.MapFrom(s => s.PaymentPayorRelationshipFk.PaymentPayorRelationshipName));
+            #endregion
+            #region Transaction Category
+            this.CreateMap<TransactionCategory, vmTransactionCategoryList>();
+            #endregion
+            #region Transaction
             this.CreateMap<Transaction, vmTransactionListSimpleRequest>();
             this.CreateMap<Transaction, vmTransactionListFullRequest>()
                 .ForMember(target => target.TransactionDetailContent.PostedDate, source => source.MapFrom(s => s.TransactionDetailFk.PostedDate))
@@ -110,7 +140,6 @@ namespace FamilyHub.ViewModel.Mapping
                 .ForMember(target => target.TransactionDetailContent.PaymentPayorName, source => source.MapFrom(s => s.TransactionDetailFk.PaymentPayorFk.PaymentPayorName));
             //vmTransactionListRequest
             #endregion
-
             #endregion
         }
 

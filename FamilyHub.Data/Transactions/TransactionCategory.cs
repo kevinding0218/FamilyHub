@@ -11,6 +11,7 @@ namespace FamilyHub.Data.Transactions
         public string TransactionCategoryName { get; set; }
         public string TransactionCategoryDescription { get; set; }
         public bool IsFixed { get; set; }
+        public bool IsRecurring { get; set; }
 
         public Byte[] Timestamp { get; set; }
 

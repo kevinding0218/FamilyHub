@@ -6,6 +6,13 @@ using System.Text;
 
 namespace FamilyHub.ViewModel.Transactions
 {
+    public class vmTransactionListHttpRequest
+    {
+        public int UID { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+    }
+
     public class vmTransactionListSimpleRequest
     {
         public DateTime? CreatedOn { get; set; }

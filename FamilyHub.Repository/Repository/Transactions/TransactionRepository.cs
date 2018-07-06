@@ -5,6 +5,7 @@ using FamilyHub.Repository.Contracts.Transactions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +28,11 @@ namespace FamilyHub.Repository.Repository.Transactions
                     predicate: tr => (tr.TransactionID == transactionID)
                 );
 
+        public async Task<Transaction> GetSingleLightTransactionByAmoutDescDateAsync(Double Amount, DateTime TransactionDate, String Description)
+            => await GetSingleOrDefaultAsync(
+                    predicate: tr => (tr.Amount == Amount && DateTime.Compare(tr.TransactionDate, TransactionDate) == 0 && tr.TransactionDescription == Description)
+                );
+
         public async Task<Transaction> GetSingleFullTransactionByIDAsync(int transactionID)
             => await GetSingleOrDefaultAsync(
                     predicate: tr => (tr.TransactionID == transactionID),
@@ -43,14 +49,22 @@ namespace FamilyHub.Repository.Repository.Transactions
                             ))
                 );
 
-        public async Task<IEnumerable<Transaction>> GetListLightTransactionAsync(int createdBy)
+        public async Task<IEnumerable<Transaction>> GetListLightTransactionRangeAsync(int createdBy, DateTime startDate, DateTime endDate)
             => await GetListAsync(
-                    predicate: tr => (tr.CreatedBy == createdBy)
+                    predicate: tr => (tr.CreatedBy == createdBy
+                        && tr.TransactionDate >= startDate
+                        && tr.TransactionDate < endDate
+                    ),
+                    orderBy: tr => tr.OrderBy(entity => entity.TransactionDate)
                 );
 
-        public async Task<IEnumerable<Transaction>> GetListFullTransactionAsync(int createdBy)
+        public async Task<IEnumerable<Transaction>> GetListFullTransactionRangeAsync(int createdBy, DateTime startDate, DateTime endDate)
             => await GetListAsync(
-                    predicate: tr => (tr.CreatedBy == createdBy),
+                    predicate: tr => (tr.CreatedBy == createdBy
+                        && tr.TransactionDate >= startDate
+                        && tr.TransactionDate < endDate
+                    ),
+                    orderBy: tr => tr.OrderBy(entity => entity.TransactionDate),
                     include: (obj => (
                                     obj
                                     .Include(entity => entity.TransactionDetailFk)

@@ -24,6 +24,7 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Transactions
             builder.Property(p => p.TransactionCategoryName).HasColumnType("nvarchar(50)").IsRequired();
             builder.Property(p => p.TransactionCategoryDescription).HasColumnType("nvarchar(250)");
             builder.Property(p => p.IsFixed).HasColumnType("bit").IsRequired();
+            builder.Property(p => p.IsRecurring).HasColumnType("bit");
 
             // Set concurrency token for entity
             builder.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();

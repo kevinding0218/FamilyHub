@@ -224,6 +224,7 @@ CREATE TABLE [Transactions].[TransactionCategory]
 	[TransactionCategoryName] NVARCHAR(50) NOT NULL,
 	[TransactionCategoryDescription] NVARCHAR(250) NULL,
 	[IsFixed] BIT NOT NULL,
+	[IsRecurring] BIT NULL,
 	[Timestamp] rowversion NULL,
 	PRIMARY KEY (TransactionCategoryID),
 );

@@ -26,6 +26,11 @@ namespace FamilyHub.Repository.Repository.Transactions
                     predicate: tc => tc.TransactionCategoryID == transactionCategoryID
                 );
 
+        public async Task<TransactionCategory> GetSingleTransactionCategoryByNameAsync(string transactionCategoryName)
+            => await GetSingleOrDefaultAsync(
+                    predicate: tc => tc.TransactionCategoryName == transactionCategoryName
+                );
+
         public async Task<IEnumerable<TransactionCategory>> GetListTransactionCategoryAsync()
             => await GetListAsync();
 
@@ -39,6 +44,13 @@ namespace FamilyHub.Repository.Repository.Transactions
         public async Task<int> UpdateTransactionCategoryAsync(TransactionCategory entity)
         {
             Update(entity);
+
+            return await CommitChangesAsync();
+        }
+
+        public async Task<int> DeleteTransactionCategoryAsync(TransactionCategory entity)
+        {
+            Remove(entity);
 
             return await CommitChangesAsync();
         }

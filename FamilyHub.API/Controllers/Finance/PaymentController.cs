@@ -50,20 +50,20 @@ namespace FamilyHub.API.Controllers.Payment
         }
 
         [HttpPost("createPaymentMethod")]
-        public async Task<IActionResult> CreatePaymentMethodAsync([FromBody] vmPaymentMethodCreateRequest newPaymentMethodRequest)
+        public async Task<IActionResult> CreatePaymentMethodAsync([FromBody] vmPaymentMethodCreateRequest newRequest)
         {
             // Get response from business logic
-            var response = await _paymentService.AddPaymentMethodAsync(newPaymentMethodRequest);
+            var response = await _paymentService.AddPaymentMethodAsync(newRequest);
 
             // Return as http response
             return response.ToHttpResponse();
         }
 
         [HttpPut("updatePaymentMethod")]
-        public async Task<IActionResult> UpdatePaymentMethodAsync(int paymentMethodId, [FromBody] vmPaymentMethodUpdateRequest updatePaymentMethodRequest)
+        public async Task<IActionResult> UpdatePaymentMethodAsync(int paymentMethodId, [FromBody] vmPaymentMethodUpdateRequest updateRequest)
         {
             // Get response from business logic
-            var response = await _paymentService.UpdatePaymentMethodAsync(paymentMethodId, updatePaymentMethodRequest);
+            var response = await _paymentService.UpdatePaymentMethodAsync(paymentMethodId, updateRequest);
 
             // Return as http response
             return response.ToHttpResponse();

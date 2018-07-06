@@ -9,8 +9,14 @@ namespace FamilyHub.Repository.Contracts.Transactions
     public interface ITransactionCategoryRepository : IRepository<TransactionCategory>
     {
         Task<TransactionCategory> GetSingleTransactionCategoryByIDAsync(int transactionCategoryID);
+        Task<TransactionCategory> GetSingleTransactionCategoryByNameAsync(string transactionCategoryName);
+
         Task<IEnumerable<TransactionCategory>> GetListTransactionCategoryAsync();
+
         Task<int> AddTransactionCategoryAsync(TransactionCategory entity);
+
         Task<int> UpdateTransactionCategoryAsync(TransactionCategory entity);
+
+        Task<int> DeleteTransactionCategoryAsync(TransactionCategory entity);
     }
 }
