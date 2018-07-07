@@ -9,8 +9,10 @@ export const config: any = {
 
   menu_speed: 200,
 
-  smartSkin: "smart-style-0",
+  smartSkin: "smart-style-1",
 
+  fixedHeader: true,
+  fixedNavigation: false,
 
   skins: [
     {

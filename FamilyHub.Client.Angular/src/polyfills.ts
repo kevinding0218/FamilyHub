@@ -89,14 +89,14 @@ declare var require: any;
 import * as jQuery from 'jquery'
 window['jQuery'] = jQuery
 window['$'] = jQuery
-// import 'jquery-ui-npm/jquery-ui.min.js'
+import 'jquery-ui-npm/jquery-ui.min.js'
 
 
-// require('bootstrap/js/tooltip.js'); // required for X-editable
-// require('bootstrap/js/popover.js'); // required for X-editable
-// require('bootstrap/js/dropdown.js'); // required for bootstrap-colorpicker
-// require('bootstrap/js/tab.js'); //
-// require('bootstrap/js/modal.js'); //
+require('bootstrap/js/tooltip.js'); // required for X-editable
+require('bootstrap/js/popover.js'); // required for X-editable
+require('bootstrap/js/dropdown.js'); // required for bootstrap-colorpicker
+require('bootstrap/js/tab.js'); //
+require('bootstrap/js/modal.js'); //
 
 window['moment'] = require('moment');
 

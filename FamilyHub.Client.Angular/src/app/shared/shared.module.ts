@@ -6,20 +6,20 @@ import { RouterModule } from "@angular/router";
 import { SmartadminLayoutModule } from "./layout";
 
 import {I18nModule} from "./i18n/i18n.module";
-import {UtilsModule} from "./utils/utils.module";
+import { UserModule } from "./user/user.module";
 import { BootstrapModule } from "@app/shared/bootstrap.module";
+import {VoiceControlModule} from "./voice-control/voice-control.module";
+
+import {SmartadminWidgetsModule} from "./widgets/smartadmin-widgets.module";
+
+import {UtilsModule} from "./utils/utils.module";
 import {PipesModule} from "./pipes/pipes.module";
-// import { UserModule } from "./user/user.module";
-// import {VoiceControlModule} from "./voice-control/voice-control.module";
-
-// import {SmartadminWidgetsModule} from "./widgets/smartadmin-widgets.module";
-
-// import {ChatModule} from "./chat/chat.module";
-// import {StatsModule} from "./stats/stats.module";
-// import {InlineGraphsModule} from "./graphs/inline/inline-graphs.module";
-// import {SmartadminFormsLiteModule} from "./forms/smartadmin-forms-lite.module";
-// import {SmartProgressbarModule} from "./ui/smart-progressbar/smart-progressbar.module";
-// import { CalendarComponentsModule } from "@app/shared/calendar/calendar-components.module";
+import {ChatModule} from "./chat/chat.module";
+import {StatsModule} from "./stats/stats.module";
+import {InlineGraphsModule} from "./graphs/inline/inline-graphs.module";
+import {SmartadminFormsLiteModule} from "./forms/smartadmin-forms-lite.module";
+import {SmartProgressbarModule} from "./ui/smart-progressbar/smart-progressbar.module";
+import { CalendarComponentsModule } from "@app/shared/calendar/calendar-components.module";
 
 @NgModule({
   imports: [
@@ -36,7 +36,7 @@ import {PipesModule} from "./pipes/pipes.module";
     FormsModule,
     RouterModule,
 
-    // UserModule,
+    UserModule,
     SmartadminLayoutModule,
     BootstrapModule,
 
@@ -45,21 +45,21 @@ import {PipesModule} from "./pipes/pipes.module";
     UtilsModule,
     PipesModule,
 
-    // SmartadminFormsLiteModule,
+    SmartadminFormsLiteModule,
 
-    // SmartProgressbarModule,
+    SmartProgressbarModule,
 
-    // InlineGraphsModule,
+    InlineGraphsModule,
 
-    // SmartadminWidgetsModule,
+    SmartadminWidgetsModule,
 
-    // ChatModule,
+    ChatModule,
 
-    // StatsModule,
+    StatsModule,
 
-    // VoiceControlModule,
+    VoiceControlModule,
 
-    // CalendarComponentsModule,
+    CalendarComponentsModule,
   ]
 })
 export class SharedModule {}

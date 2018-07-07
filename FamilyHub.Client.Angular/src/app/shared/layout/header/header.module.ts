@@ -18,7 +18,7 @@ import {UtilsModule} from "@app/shared/utils/utils.module";
 import {PipesModule} from "@app/shared/pipes/pipes.module";
 import {I18nModule} from "@app/shared/i18n/i18n.module";
 import {UserModule} from "@app/shared/user/user.module";
-// import {VoiceControlModule} from "@app/shared/voice-control/voice-control.module";
+import {VoiceControlModule} from "@app/shared/voice-control/voice-control.module";
 import {BsDropdownModule} from "ngx-bootstrap";
 
 
@@ -28,7 +28,7 @@ import {BsDropdownModule} from "ngx-bootstrap";
 
     FormsModule,
 
-    // VoiceControlModule,
+    VoiceControlModule,
 
     BsDropdownModule,
 

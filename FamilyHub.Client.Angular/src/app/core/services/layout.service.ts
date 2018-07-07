@@ -10,8 +10,8 @@ const store = {
     return _skin.name == (localStorage.getItem('sm-skin') || config.smartSkin)
   }),
   skins: config.skins,
-  fixedHeader: localStorage.getItem('sm-fixed-header') == 'true',
-  fixedNavigation: localStorage.getItem('sm-fixed-navigation') == 'true',
+  fixedHeader: localStorage.getItem('sm-fixed-header') == 'true' || config.fixedHeader,
+  fixedNavigation: localStorage.getItem('sm-fixed-navigation') == 'true' || config.fixedNavigation,
   fixedRibbon: localStorage.getItem('sm-fixed-ribbon') == 'true',
   fixedPageFooter: localStorage.getItem('sm-fixed-page-footer') == 'true',
   insideContainer: localStorage.getItem('sm-inside-container') == 'true',
@@ -50,6 +50,7 @@ export class LayoutService {
   constructor(private notificationService: NotificationService) {
     this.subject = new Subject();
     this.store = store;
+    //console.log('layout constructor:', this.store);
     this.trigger();
 
     fromEvent(window, 'resize').
@@ -148,7 +149,7 @@ export class LayoutService {
 
   onCollapseMenu(value?){
     if(typeof value !== 'undefined'){
-      this.store.menuCollapsed = value
+      this.store.menuCollapsed = value;
     } else {
       this.store.menuCollapsed = !this.store.menuCollapsed;
     }
@@ -200,6 +201,7 @@ export class LayoutService {
 
 
   processBody(state) {
+    //console.log('processBody state', state);
     let $body = $('body');
     $body.removeClass(state.skins.map((it)=>(it.name)).join(' '));
     $body.addClass(state.skin.name);

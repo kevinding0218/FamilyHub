@@ -25,7 +25,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="assets/css/smartadmin-skins.min.css">
 
   <!-- SmartAdmin RTL Support (Not using RTL? Disable the CSS below to save bandwidth) -->
-  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/smartadmin-rtl.min.css">
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/smartadmin-rtl.min.css"> -->
 
   <!-- SmartAdmin Angular 2. Flex Layout  -->
   <link rel="stylesheet" type="text/css" media="screen" href="assets/css/smartadmin-angular-next.css">
@@ -33,6 +33,8 @@
   <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
   <link rel="stylesheet" type="text/css" media="screen" href="assets/css/demo.min.css">
 
+  <!-- Custom Style for Family Hub -->
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/familyhub.css">
 
   <!-- #FAVICONS -->
   <link rel="shortcut icon" href="assets/img/favicon/favicon.ico" type="image/x-icon">
@@ -59,7 +61,17 @@
 
 </head>
 <body>
-  <app-root>Loading...</app-root>
-
+  <app-root>Loading...
+    <!-- Loading Animation -->
+    <!-- <style>@-webkit-keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@-moz-keyframes spin{0%{-moz-transform:rotate(0)}100%{-moz-transform:rotate(360deg)}}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.spinner{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1003;background: #000000;overflow:hidden}  .spinner div:first-child{display:block;position:relative;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;box-shadow:0 3px 3px 0 rgba(255,56,106,1);transform:translate3d(0,0,0);animation:spin 2s linear infinite}  .spinner div:first-child:after,.spinner div:first-child:before{content:'';position:absolute;border-radius:50%}  .spinner div:first-child:before{top:5px;left:5px;right:5px;bottom:5px;box-shadow:0 3px 3px 0 rgb(255, 228, 32);-webkit-animation:spin 3s linear infinite;animation:spin 3s linear infinite}  .spinner div:first-child:after{top:15px;left:15px;right:15px;bottom:15px;box-shadow:0 3px 3px 0 rgba(61, 175, 255,1);animation:spin 1.5s linear infinite}</style> -->
+    <div id="nb-global-spinner" class="fh-loading-spinner">
+      <div class="blob blob-0"></div>
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+      <div class="blob blob-5"></div>
+    </div>
+  </app-root>
 </body>
 </html>
