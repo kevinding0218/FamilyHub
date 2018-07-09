@@ -5,7 +5,6 @@ import {NgModule} from "@angular/core";
 import {PopoverModule} from "ngx-popover";
 
 import {CollapseMenuComponent} from "./collapse-menu/collapse-menu.component";
-import {RecentProjectsComponent} from "./recent-projects/recent-projects.component";
 import {FullScreenComponent} from "./full-screen/full-screen.component";
 
 import {ActivitiesComponent} from "./activities/activities.component";
@@ -20,6 +19,8 @@ import {I18nModule} from "@app/shared/i18n/i18n.module";
 import {UserModule} from "@app/shared/user/user.module";
 import {VoiceControlModule} from "@app/shared/voice-control/voice-control.module";
 import {BsDropdownModule} from "ngx-bootstrap";
+import { MegaComponent } from './mega/mega.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -38,11 +39,12 @@ import {BsDropdownModule} from "ngx-bootstrap";
     ActivitiesMessageComponent,
     ActivitiesNotificationComponent,
     ActivitiesTaskComponent,
-    RecentProjectsComponent,
     FullScreenComponent,
     CollapseMenuComponent,
     ActivitiesComponent,
     HeaderComponent,
+    MegaComponent,
+    UserProfileComponent,
   ],
   exports: [
     HeaderComponent

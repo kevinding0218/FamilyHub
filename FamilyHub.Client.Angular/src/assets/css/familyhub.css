@@ -81,4 +81,14 @@
     box-shadow:0 3px 3px 0 rgba(61, 175, 255,1);
     animation:spin 1.5s linear infinite;
 }
-/* Family Hub Loading Animation */
+/* END Family Hub Loading Animation */
+
+/* Custom Header */
+.header-a-dark {
+    color: #fff;
+}
+
+.header-a-dark:hover {
+    color: #214e75;
+}
+/* END Custom Header */
