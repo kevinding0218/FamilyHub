@@ -92,3 +92,11 @@
     color: #214e75;
 }
 /* END Custom Header */
+
+.smart-style-1 nav ul ul li .active {
+    background-color: peru;
+}
+
+.smart-style-1 nav ul li a:active {
+    background-color: peru;
+}

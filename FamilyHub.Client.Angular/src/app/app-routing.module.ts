@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: "",
     component: MainLayoutComponent,
-    data: { pageTitle: "Home" },
+    data: { pageTitle: "Family Hub" },
     children: [
       {
         path: "",
@@ -19,6 +19,11 @@ const routes: Routes = [
         path: "home",
         loadChildren: "./features/home/home.module#HomeModule",
         data: { pageTitle: "Home" }
+      },
+      {
+        path: "transactions",
+        loadChildren: "./familyhub/transactions/transactions.module#TransactionsModule",
+        data: { pageTitle: "Manage Transactions" }
       },
 
       // {

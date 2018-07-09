@@ -12,8 +12,32 @@
 
     <ul saSmartMenu>
       <li routerLinkActive="active">
-          <a routerLink="/home" title="Home"><i class="fa fa-lg fa-fw fa-home"></i><span
-            class="menu-item-parent">{{'Home' | i18n}}</span></a>
+        <a routerLink="/home" title="Home">
+          <i class="fa fa-lg fa-fw fa-home"></i>
+          <span class="menu-item-parent">{{'Home' | i18n}}</span>
+        </a>
+      </li>
+
+      <li>
+        <a title="Transactions">
+          <i class="fa fa-lg fa-fw fa-bank"></i>
+          <span class="menu-item-parent">{{'Manage Transactions' | i18n}}</span>
+        </a>
+        <ul>
+          <li routerLinkActive="active">
+            <a routerLink="/transactions/analytics">
+              <i class="fa fa-bar-chart-o"></i>{{'Analytics' | i18n}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a routerLink="/transactions/trans-detail">
+              <i class="fa fa-dollar"></i>{{'Transactions' | i18n}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a routerLink="/transactions/payment-options">
+              <i class="fa fa-credit-card"></i>{{'Payment Options' | i18n}}</a>
+          </li>
+
+        </ul>
       </li>
 
       <!-- <li>
