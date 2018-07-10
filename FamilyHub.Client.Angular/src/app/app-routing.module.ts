@@ -1,3 +1,4 @@
+import { AuthGuardOld } from './core/guards/auth.guard.old';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
@@ -9,6 +10,7 @@ const routes: Routes = [
     path: "",
     component: MainLayoutComponent,
     data: { pageTitle: "Family Hub" },
+    //canActivate: [AuthGuardOld],
     children: [
       {
         path: "",
@@ -22,6 +24,7 @@ const routes: Routes = [
       },
       {
         path: "transactions",
+        canActivate: [AuthGuardOld],
         loadChildren: "./familyhub/transactions/transactions.module#TransactionsModule",
         data: { pageTitle: "Manage Transactions" }
       },
@@ -109,11 +112,11 @@ const routes: Routes = [
     ]
   },
 
-  // {
-  //   path: "auth",
-  //   component: AuthLayoutComponent,
-  //   loadChildren: "./features/auth/auth.module#AuthModule"
-  // },
+  {
+    path: "auth",
+    component: AuthLayoutComponent,
+    loadChildren: "./familyhub/auth/auth.module#AuthModule"
+  },
   // { path: "**", redirectTo: "miscellaneous/error404" }
 ];
 

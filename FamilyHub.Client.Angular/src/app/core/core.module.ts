@@ -1,3 +1,4 @@
+import { AuthGuardOld } from './guards/auth.guard.old';
 import { NgModule, ModuleWithProviders, APP_INITIALIZER , Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -31,7 +32,7 @@ import { throwIfAlreadyLoaded } from './guards/module-import.guard';
   exports: [],
   providers: [
     AuthGuard,
-
+    AuthGuardOld,
     ...services,
     ...fromStore.services,
 
