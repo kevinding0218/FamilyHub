@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: "transactions",
-        canActivate: [AuthGuardOld],
+        //canActivate: [AuthGuardOld],
         loadChildren: "./familyhub/transactions/transactions.module#TransactionsModule",
         data: { pageTitle: "Manage Transactions" }
       },

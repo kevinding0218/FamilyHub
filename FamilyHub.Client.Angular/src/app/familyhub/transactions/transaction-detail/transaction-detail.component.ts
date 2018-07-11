@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   templateUrl: './transaction-detail.component.html'
 })
 export class TransactionDetailComponent implements OnInit {
+  private menuCollapsed: boolean = false;
 
   constructor() { }
 
@@ -20,6 +21,10 @@ export class TransactionDetailComponent implements OnInit {
 
   public hideChildModal():void {
     this.lgModal.hide();
+  }
+
+  onToggle() {
+    this.menuCollapsed = !this.menuCollapsed;
   }
 
 }

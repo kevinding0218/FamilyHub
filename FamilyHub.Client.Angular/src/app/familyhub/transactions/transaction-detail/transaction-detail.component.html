@@ -3,50 +3,75 @@
     <sa-big-breadcrumbs [items]="['TRANSACTION DETAIL']" icon="list" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
     <sa-stats></sa-stats>
   </div>
-  <sa-widgets-grid>
-    <!-- start row -->
-    <div class="row">
-      <!-- NEW WIDGET START -->
-      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <!-- Widget ID (each widget will need unique ID)-->
-        <sa-widget>
-          <header>
-            <h2>
-              <strong>Default</strong>
-              <i>Widget</i>
-            </h2>
-          </header>
-          <div>
-            <!-- widget content -->
-            <div class="widget-body">
-              <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                  <!-- well -->
-                  <div class="well">
-                    <h3>Bootstrap Modal</h3>
-                    <h5>Static Example</h5>
-                    <p>
-                      A rendered modal with header, body, and set of actions in the footer.
-                    </p>
-
-                    <button class="btn btn-primary btn-lg" (click)="lgModal.show()">
-                      Launch demo modal
-                    </button>
-                  </div>
-                  <!-- end well-->
-                </div>
-              </div>
-            </div>
-            <!-- end widget content -->
-          </div>
-          <!-- end widget div -->
-        </sa-widget>
-      </article>
+  <div class="row">
+    <div class="col-md-1">
+      <div class="btn-group-vertical" style="width: 100%;" [ngClass]="{'drawer-hidden': menuCollapsed}">
+        <button type="button" class="btn btn-default">
+          Top
+        </button>
+        <button type="button" class="btn btn-default">
+          Middle
+        </button>
+        <button type="button" class="btn btn-default">
+          Bottom
+        </button>
+      </div>
     </div>
-    <!-- end row -->
-  </sa-widgets-grid>
+    <div [ngClass]="{'col-md-12': menuCollapsed, 'col-md-11': !menuCollapsed}">
+      <div>
+        <sa-widgets-grid>
+          <!-- start row -->
+          <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <!-- Widget ID (each widget will need unique ID)-->
+              <sa-widget>
+                <header>
+                  <h2>
+                    <span class="btn">
+                      <a (click)="onToggle()" title="Collapse Menu">
+                        <i class="fa fa-reorder fa-lg"></i>
+                      </a>
+                    </span>
+                    <strong>Default</strong>
+                    <i>Widget</i>
+                  </h2>
+                </header>
+                <!-- widget content -->
+                <div class="widget-body">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      <!-- well -->
+                      <div class="well">
+                        <h3>Bootstrap Modal</h3>
+                        <h5>Static Example</h5>
+                        <p>
+                          A rendered modal with header, body, and set of actions in the footer.
+                        </p>
+
+                        <button class="btn btn-primary btn-lg" (click)="lgModal.show()">
+                          Launch demo modal
+                        </button>
+                      </div>
+                      <!-- end well-->
+                    </div>
+                  </div>
+                </div>
+                <!-- end widget content -->
+              </sa-widget>
+            </article>
+          </div>
+          <!-- end row -->
+        </sa-widgets-grid>
+      </div>
+    </div>
+  </div>
 </div>
 
+<button class="btn btn-primary btn-lg" (click)="lgModal.show()">
+    Launch demo modal
+  </button>
+  
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
