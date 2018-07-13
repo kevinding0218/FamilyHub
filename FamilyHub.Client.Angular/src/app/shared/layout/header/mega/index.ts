@@ -1,1 +1,0 @@
-export { MegaComponent } from './mega.component';
