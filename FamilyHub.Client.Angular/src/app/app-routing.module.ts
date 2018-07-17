@@ -1,12 +1,15 @@
+
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AdminComponent} from './layout/admin/admin.component';
-import {AuthComponent} from './layout/auth/auth.component';
+
+import { AuthLayoutComponent } from './shared/layout/auth-layout/auth-layout.component';
+import { AdminLayoutComponent } from './shared/layout/admin-layout/admin-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,
+    component: AdminLayoutComponent,
     children: [
       {
         path: '',
@@ -15,17 +18,17 @@ const routes: Routes = [
       },
       {
         path: 'simple-page',
-        loadChildren: './theme/simple-page/simple-page.module#SimplePageModule'
+        loadChildren: './features/simple-page/simple-page.module#SimplePageModule'
       }
     ]
   },
   {
     path: '',
-    component: AuthComponent,
+    component: AuthLayoutComponent,
     children: [
       {
         path: 'coming-soon',
-        loadChildren: './theme/coming-soon/coming-soon.module#ComingSoonModule'
+        loadChildren: './features/coming-soon/coming-soon.module#ComingSoonModule'
       }
     ]
   }

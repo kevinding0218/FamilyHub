@@ -1,11 +1,14 @@
+import { LayoutService } from '../../../core/services/layout.service';
+import { Subscription } from 'rxjs/Subscription';
+import { element } from 'protractor';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
-import {MenuItems} from '../../shared/menu-items/menu-items';
+import {MenuItems} from '../../menu-items/menu-items';
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
+  templateUrl: './admin-layout.component.html',
+  styleUrls: ['./admin-layout.component.scss'],
   animations: [
     trigger('notificationBottom', [
       state('an-off, void',
@@ -80,7 +83,7 @@ import {MenuItems} from '../../shared/menu-items/menu-items';
     ])
   ]
 })
-export class AdminComponent implements OnInit, OnDestroy {
+export class AdminLayoutComponent implements OnInit, OnDestroy {
   public animateSidebar: string;
   public navType: string;
   public themeLayout: string;
@@ -145,6 +148,9 @@ export class AdminComponent implements OnInit, OnDestroy {
   public config: any;
   public searchInterval: any;
 
+  private liveNotificationSub: Subscription;
+  private toggleLiveNotificationSub: Subscription;
+
   scroll = (): void => {
     const scrollPosition = window.pageYOffset;
     if (scrollPosition > 50) {
@@ -164,7 +170,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(public menuItems: MenuItems) {
+  constructor(public menuItems: MenuItems
+    , private layoutService: LayoutService) {
     this.animateSidebar = '';
     this.navType = 'st2';
     this.themeLayout = 'vertical';
@@ -199,9 +206,9 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.navBarTheme = 'themelight1'; // themelight1(default) theme1(dark)
     this.activeItemTheme = 'theme1';
     this.pcodedSidebarPosition = 'fixed';
-    this.menuTitleTheme = 'theme1'; // theme1(default) theme10(dark)
-    this.dropDownIcon = 'style1';
-    this.subItemIcon = 'style1';
+    this.menuTitleTheme = 'theme3'; // theme1(default) theme10(dark)
+    this.dropDownIcon = 'style3';
+    this.subItemIcon = 'style3';
 
     this.displayBoxLayout = 'd-none';
     this.isVerticalLayoutChecked = false;
@@ -236,6 +243,15 @@ export class AdminComponent implements OnInit, OnDestroy {
     /*this.setHeaderPosition();
     this.setSidebarPosition();
     this.setVerticalLayout();*/
+
+    this.liveNotificationSub = this.layoutService.liveNotification$.subscribe((ele) => {
+      this.notificationOutsideClick(ele);
+    });
+
+    this.toggleLiveNotificationSub = this.layoutService.toggleLiveNotification$
+    .subscribe(() => {
+      this.toggleLiveNotification();
+    });
   }
 
   ngOnInit() {
@@ -387,6 +403,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     if (this.searchInterval) {
       clearInterval(this.searchInterval);
     }
+    this.liveNotificationSub.unsubscribe();
+    this.toggleLiveNotificationSub.unsubscribe();
   }
 
   toggleOpened(e) {
