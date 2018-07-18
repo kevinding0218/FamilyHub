@@ -4,6 +4,7 @@ using FamilyHub.DataAccess.EFCore.MappingConfiguration.Payment;
 using FamilyHub.DataAccess.EFCore.MappingConfiguration.Logging;
 using FamilyHub.DataAccess.EFCore.MappingConfiguration.Transactions;
 using Microsoft.EntityFrameworkCore;
+using FamilyHub.DataAccess.EFCore.MappingConfiguration.Member;
 
 namespace FamilyHub.DataAccess.EFCore
 {
@@ -28,14 +29,20 @@ namespace FamilyHub.DataAccess.EFCore
             modelBuilder
                 .ApplyConfiguration(new ContactAddressConfiguration())
                 .ApplyConfiguration(new UserConfiguration())
-                .ApplyConfiguration(new UserPasswordConfiguration());
+                .ApplyConfiguration(new UserPasswordConfiguration())
+                .ApplyConfiguration(new ImageSourceConfiguration());
+            #endregion
+
+            #region Member
+            modelBuilder
+                .ApplyConfiguration(new MemberRelationshipConfiguration())
+                .ApplyConfiguration(new MemberContactConfiguration());
             #endregion
 
             #region Payment
             modelBuilder
                 .ApplyConfiguration(new PaymentMethodTypeConfiguration())
                 .ApplyConfiguration(new PaymentMethodConfiguration())
-                .ApplyConfiguration(new PaymentPayorRelationshipConfiguration())
                 .ApplyConfiguration(new PaymentPayorConfiguration());
             #endregion
 

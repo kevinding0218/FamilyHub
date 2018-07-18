@@ -9,7 +9,6 @@ namespace FamilyHub.Repository.Contracts.Payment
     public interface IPaymentPayorRepository : IRepository<PaymentPayor>
     {
         Task<PaymentPayor> GetSinglePaymentPayorByIDAsync(int paymentPayorID);
-        Task<PaymentPayor> GetSinglePaymentPayorByNameAsync(string paymentPayorName);
         Task<IEnumerable<PaymentPayor>> GetListPaymentPayorAsync(
             int createdBy,
             bool includeRelationship = false,

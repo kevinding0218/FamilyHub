@@ -36,7 +36,7 @@ namespace FamilyHub.Repository.Repository.Common
             {
                 return await GetSingleOrDefaultAsync(
                         predicate: u => (u.Email == user.Email || u.UserID == user.UserID),
-                        include: obj => obj.Include(entity => entity.ContactAddressFk)
+                        include: obj => (obj.Include(entity => entity.ContactAddressFk))
                     );
             }
             else

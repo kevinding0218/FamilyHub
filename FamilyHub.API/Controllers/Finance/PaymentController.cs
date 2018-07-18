@@ -101,16 +101,6 @@ namespace FamilyHub.API.Controllers.Payment
             return response.ToHttpResponse();
         }
 
-        [HttpGet("preparePaymentPayorRelated")]
-        public async Task<IActionResult> preparePaymentPayorRelatedAsync()
-        {
-            // Get response from business logic
-            var response = await _paymentService.PreparePaymentPayorRelatedAsync();
-
-            // Return as http response
-            return response.ToHttpResponse();
-        }
-
         [HttpPost("createPaymentPayor")]
         public async Task<IActionResult> CreatePaymentPayorAsync([FromBody] vmPaymentPayorCreateRequest newPaymentPayorRequest)
         {

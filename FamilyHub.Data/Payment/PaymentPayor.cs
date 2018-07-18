@@ -1,4 +1,5 @@
-﻿using FamilyHub.Data.Transactions;
+﻿using FamilyHub.Data.Member;
+using FamilyHub.Data.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ namespace FamilyHub.Data.Payment
     public class PaymentPayor : IAuditableEntity, IActivateEntity
     {
         public int PaymentPayorID { get; set; }
-        public string PaymentPayorName { get; set; }
+        public int MemberContactID { get; set; }
         public string PaymentPayorDescription { get; set; }
         public Boolean Active { get; set; }
         public bool PaymentSplit { get; set; }
@@ -23,7 +24,7 @@ namespace FamilyHub.Data.Payment
 
         public Byte[] Timestamp { get; set; }
 
-        public virtual PaymentPayorRelationship PaymentPayorRelationshipFk { get; set; }
+        public virtual MemberContact MemberContactFk { get; set; }
         public virtual Collection<TransactionDetail> TransactionDetails { get; set; } = new Collection<TransactionDetail>();
     }
 }

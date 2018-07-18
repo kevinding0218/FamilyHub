@@ -26,9 +26,6 @@ namespace FamilyHub.Repository.Repository.Payment
         public async Task<PaymentPayor> GetSinglePaymentPayorByIDAsync(int paymentPayorID)
             => await GetSingleOrDefaultAsync(predicate: pp => pp.PaymentPayorID == paymentPayorID);
 
-        public async Task<PaymentPayor> GetSinglePaymentPayorByNameAsync(string paymentPayorName)
-            => await GetSingleOrDefaultAsync(predicate: pp => pp.PaymentPayorName == paymentPayorName);
-
         public async Task<IEnumerable<PaymentPayor>> GetListPaymentPayorAsync(
             int createdBy,
             bool includeRelationship = false,
@@ -37,7 +34,10 @@ namespace FamilyHub.Repository.Repository.Payment
             if (includeRelationship)
                 return await GetListAsync(
                         predicate: pp => (pp.CreatedBy == createdBy),
-                        include: (obj => obj.Include(entity => entity.PaymentPayorRelationshipFk))
+                        include: (obj => obj.Include(entity => entity.MemberContactFk)
+                                                .ThenInclude(mc => mc.MemberRelationshipFK)
+                                            .Include(entity => entity.MemberContactFk)
+                                                .ThenInclude(mc => mc.MemberImageSourceFK))
                     );
             else if (includeTransactionDetails)
                 return await GetListAsync(

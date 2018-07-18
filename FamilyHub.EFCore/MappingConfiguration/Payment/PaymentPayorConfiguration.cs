@@ -21,7 +21,7 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Payment
             builder.Property(p => p.PaymentPayorID).UseSqlServerIdentityColumn();
 
             // Set mapping for columns
-            builder.Property(p => p.PaymentPayorName).HasColumnType("nvarchar(50)").IsRequired();
+            builder.Property(p => p.MemberContactID).HasColumnType("int").IsRequired();
             builder.Property(p => p.PaymentPayorDescription).HasColumnType("nvarchar(250)");
             builder.Property(p => p.Active).HasColumnType("bit").IsRequired();
             builder.Property(p => p.PaymentSplit).HasColumnType("bit").IsRequired();
@@ -38,9 +38,9 @@ namespace FamilyHub.DataAccess.EFCore.MappingConfiguration.Payment
 
             // Add configuration for foreign keys
             builder
-                .HasOne(pp => pp.PaymentPayorRelationshipFk)
-                    .WithMany(ppr => ppr.PaymentPayors)
-                    .HasForeignKey(pp => pp.PaymentPayorRelationshipID);
+                .HasOne(tr => tr.MemberContactFk)
+                    .WithOne(td => td.PaymentPayorFK)
+                    .HasForeignKey<PaymentPayor>(tr => tr.MemberContactID);
         }
     }
 }

@@ -2,9 +2,11 @@
 using FamilyHub.Data;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Repository.Contracts.Common;
+using FamilyHub.Repository.Contracts.Member;
 using FamilyHub.Repository.Contracts.Payment;
 using FamilyHub.Repository.Contracts.Transactions;
 using FamilyHub.Repository.Repository.Common;
+using FamilyHub.Repository.Repository.Member;
 using FamilyHub.Repository.Repository.Payment;
 using FamilyHub.Repository.Repository.Transactions;
 using FamilyHub.Service.Contracts;
@@ -29,9 +31,13 @@ namespace FamilyHub.Service.Services
         protected IUserRepository _userRepository;
         #endregion
 
+        #region Member Contacts
+        protected IMemberRelationshipRepository _memberRelationshipRepository;
+        protected IMemberContactRepository _memberContactRepository;
+        #endregion
+
         #region Payment Contracts
         protected IPaymentPayorRepository _paymentPayorRepository;
-        protected IPaymentPayorRelationshipRepository _paymentPayorRelationshipRepository;
         protected IPaymentMethodTypeRepository _paymentMethodTypeRepository;
         protected IPaymentMethodRepository _paymentMethodRepository;
         #endregion
@@ -76,11 +82,16 @@ namespace FamilyHub.Service.Services
             => _userRepository ?? (_userRepository = new UserRepository(_userInfo, _dbContext));
         #endregion
 
+        #region Member Instances
+        protected IMemberRelationshipRepository MemberRelationshipRepository
+            => _memberRelationshipRepository ?? (_memberRelationshipRepository = new MemberRelationshipRepository(_dbContext));
+        protected IMemberContactRepository MemberContactRepository
+            => _memberContactRepository ?? (_memberContactRepository = new MemberContactRepository(_userInfo, _dbContext));
+        #endregion
+
         #region Payment Instances
         protected IPaymentPayorRepository PaymentPayorRepository
             => _paymentPayorRepository ?? (_paymentPayorRepository = new PaymentPayorRepository(_userInfo, _dbContext));
-        protected IPaymentPayorRelationshipRepository PaymentPayorRelationshipRepository
-            => _paymentPayorRelationshipRepository ?? (_paymentPayorRelationshipRepository = new PaymentPayorRelationshipRepository(_userInfo, _dbContext));
         protected IPaymentMethodTypeRepository PaymentMethodTypeRepository
             => _paymentMethodTypeRepository ?? (_paymentMethodTypeRepository = new PaymentMethodTypeRepository(_dbContext));
         protected IPaymentMethodRepository PaymentMethodRepository

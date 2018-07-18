@@ -13,8 +13,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'simple-page',
+        redirectTo: 'finance',
         pathMatch: 'full'
+      },
+      {
+        path: 'finance',
+        loadChildren: './features/finance/finance.module#FinanceModule'
       },
       {
         path: 'simple-page',

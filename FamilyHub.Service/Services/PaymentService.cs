@@ -39,26 +39,8 @@ namespace FamilyHub.Service.Services
 
             try
             {
-                var listPaymentPayorFromDb = await PaymentPayorRepository.GetListPaymentPayorAsync(createdBy);
+                var listPaymentPayorFromDb = await PaymentPayorRepository.GetListPaymentPayorAsync(createdBy, includeRelationship: true);
                 response.Model = _mapper.Map<IEnumerable<PaymentPayor>, IEnumerable<vmPaymentPayorListRequest>>(listPaymentPayorFromDb);
-                response.Message = ResponseMessageDisplay.Success;
-            }
-            catch (Exception ex)
-            {
-                response.SetError(ex);
-            }
-
-            return response;
-        }
-
-        public async Task<IListResponse<PaymentPayorRelationship>> PreparePaymentPayorRelatedAsync()
-        {
-            var response = new ListResponse<PaymentPayorRelationship>();
-
-            try
-            {
-                // Create new user
-                response.Model = await PaymentPayorRelationshipRepository.GetListPaymentPayorRelationshipAsync();
                 response.Message = ResponseMessageDisplay.Success;
             }
             catch (Exception ex)
@@ -75,22 +57,11 @@ namespace FamilyHub.Service.Services
 
             try
             {
-                var duplicatePaymentPayor = await PaymentPayorRepository.GetSinglePaymentPayorByNameAsync(newPaymentPayorRequest.PaymentPayorName);
+                var newPaymentPayor = _mapper.Map<vmPaymentPayorCreateRequest, PaymentPayor>(newPaymentPayorRequest);
+                // Create new payment payor
+                await PaymentPayorRepository.AddPaymentPayorAsync(newPaymentPayor);
 
-                if (duplicatePaymentPayor != null)
-                {
-                    response.Message = ResponseMessageDisplay.Duplicate;
-                    // Throw exception if duplicate existed
-                    throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentPayorAlreadyExistedMessage, newPaymentPayorRequest.PaymentPayorName));
-                }
-                else
-                {
-                    var newPaymentPayor = _mapper.Map<vmPaymentPayorCreateRequest, PaymentPayor>(newPaymentPayorRequest);
-                    // Create new payment payor
-                    await PaymentPayorRepository.AddPaymentPayorAsync(newPaymentPayor);
-
-                    response.Message = ResponseMessageDisplay.Success;
-                }
+                response.Message = ResponseMessageDisplay.Success;
             }
             catch (Exception ex)
             {
@@ -106,30 +77,19 @@ namespace FamilyHub.Service.Services
 
             try
             {
-                var duplicatePaymentPayor = await PaymentPayorRepository.GetSinglePaymentPayorByNameAsync(updatePaymentPayorRequest.PaymentPayorName);
-
-                if (duplicatePaymentPayor != null && duplicatePaymentPayor.PaymentPayorID != paymentPayorID)
+                var paymentPayorFromDB = await PaymentPayorRepository.GetSinglePaymentPayorByIDAsync(paymentPayorID);
+                if (paymentPayorFromDB == null)
                 {
-                    response.Message = ResponseMessageDisplay.Duplicate;
+                    response.Message = ResponseMessageDisplay.NotFound;
                     // Throw exception if duplicate existed
-                    throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentPayorAlreadyExistedMessage, updatePaymentPayorRequest.PaymentPayorName));
+                    throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentPayorNotFoundMessage));
                 }
                 else
                 {
-                    var paymentPayorFromDB = await PaymentPayorRepository.GetSinglePaymentPayorByIDAsync(paymentPayorID);
-                    if (paymentPayorFromDB == null)
-                    {
-                        response.Message = ResponseMessageDisplay.NotFound;
-                        // Throw exception if duplicate existed
-                        throw new FamilyHubException(string.Format(PaymentMessageDisplay.PaymentPayorNotFoundMessage));
-                    }
-                    else
-                    {
-                        _mapper.Map<vmPaymentPayorUpdateRequest, PaymentPayor>(updatePaymentPayorRequest, paymentPayorFromDB);
-                        await PaymentPayorRepository.UpdatePaymentPayorAsync(paymentPayorFromDB);
+                    _mapper.Map<vmPaymentPayorUpdateRequest, PaymentPayor>(updatePaymentPayorRequest, paymentPayorFromDB);
+                    await PaymentPayorRepository.UpdatePaymentPayorAsync(paymentPayorFromDB);
 
-                        response.Message = ResponseMessageDisplay.Success;
-                    }
+                    response.Message = ResponseMessageDisplay.Success;
                 }
             }
             catch (Exception ex)

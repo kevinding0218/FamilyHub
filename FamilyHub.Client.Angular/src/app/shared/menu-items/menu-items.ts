@@ -32,14 +32,56 @@ export interface Menu {
 
 const MENUITEMS = [
   {
-    label: 'My Panel',
+    label: 'Navigation',
     main: [
       {
-        state: 'simple-page',
-        short_label: 'S',
-        name: 'Sample Page',
+        state: 'dashboard',
+        short_label: 'D',
+        name: 'Dashboard',
         type: 'link',
-        icon: 'feather icon-file'
+        icon: 'feather icon-home'
+      },
+      {
+        state: 'member',
+        short_label: 'M',
+        name: 'Member',
+        type: 'link',
+        icon: 'feather icon-users'
+      },
+      {
+        state: 'finance',
+        short_label: 'F',
+        name: 'Finance',
+        type: 'sub',
+        icon: 'feather icon-inbox',
+        children: [
+          {
+            state: 'analytics',
+            name: 'Analytics',
+            badge: [
+              {
+                type: 'info',
+                value: 'NEW'
+              }
+            ]
+          },
+          {
+            state: 'current-month',
+            name: 'Current Month'
+          },
+          {
+            state: 'transaction-history',
+            name: 'Transaction History'
+          },
+          {
+            state: 'manual-import',
+            name: 'Manual Import'
+          },
+          {
+            state: 'settings',
+            name: 'Settings'
+          }
+        ]
       },
       {
         state: 'coming-soon',

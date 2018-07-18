@@ -47,7 +47,6 @@ namespace FamilyHub.EFCoreUnitTest
                 var _repository = new PaymentPayorRepository(_context);
 
                 PaymentPayor newEntity = new PaymentPayor();
-                newEntity.PaymentPayorName = "Self";
                 newEntity.Active = true;
                 newEntity.PaymentSplit = false;
                 newEntity.PaymentPayorRelationshipID = 7;

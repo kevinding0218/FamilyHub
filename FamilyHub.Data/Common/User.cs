@@ -57,5 +57,7 @@ namespace FamilyHub.Data.Common
         public virtual ContactAddress ContactAddressFk { get; set; }
 
         public virtual Collection<UserPassword> UserPasswords { get; set; } = new Collection<UserPassword>();
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

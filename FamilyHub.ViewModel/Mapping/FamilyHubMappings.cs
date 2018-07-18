@@ -19,7 +19,7 @@ namespace FamilyHub.ViewModel.Mapping
         public FamilyHubMappings()
         {
             #region view to domain
-            #region common
+            #region Common
             this.CreateMap<vmRegisterUserRequest, User>()
                     .AfterMap((source, target) =>
                     {
@@ -114,7 +114,7 @@ namespace FamilyHub.ViewModel.Mapping
             #endregion
 
             #region domain to view
-            #region common
+            #region Common
             this.CreateMap<User, vmRegisterUserResponse>();
             this.CreateMap<User, vmValidateUserResponse>()
                  .ForMember(target => target.JwtToken, source => source.Ignore())
@@ -125,20 +125,23 @@ namespace FamilyHub.ViewModel.Mapping
             this.CreateMap<PaymentMethod, vmPaymentMethodListRequest>()
                 .ForMember(target => target.PaymentMethodTypeName, source => source.MapFrom(s => s.PaymentMethodTypeFk.PaymentMethodTypeName));
             this.CreateMap<PaymentPayor, vmPaymentPayorListRequest>()
-                .ForMember(target => target.PaymentPayorRelationshipName, source => source.MapFrom(s => s.PaymentPayorRelationshipFk.PaymentPayorRelationshipName));
+                .ForMember(target => target.PaymentPayorRelationshipName, source => source.MapFrom(s => s.MemberContactFk.MemberRelationshipFK.MemberRelationshipName))
+                .ForMember(target => target.ImageSource, source => source.MapFrom(s => s.MemberContactFk.MemberImageSourceFK.Source));
             #endregion
+
             #region Transaction Category
             this.CreateMap<TransactionCategory, vmTransactionCategoryList>();
             #endregion
+
             #region Transaction
             this.CreateMap<Transaction, vmTransactionListSimpleRequest>();
             this.CreateMap<Transaction, vmTransactionListFullRequest>()
-                .ForMember(target => target.TransactionDetailContent.PostedDate, source => source.MapFrom(s => s.TransactionDetailFk.PostedDate))
-                .ForMember(target => target.TransactionDetailContent.TransactionTypeName, source => source.MapFrom(s => s.TransactionDetailFk.TransactionTypeFk.TransactionTypeName))
-                .ForMember(target => target.TransactionDetailContent.TransactionCategoryName, source => source.MapFrom(s => s.TransactionDetailFk.TransactionCategoryFk.TransactionCategoryName))
-                .ForMember(target => target.TransactionDetailContent.PaymentMethodName, source => source.MapFrom(s => s.TransactionDetailFk.PaymentMethodFk.PaymentMethodName))
-                .ForMember(target => target.TransactionDetailContent.PaymentPayorName, source => source.MapFrom(s => s.TransactionDetailFk.PaymentPayorFk.PaymentPayorName));
-            //vmTransactionListRequest
+                .ForMember(target => target.TransactionDetailContent, source => source.Ignore());
+            //.ForMember(target => target.TransactionDetailContent.PostedDate, source => source.MapFrom(s => s.TransactionDetailFk.PostedDate))
+            //.ForMember(target => target.TransactionDetailContent.TransactionTypeName, source => source.MapFrom(s => s.TransactionDetailFk.TransactionTypeFk.TransactionTypeName))
+            //.ForMember(target => target.TransactionDetailContent.TransactionCategoryName, source => source.MapFrom(s => s.TransactionDetailFk.TransactionCategoryFk.TransactionCategoryName))
+            //.ForMember(target => target.TransactionDetailContent.PaymentMethodName, source => source.MapFrom(s => s.TransactionDetailFk.PaymentMethodFk.PaymentMethodName))
+            //.ForMember(target => target.TransactionDetailContent.PaymentPayorName, source => source.MapFrom(s => s.TransactionDetailFk.PaymentPayorFk.PaymentPayorName));
             #endregion
             #endregion
         }

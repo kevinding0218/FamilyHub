@@ -57,6 +57,16 @@ CREATE TABLE [Common].[UserPassword]
 );
 GO
 
+CREATE TABLE [Common].[ImageSource] (
+	[ImageSourceID] [INT] IDENTITY(1,1) NOT NULL,
+	[ImageSource] NVARCHAR(150) NULL,
+	[UseClass] BIT NOT NULL,
+	[IconClass] NVARCHAR(30) NULL,
+	[Timestamp] rowversion NULL,
+	PRIMARY KEY ([ImageSourceID]),
+)
+GO
+
 INSERT INTO Logging.ChangeLogExclusion
 (
     EntityName,
@@ -97,15 +107,4 @@ VALUES
     'Users'  -- PropertyName - varchar(128)
 )
 GO
-
-SELECT * FROM Common.Users u
-SELECT * FROM Common.UserPassword
-SELECT * FROM Logging.ChangeLog
-
-TRUNCATE TABLE common.ContactAddress
-go
-TRUNCATE TABLE common.Users
-go
-TRUNCATE TABLE common.UserPassword
-go
 

@@ -12,7 +12,6 @@ namespace FamilyHub.Service.Contracts
     {
         #region Payment Payor
         Task<IListResponse<vmPaymentPayorListRequest>> GetListPaymentPayorAsync(int createdBy);
-        Task<IListResponse<PaymentPayorRelationship>> PreparePaymentPayorRelatedAsync();
         Task<IResponse> AddPaymentPayorAsync(vmPaymentPayorCreateRequest newPaymentPayorRequest);
         Task<IResponse> UpdatePaymentPayorAsync(int paymentPayorID, vmPaymentPayorUpdateRequest updatePaymentPayorRequest);
         Task<IResponse> ToggleActivePaymentPayorAsync(int paymentPayorId, bool active);

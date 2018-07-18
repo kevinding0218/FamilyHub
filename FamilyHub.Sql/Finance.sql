@@ -62,8 +62,8 @@ INSERT INTO Payment.PaymentMethodType
     PaymentMethodTypeDescription
 )
 VALUES
-(   N'MOBILE PAYMENT', -- PaymentMethodTypeName - nvarchar(50)
-    N'All Mobile Payment Type Such As ALIPAY/WEIXIN/ANDROID/APPLE PAY'  -- PaymentMethodTypeDescription - nvarchar(250)
+(   N'ONLINE PAYMENT', -- PaymentMethodTypeName - nvarchar(50)
+    N'All Mobile Payment Type Such As ALIPAY/WEIXIN/PAYPAL'  -- PaymentMethodTypeDescription - nvarchar(250)
 );
 GO
 --SELECT * FROM Payment.PaymentMethodType
@@ -86,101 +86,22 @@ CREATE TABLE Payment.PaymentMethod
 );
 GO
 
---Spouse/Children/Parent/Relative/Friends/Colleague
-CREATE TABLE Payment.PaymentPayorRelationship
-(
-	[PaymentPayorRelationshipID] [INT] IDENTITY(1,1) NOT NULL,
-	[PaymentPayorRelationshipName] NVARCHAR(50) NOT NULL,
-	[PaymentPayorRelationshipDescription] NVARCHAR(250) NULL,
-	[Timestamp] rowversion NULL,
-	PRIMARY KEY (PaymentPayorRelationshipID),
-);
-GO
-
-INSERT INTO Payment.PaymentPayorRelationship
-(
-    PaymentPayorRelationshipName,
-    PaymentPayorRelationshipDescription
-)
-VALUES
-(   N'Owner', -- PaymentPayorRelationshipName - nvarchar(50)
-    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
-);
-INSERT INTO Payment.PaymentPayorRelationship
-(
-    PaymentPayorRelationshipName,
-    PaymentPayorRelationshipDescription
-)
-VALUES
-(   N'Parent', -- PaymentPayorRelationshipName - nvarchar(50)
-    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
-);
-INSERT INTO Payment.PaymentPayorRelationship
-(
-    PaymentPayorRelationshipName,
-    PaymentPayorRelationshipDescription
-)
-VALUES
-(   N'Spouse', -- PaymentPayorRelationshipName - nvarchar(50)
-    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
-);
-INSERT INTO Payment.PaymentPayorRelationship
-(
-    PaymentPayorRelationshipName,
-    PaymentPayorRelationshipDescription
-)
-VALUES
-(   N'Children', -- PaymentPayorRelationshipName - nvarchar(50)
-    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
-);
-INSERT INTO Payment.PaymentPayorRelationship
-(
-    PaymentPayorRelationshipName,
-    PaymentPayorRelationshipDescription
-)
-VALUES
-(   N'Relative', -- PaymentPayorRelationshipName - nvarchar(50)
-    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
-);
-INSERT INTO Payment.PaymentPayorRelationship
-(
-    PaymentPayorRelationshipName,
-    PaymentPayorRelationshipDescription
-)
-VALUES
-(   N'Friends', -- PaymentPayorRelationshipName - nvarchar(50)
-    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
-);
-INSERT INTO Payment.PaymentPayorRelationship
-(
-    PaymentPayorRelationshipName,
-    PaymentPayorRelationshipDescription
-)
-VALUES
-(   N'Colleague', -- PaymentPayorRelationshipName - nvarchar(50)
-    N'Family Member'  -- PaymentPayorRelationshipDescription - nvarchar(250)
-);
-GO
-
---SELECT * FROM Payment.PaymentPayorRelationship
-
 CREATE TABLE Payment.PaymentPayor
 (
 	[PaymentPayorID] [INT] IDENTITY(1,1) NOT NULL,
-	[PaymentPayorName] NVARCHAR(50) NOT NULL,
+	[MemberContactID] [INT] NOT NULL,
 	[PaymentPayorDescription] NVARCHAR(250) NULL,
 	[Active] BIT NOT NULL,
 	[PaymentSplit] BIT NOT NULL,
 	[PaymentSplitFactor] FLOAT NULL,
-	[PaymentPayorRelationshipID] INT NOT NULL,
 	CreatedBy INT NULL,
 	CreatedOn DATETIME NULL,
 	LastUpdatedBy INT NULL,
 	LastUpdatedOn DATETIME NULL,
 	[Timestamp] rowversion NULL,
 	PRIMARY KEY (PaymentPayorID),
-	CONSTRAINT PaymentPayorPaymentPayorRelationship FOREIGN KEY (PaymentPayorRelationshipID)
-    REFERENCES Payment.PaymentPayorRelationship(PaymentPayorRelationshipID)
+	CONSTRAINT PaymentPayorMemberContactID FOREIGN KEY (MemberContactID)
+    REFERENCES [Member].[MemberContact](MemberContactID)
 );
 GO
 
@@ -225,6 +146,7 @@ CREATE TABLE [Transactions].[TransactionCategory]
 	[TransactionCategoryDescription] NVARCHAR(250) NULL,
 	[IsFixed] BIT NOT NULL,
 	[IsRecurring] BIT NULL,
+	[RecurringPeriod] NVARCHAR(50) NULL,
 	[Timestamp] rowversion NULL,
 	PRIMARY KEY (TransactionCategoryID),
 );
