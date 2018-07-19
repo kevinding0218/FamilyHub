@@ -58,6 +58,7 @@ namespace FamilyHub.API
 
             #region Inject Business Service Layer
             services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<IMemberService, MemberService>();
             services.AddScoped<ITransactionsService, TransactionsService>();
             services.AddScoped<IPaymentService, PaymentService>();
             #endregion

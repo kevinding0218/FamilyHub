@@ -153,13 +153,14 @@ namespace FamilyHub.Service.Services
             return response;
         }
 
-        public async Task<IListResponse<PaymentMethodType>> PreparePaymentMethodRelatedRequestAsync()
+        public async Task<IListResponse<vmPaymentMethodType>> PreparePaymentMethodRelatedRequestAsync()
         {
-            var response = new ListResponse<PaymentMethodType>();
+            var response = new ListResponse<vmPaymentMethodType>();
 
             try
             {
-                response.Model = await PaymentMethodTypeRepository.GetListPaymentMethodTypeAsync();
+                var listPaymentMethodTypeFromDb = await PaymentMethodTypeRepository.GetListPaymentMethodTypeAsync();
+                response.Model = _mapper.Map<IEnumerable<PaymentMethodType>, IEnumerable<vmPaymentMethodType>>(listPaymentMethodTypeFromDb);
                 response.Message = ResponseMessageDisplay.Success;
             }
             catch (Exception ex)

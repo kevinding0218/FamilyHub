@@ -172,6 +172,34 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 
   constructor(public menuItems: MenuItems
     , private layoutService: LayoutService) {
+    this.processTheme();
+
+    // dark theme
+    /*this.setLayoutType('dark');*/
+
+    // light-dark
+    /*this.setLayoutType('dark');
+    this.setNavBarTheme('themelight1');*/
+
+    // dark-light theme
+    /*this.setNavBarTheme('theme1');*/
+
+    // box layout
+    /*this.setHeaderPosition();
+    this.setSidebarPosition();
+    this.setVerticalLayout();*/
+
+    this.liveNotificationSub = this.layoutService.liveNotification$.subscribe((ele) => {
+      this.notificationOutsideClick(ele);
+    });
+
+    this.toggleLiveNotificationSub = this.layoutService.toggleLiveNotification$
+    .subscribe(() => {
+      this.toggleLiveNotification();
+    });
+  }
+
+  processTheme() {
     this.animateSidebar = '';
     this.navType = 'st2';
     this.themeLayout = 'vertical';
@@ -228,30 +256,6 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 
     this.setMenuAttributes(this.windowWidth);
     this.setHeaderAttributes(this.windowWidth);
-
-    // dark theme
-    /*this.setLayoutType('dark');*/
-
-    // light-dark
-    /*this.setLayoutType('dark');
-    this.setNavBarTheme('themelight1');*/
-
-    // dark-light theme
-    /*this.setNavBarTheme('theme1');*/
-
-    // box layout
-    /*this.setHeaderPosition();
-    this.setSidebarPosition();
-    this.setVerticalLayout();*/
-
-    this.liveNotificationSub = this.layoutService.liveNotification$.subscribe((ele) => {
-      this.notificationOutsideClick(ele);
-    });
-
-    this.toggleLiveNotificationSub = this.layoutService.toggleLiveNotification$
-    .subscribe(() => {
-      this.toggleLiveNotification();
-    });
   }
 
   ngOnInit() {

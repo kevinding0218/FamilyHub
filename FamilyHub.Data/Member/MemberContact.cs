@@ -12,8 +12,8 @@ namespace FamilyHub.Data.Member
         public string FirstName { get; set; }
         public string MiddleInitial { get; set; }
         public string LastName { get; set; }
-        public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
+        public string HomePhone { get; set; }
         public string Location { get; set; }
         public string EmailAddress { get; set; }
         public int MemberRelationshipID { get; set; }

@@ -19,7 +19,7 @@ namespace FamilyHub.Service.Contracts
 
         #region Payment Method
         Task<IListResponse<vmPaymentMethodListRequest>> GetListPaymentMethodAsync(int createdBy);
-        Task<IListResponse<PaymentMethodType>> PreparePaymentMethodRelatedRequestAsync();
+        Task<IListResponse<vmPaymentMethodType>> PreparePaymentMethodRelatedRequestAsync();
         Task<IResponse> AddPaymentMethodAsync(vmPaymentMethodCreateRequest newPaymentMethodRequest);
         Task<IResponse> UpdatePaymentMethodAsync(int paymentMethodId, vmPaymentMethodUpdateRequest updatePaymentMethodRequest);
         Task<IResponse> ToggleActivePaymentMethodAsync(int paymentMethodId, bool active);

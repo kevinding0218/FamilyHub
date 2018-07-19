@@ -52,10 +52,10 @@
           </ul>
           <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right">
             <!-- Notification Dropdown -->
-            <fh-live-notification 
+            <app-live-notification 
             [liveNotification]="liveNotification"
             [liveNotificationClass]="liveNotificationClass"
-            ></fh-live-notification>
+            ></app-live-notification>
             <!-- End Notification Dropdown -->
             <li class="ripple light">
               <a href="javascript:" (click)="toggleChat()">
@@ -403,7 +403,7 @@
                       <span class="head"></span>
                       <span class="cont"></span>
                     </a>
-                    <a href="javascript:" (click)="constructor(menuItems)" class="Layout-type ripple light" layout-type="reset" placement="top" ngbTooltip="Default">
+                    <a href="javascript:" (click)="processTheme()" class="Layout-type ripple light" layout-type="reset" placement="top" ngbTooltip="Default">
                       <i class="feather icon-power"></i>
                     </a>
                   </div>

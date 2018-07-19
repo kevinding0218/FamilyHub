@@ -7,7 +7,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "fh",
+      "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
@@ -32,7 +32,7 @@
               "src/scss/widget.scss",
               "src/scss/pages.scss",
               "src/assets/icon/feather/css/feather.css",
-              "node_modules/@swimlane/ngx-datatable/release/themes/material.css"
+              "node_modules/@swimlane/ngx-datatable/release/themes/material.css"              
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js"

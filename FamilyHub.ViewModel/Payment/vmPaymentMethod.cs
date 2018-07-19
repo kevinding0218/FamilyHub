@@ -5,6 +5,13 @@ using System.Text;
 
 namespace FamilyHub.ViewModel.Payment
 {
+    public class vmPaymentMethodType
+    {
+        public int PaymentMethodTypeID { get; set; }
+        public string PaymentMethodTypeName { get; set; }
+        public string PaymentMethodTypeDescription { get; set; }
+    }
+
     public class vmPaymentMethodListRequest
     {
         public int PaymentMethodID { get; set; }

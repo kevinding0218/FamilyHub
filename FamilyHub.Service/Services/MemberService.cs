@@ -4,6 +4,7 @@ using FamilyHub.Data.Member;
 using FamilyHub.DataAccess.EFCore;
 using FamilyHub.Service.Contracts;
 using FamilyHub.Service.Display;
+using FamilyHub.Service.Exceptions;
 using FamilyHub.Service.Responses;
 using FamilyHub.ViewModel.Member;
 using System;
@@ -31,13 +32,14 @@ namespace FamilyHub.Service.Services
         }
 
         #region Member Relationship
-        public async Task<IListResponse<MemberRelationship>> PrepareMemberRelationshipRequestAsync()
+        public async Task<IListResponse<vmMemberRelationship>> PrepareMemberRelationshipRequestAsync()
         {
-            var response = new ListResponse<MemberRelationship>();
+            var response = new ListResponse<vmMemberRelationship>();
 
             try
             {
-                response.Model = await MemberRelationshipRepository.GetListMemberRelationshipAsync();
+                var listMemberRelationshipFromDb = await MemberRelationshipRepository.GetListMemberRelationshipAsync();
+                response.Model = _mapper.Map<IEnumerable<MemberRelationship>, IEnumerable<vmMemberRelationship>>(listMemberRelationshipFromDb);
                 response.Message = ResponseMessageDisplay.Success;
             }
             catch (Exception ex)
@@ -50,29 +52,115 @@ namespace FamilyHub.Service.Services
         #endregion
 
         #region Member Contact
-        public Task<IListResponse<MemberContact>> GetMemberContactListByCreatedAsync(int createdBy)
+        public async Task<IListResponse<vmMemberContactListRequest>> GetMemberContactListByCreatedAsync(int createdBy)
+        {
+            var response = new ListResponse<vmMemberContactListRequest>();
+
+            try
+            {
+                var listMemberContactFromDb = await MemberContactRepository.GetListMemberContactAsync(createdBy);
+                response.Model = _mapper.Map<IEnumerable<MemberContact>, IEnumerable<vmMemberContactListRequest>>(listMemberContactFromDb);
+                response.Message = ResponseMessageDisplay.Success;
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
+        }
+
+        public Task<IListResponse<vmMemberContactListRequest>> GetMemberContactListByRelationshipAsync(int createdBy, int memberRelationshipID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IListResponse<MemberContact>> GetMemberContactListByRelationshipAsync(int createdBy, int memberRelationshipID)
+        public async Task<IResponse> AddMemberContactAsync(vmMemberContactCreateRequest newMemberContactRequest)
         {
-            throw new NotImplementedException();
+            var response = new Response();
+
+            try
+            {
+                var newMemberContact = _mapper.Map<vmMemberContactCreateRequest, MemberContact>(newMemberContactRequest);
+                // Create new payment payor
+                await MemberContactRepository.AddMemberContactAsync(newMemberContact);
+
+                response.Message = ResponseMessageDisplay.Success;
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
         }
 
-        public Task<IResponse> AddMemberContactAsync(vmMemberContactCreateRequest newMemberContactRequest)
+        public async Task<IResponse> UpdateMemberContactAsync(int memberContactId, vmMemberContactUpdateRequest updateMemberContactRequest)
         {
-            throw new NotImplementedException();
+            var response = new Response();
+
+            try
+            {
+                var duplicateMemberContact = await MemberContactRepository.GetSingleMemberContactByNameAsync(updateMemberContactRequest.FullName);
+
+                if (duplicateMemberContact != null && duplicateMemberContact.MemberContactID != memberContactId)
+                {
+                    response.Message = ResponseMessageDisplay.Duplicate;
+                    // Throw exception if duplicate existed
+                    throw new FamilyHubException(string.Format(MemberMessageDisplay.MemberContactAlreadyExistedMessage, updateMemberContactRequest.FullName));
+                }
+                else
+                {
+                    var memberContactFromDB = await MemberContactRepository.GetSingleMemberContactByIDAsync(memberContactId);
+                    if (memberContactFromDB == null)
+                    {
+                        response.Message = ResponseMessageDisplay.NotFound;
+                        // Throw exception if duplicate existed
+                        throw new FamilyHubException(string.Format(MemberMessageDisplay.MemberContactNotFoundMessage));
+                    }
+                    else
+                    {
+                        _mapper.Map<vmMemberContactUpdateRequest, MemberContact>(updateMemberContactRequest, memberContactFromDB);
+                        await MemberContactRepository.UpdateMemberContactAsync(memberContactFromDB);
+
+                        response.Message = ResponseMessageDisplay.Success;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
         }
 
-        public Task<IResponse> UpdateMemberContactAsync(int memberContactId, vmMemberContactUpdateRequest updateMemberContactRequest)
+        public async Task<IResponse> DeleteMemberContactAsync(int memberContactId)
         {
-            throw new NotImplementedException();
-        }
+            var response = new Response();
 
-        public Task<IResponse> DeleteMemberContactAsync(MemberContact memberContact)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                var memberContactFromDB = await MemberContactRepository.GetSingleMemberContactByIDAsync(memberContactId);
+                if (memberContactFromDB == null)
+                {
+                    response.Message = ResponseMessageDisplay.NotFound;
+                    // Throw exception if duplicate existed
+                    throw new FamilyHubException(string.Format(MemberMessageDisplay.MemberContactNotFoundMessage));
+                }
+                else
+                {
+                    await MemberContactRepository.DeleteMemberContactAsync(memberContactFromDB);
+
+                    response.Message = ResponseMessageDisplay.Success;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex);
+            }
+
+            return response;
         }
         #endregion
     }

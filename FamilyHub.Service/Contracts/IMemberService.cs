@@ -11,16 +11,16 @@ namespace FamilyHub.Service.Contracts
     public interface IMemberService
     {
         #region Member Relationship
-        Task<IListResponse<MemberRelationship>> PrepareMemberRelationshipRequestAsync();
+        Task<IListResponse<vmMemberRelationship>> PrepareMemberRelationshipRequestAsync();
         #endregion
 
         #region Member Contact        
-        Task<IListResponse<MemberContact>> GetMemberContactListByCreatedAsync(int createdBy);
-        Task<IListResponse<MemberContact>> GetMemberContactListByRelationshipAsync(int createdBy, int memberRelationshipID);
+        Task<IListResponse<vmMemberContactListRequest>> GetMemberContactListByCreatedAsync(int createdBy);
+        Task<IListResponse<vmMemberContactListRequest>> GetMemberContactListByRelationshipAsync(int createdBy, int memberRelationshipID);
 
         Task<IResponse> AddMemberContactAsync(vmMemberContactCreateRequest newMemberContactRequest);
         Task<IResponse> UpdateMemberContactAsync(int memberContactId, vmMemberContactUpdateRequest updateMemberContactRequest);
-        Task<IResponse> DeleteMemberContactAsync(MemberContact memberContact);
+        Task<IResponse> DeleteMemberContactAsync(int memberContactId);
         #endregion
     }
 }

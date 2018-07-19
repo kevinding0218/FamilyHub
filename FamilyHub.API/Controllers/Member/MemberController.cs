@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FamilyHub.Data;
 using FamilyHub.Service.Contracts;
+using FamilyHub.ViewModel.Member;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,16 @@ namespace FamilyHub.API.Controllers.Member
         }
 
         #region Member Relationship
+        // GET: api/member/memberRelationship
+        [HttpGet("memberRelationship")]
+        public async Task<IActionResult> ListMemberRelationshipAsync()
+        {
+            // Get response from business logic
+            var response = await _memberService.PrepareMemberRelationshipRequestAsync();
+
+            // Return as http response
+            return response.ToHttpResponse();
+        }
         #endregion
 
         #region Member Contact
@@ -51,38 +62,36 @@ namespace FamilyHub.API.Controllers.Member
             // Return as http response
             return response.ToHttpResponse();
         }
-        #endregion
 
-        // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpPost("createMemberContact")]
+        public async Task<IActionResult> CreateMemberContactAsync([FromBody] vmMemberContactCreateRequest newMemberContactRequest)
         {
-            return new string[] { "value1", "value2" };
+            // Get response from business logic
+            var response = await _memberService.AddMemberContactAsync(newMemberContactRequest);
+
+            // Return as http response
+            return response.ToHttpResponse();
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPut("updateMemberContact")]
+        public async Task<IActionResult> UpdateMemberContactAsync(int memberContactId, [FromBody] vmMemberContactUpdateRequest updateMemberContactRequest)
         {
-            return "value";
+            // Get response from business logic
+            var response = await _memberService.UpdateMemberContactAsync(memberContactId, updateMemberContactRequest);
+
+            // Return as http response
+            return response.ToHttpResponse();
         }
 
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpDelete("deleteMemberContact")]
+        public async Task<IActionResult> DeleteMemberContactAsync(int memberContactId)
         {
-        }
+            // Get response from business logic
+            var response = await _memberService.DeleteMemberContactAsync(memberContactId);
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
+            // Return as http response
+            return response.ToHttpResponse();
         }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        #endregion        
     }
 }

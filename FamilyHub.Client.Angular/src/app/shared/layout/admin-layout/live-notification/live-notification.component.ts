@@ -4,7 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
-  selector: 'fh-live-notification',
+  selector: 'app-live-notification',
   templateUrl: './live-notification.component.html',
   animations: [notificationBottom]
 })

@@ -17,6 +17,10 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'member',
+        loadChildren: './features/member/member.module#MemberModule'
+      },
+      {
         path: 'finance',
         loadChildren: './features/finance/finance.module#FinanceModule'
       },

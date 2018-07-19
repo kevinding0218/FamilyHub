@@ -52,7 +52,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SpinnerModule,
     ClickOutsideModule,
     DataFilterPipe
-  ],  
+  ],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

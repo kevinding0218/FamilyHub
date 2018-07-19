@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FamilyHub.Data.Common;
+using FamilyHub.Data.Member;
 using FamilyHub.Data.Payment;
 using FamilyHub.Data.Transactions;
+using FamilyHub.ViewModel.Member;
 using FamilyHub.ViewModel.Payment;
 using FamilyHub.ViewModel.Transactions;
 using System;
@@ -31,6 +33,33 @@ namespace FamilyHub.ViewModel.Mapping
                             PasswordCreated = DateTime.Now
                         });
                     });
+            #endregion
+
+            #region Member
+            this.CreateMap<vmMemberContactCreateRequest, MemberContact>()
+                .ForMember(target => target.MemberContactID, source => source.Ignore())
+                .ForMember(target => target.MiddleInitial, source => source.Ignore())
+                .ForMember(target => target.ImageSourceID, source => source.Ignore())
+                .ForMember(target => target.MemberRelationshipFK, source => source.Ignore())
+                .ForMember(target => target.MemberImageSourceFK, source => source.Ignore())
+                .ForMember(target => target.PaymentPayorFK, source => source.Ignore())
+                .ForMember(target => target.CreatedBy, source => source.Ignore())
+                .ForMember(target => target.CreatedOn, source => source.Ignore())
+                .ForMember(target => target.LastUpdatedBy, source => source.Ignore())
+                .ForMember(target => target.LastUpdatedOn, source => source.Ignore())
+                .ForMember(target => target.Timestamp, source => source.Ignore());
+
+            this.CreateMap<vmMemberContactUpdateRequest, MemberContact>()
+                .ForMember(target => target.MiddleInitial, source => source.Ignore())
+                .ForMember(target => target.ImageSourceID, source => source.Ignore())
+                .ForMember(target => target.MemberRelationshipFK, source => source.Ignore())
+                .ForMember(target => target.MemberImageSourceFK, source => source.Ignore())
+                .ForMember(target => target.PaymentPayorFK, source => source.Ignore())
+                .ForMember(target => target.CreatedBy, source => source.Ignore())
+                .ForMember(target => target.CreatedOn, source => source.Ignore())
+                .ForMember(target => target.LastUpdatedBy, source => source.Ignore())
+                .ForMember(target => target.LastUpdatedOn, source => source.Ignore())
+                .ForMember(target => target.Timestamp, source => source.Ignore());
             #endregion
 
             #region Payment
@@ -121,7 +150,18 @@ namespace FamilyHub.ViewModel.Mapping
                  .ForMember(target => target.Password, source => source.MapFrom(s => s.UserPasswords.FirstOrDefault().Password));
             #endregion
 
+            #region Member
+            this.CreateMap<MemberRelationship, vmMemberRelationship>();
+
+            this.CreateMap<MemberContact, vmMemberContactListRequest>()
+                .ForMember(target => target.FullName, source => source.MapFrom(s => s.FullName))
+                .ForMember(target => target.ContactPhone, source => source.MapFrom(s => s.MobilePhone ?? s.HomePhone ?? string.Empty))
+                .ForMember(target => target.MemberRelationshipName, source => source.MapFrom(s => s.MemberRelationshipFK.MemberRelationshipName))
+                .ForMember(target => target.ImageSource, source => source.MapFrom(s => s.MemberImageSourceFK.Source));
+            #endregion
+
             #region Payment
+            this.CreateMap<PaymentMethodType, vmPaymentMethodType>();
             this.CreateMap<PaymentMethod, vmPaymentMethodListRequest>()
                 .ForMember(target => target.PaymentMethodTypeName, source => source.MapFrom(s => s.PaymentMethodTypeFk.PaymentMethodTypeName));
             this.CreateMap<PaymentPayor, vmPaymentPayorListRequest>()
