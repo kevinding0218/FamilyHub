@@ -3,6 +3,7 @@ using FamilyHub.Data.Common;
 using FamilyHub.Data.Member;
 using FamilyHub.Data.Payment;
 using FamilyHub.Data.Transactions;
+using FamilyHub.ViewModel.Core;
 using FamilyHub.ViewModel.Member;
 using FamilyHub.ViewModel.Payment;
 using FamilyHub.ViewModel.Transactions;
@@ -151,7 +152,9 @@ namespace FamilyHub.ViewModel.Mapping
             #endregion
 
             #region Member
-            this.CreateMap<MemberRelationship, vmMemberRelationship>();
+            this.CreateMap<MemberRelationship, IOptions>()
+                .ForMember(target => target.Value, source => source.MapFrom(s => s.MemberRelationshipID.ToString()))
+                .ForMember(target => target.Label, source => source.MapFrom(s => s.MemberRelationshipName));
 
             this.CreateMap<MemberContact, vmMemberContactListRequest>()
                 .ForMember(target => target.FullName, source => source.MapFrom(s => s.FullName))

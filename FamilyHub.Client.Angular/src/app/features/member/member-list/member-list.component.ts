@@ -2,11 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { IOption } from 'ng-select';
 
+import { SweetAlertPopupService } from './../../../core/services/sweet-alert-popup.service';
+import { NgIOptionService } from '../../../core/services/ng-option.service';
+import { IResponseMessage } from '../../../core/config/api-response.config';
+
+
+
 @Component({
   selector: 'app-member-list',
   templateUrl: './member-list.component.html',
   styleUrls: [
-    // './crm-contact.component.scss',
     '../../../../assets/icon/icofont/css/icofont.scss'
   ]
 })
@@ -33,17 +38,20 @@ export class MemberListComponent implements OnInit {
 
   /* ng-select */
   simpleOption: Array<IOption> = [
-    {value: '0', label: 'Alabama'},
-    {value: '1', label: 'Wyoming'},
-    {value: '2', label: 'Coming'},
-    {value: '3', label: 'Henry Die'},
-    {value: '4', label: 'John Doe'}
+    { value: '0', label: 'Alabama' },
+    { value: '1', label: 'Wyoming' },
+    { value: '2', label: 'Coming' },
+    { value: '3', label: 'Henry Die' },
+    { value: '4', label: 'John Doe' }
   ];
   selectedOption = null;
 
   @Input('modalDefault') modalDefault: any;
 
-  constructor(public http: Http) { }
+  constructor(
+    private ngIOptionService: NgIOptionService,
+    private sapopup: SweetAlertPopupService,
+    public http: Http) { }
 
   ngOnInit() {
     this.http.get(`assets/data/crm-contact.json`)
@@ -54,6 +62,17 @@ export class MemberListComponent implements OnInit {
 
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
+
+    this.ngIOptionService.loadIOptionMembersRelationship()
+      .subscribe((response) => {
+        if (response.message !== IResponseMessage.Success) {
+          // this.sapopup.openSuccessSwal('Hooray', 'Get Success Response!');
+          this.simpleOption = response.model;
+        } else {
+          // this.closeMyModal();
+          this.sapopup.openErrorSwal('Oops!', 'Something wrong with the server!');
+        }
+      });
   }
 
   openMyModalData(event) {
@@ -69,6 +88,7 @@ export class MemberListComponent implements OnInit {
   }
 
   closeMyModal(event) {
+    console.log('event:', event);
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
 }

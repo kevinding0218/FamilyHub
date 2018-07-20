@@ -4,13 +4,6 @@ using System.Text;
 
 namespace FamilyHub.ViewModel.Member
 {
-    public class vmMemberRelationship
-    {
-        public int MemberRelationshipID { get; set; }
-        public string MemberRelationshipName { get; set; }
-        public string MemberRelationshipDescription { get; set; }
-    }
-
     public class vmMemberContactListRequest
     {
         public int MemberContactID { get; set; }

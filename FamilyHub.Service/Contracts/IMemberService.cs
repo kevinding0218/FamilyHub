@@ -1,5 +1,6 @@
 ﻿using FamilyHub.Data.Member;
 using FamilyHub.Service.Responses;
+using FamilyHub.ViewModel.Core;
 using FamilyHub.ViewModel.Member;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace FamilyHub.Service.Contracts
     public interface IMemberService
     {
         #region Member Relationship
-        Task<IListResponse<vmMemberRelationship>> PrepareMemberRelationshipRequestAsync();
+        Task<IIOptionResponse<IOptions>> PrepareMemberRelationshipRequestAsync();
         #endregion
 
         #region Member Contact        

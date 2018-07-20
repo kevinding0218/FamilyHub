@@ -29,8 +29,8 @@ namespace FamilyHub.API.Controllers.Member
 
         #region Member Relationship
         // GET: api/member/memberRelationship
-        [HttpGet("memberRelationship")]
-        public async Task<IActionResult> ListMemberRelationshipAsync()
+        [HttpGet("IOptionMemberRelationship")]
+        public async Task<IActionResult> IOptionMemberRelationship()
         {
             // Get response from business logic
             var response = await _memberService.PrepareMemberRelationshipRequestAsync();

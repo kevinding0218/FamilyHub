@@ -7,7 +7,7 @@ namespace FamilyHub.Service.Display
     public static class ResponseMessageDisplay
     {
         public static string Success
-            => "SUCCESS";
+            => "Success";
         public static string Warning
             => "Warning";
         public static string Error

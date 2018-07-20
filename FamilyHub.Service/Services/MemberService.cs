@@ -6,6 +6,7 @@ using FamilyHub.Service.Contracts;
 using FamilyHub.Service.Display;
 using FamilyHub.Service.Exceptions;
 using FamilyHub.Service.Responses;
+using FamilyHub.ViewModel.Core;
 using FamilyHub.ViewModel.Member;
 using System;
 using System.Collections.Generic;
@@ -32,14 +33,14 @@ namespace FamilyHub.Service.Services
         }
 
         #region Member Relationship
-        public async Task<IListResponse<vmMemberRelationship>> PrepareMemberRelationshipRequestAsync()
+        public async Task<IIOptionResponse<IOptions>> PrepareMemberRelationshipRequestAsync()
         {
-            var response = new ListResponse<vmMemberRelationship>();
+            var response = new IOptionResponse<IOptions>();
 
             try
             {
                 var listMemberRelationshipFromDb = await MemberRelationshipRepository.GetListMemberRelationshipAsync();
-                response.Model = _mapper.Map<IEnumerable<MemberRelationship>, IEnumerable<vmMemberRelationship>>(listMemberRelationshipFromDb);
+                response.Model = _mapper.Map<IEnumerable<MemberRelationship>, IEnumerable<IOptions>>(listMemberRelationshipFromDb);
                 response.Message = ResponseMessageDisplay.Success;
             }
             catch (Exception ex)
