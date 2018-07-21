@@ -25,7 +25,7 @@ namespace FamilyHub.ViewModel.Member
         public string HomePhone { get; set; }
         public string Location { get; set; }
         public string EmailAddress { get; set; }
-        public int MemberRelationshipID { get; set; }
+        public string MemberRelationshipID { get; set; }
     }
 
     public class vmMemberContactUpdateRequest : vmMemberContactCreateRequest

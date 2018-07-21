@@ -48,6 +48,7 @@ namespace FamilyHub.ViewModel.Mapping
                 .ForMember(target => target.CreatedOn, source => source.Ignore())
                 .ForMember(target => target.LastUpdatedBy, source => source.Ignore())
                 .ForMember(target => target.LastUpdatedOn, source => source.Ignore())
+                .ForMember(target => target.MemberRelationshipID, source => source.MapFrom(s => Convert.ToInt32(s.MemberRelationshipID)))
                 .ForMember(target => target.Timestamp, source => source.Ignore());
 
             this.CreateMap<vmMemberContactUpdateRequest, MemberContact>()
@@ -60,6 +61,7 @@ namespace FamilyHub.ViewModel.Mapping
                 .ForMember(target => target.CreatedOn, source => source.Ignore())
                 .ForMember(target => target.LastUpdatedBy, source => source.Ignore())
                 .ForMember(target => target.LastUpdatedOn, source => source.Ignore())
+                .ForMember(target => target.MemberRelationshipID, source => source.MapFrom(s => Convert.ToInt32(s.MemberRelationshipID)))
                 .ForMember(target => target.Timestamp, source => source.Ignore());
             #endregion
 

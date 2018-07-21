@@ -32,8 +32,10 @@ import { TitleComponent } from './admin-layout/title/title.component';
     ClickOutsideModule,
     BreadcrumbsModule,
     LiveNotificationModule
-  ], 
+  ],
   exports: [],
   providers: []
 })
-export class FamilyHubLayoutModule {}
+export class FamilyHubLayoutModule {
+
+}

@@ -1,3 +1,4 @@
+import { SharedService } from './services/shared.service';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,7 +14,7 @@ import { ModalBasicComponent } from './modal-basic/modal-basic.component';
 import { ModalAnimationComponent } from './modal-animation/modal-animation.component';
 import { SpinnerModule } from './spinner/spinner.module';
 import { ClickOutsideModule } from 'ng-click-outside';
-import { DataFilterPipe } from './elements/data-filter.pipe';
+import { PipesModule } from './pipes/pipes.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -25,8 +26,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CardToggleDirective,
     CardComponent,
     ModalBasicComponent,
-    ModalAnimationComponent,
-    DataFilterPipe
+    ModalAnimationComponent
   ],
   imports: [
     CommonModule,
@@ -51,13 +51,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalAnimationComponent,
     SpinnerModule,
     ClickOutsideModule,
-    DataFilterPipe
+    PipesModule
   ],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    SharedService
   ],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

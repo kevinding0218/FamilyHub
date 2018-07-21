@@ -5,5 +5,5 @@
 </div>
 <div *ngIf="(backDrop); else backDropOver" class="md-overlay"></div>
 <ng-template #backDropOver>
-  <div class="md-overlay" (click)="close(modalID)"></div>
+  <div class="md-overlay" (click)="onContainerClicked(modalID)"></div>
 </ng-template>

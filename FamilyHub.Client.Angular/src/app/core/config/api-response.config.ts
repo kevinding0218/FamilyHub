@@ -1,4 +1,4 @@
-export const enum IResponseMessage {
+export const enum ResponseMessage {
     Success = 'Success',
     Warning = 'Warning',
     Error = 'Error',

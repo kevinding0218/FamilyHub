@@ -17,12 +17,6 @@ export class NgIOptionService {
 
     loadIOptionMembersRelationship(): Observable<IOptionResponse> {
         console.log(`Get Request From: ${environment.apiUrl}/api/member/IOptionMemberRelationship`);
-        return this.httpClient.get<IOptionResponse>(`${environment.apiUrl}/api/member/IOptionMemberRelationship`, httpOptions)
-            .map(
-                (response) => {
-                    console.log(response);
-                    return response;
-                }
-            );
+        return this.httpClient.get<IOptionResponse>(`${environment.apiUrl}/api/member/IOptionMemberRelationship`, httpOptions);
     }
 }

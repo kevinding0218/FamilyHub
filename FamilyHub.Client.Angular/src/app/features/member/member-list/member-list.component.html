@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header">
     <h5>Member</h5>
-    <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMyModal('effect-11')">
+    <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('CREATE')">
       <i class="icofont icofont-plus m-r-5"></i> Add Member
     </button>
   </div>
@@ -134,7 +134,8 @@
   </div>
 </div>
 <!-- Add Contact Start Model -->
-<app-modal-animation [modalID]="'effect-11'" [modalClass]="'md-effect-11'">
+<app-member-detail-popup></app-member-detail-popup>
+<!-- <app-modal-animation #memberDetailPopup [modalID]="'memberDetailPopup'" [modalClass]="'md-effect-11'" [containerClick]="'false'">
   <h3 class="f-26 bg-primary waves-effect">Add Member</h3>
   <div class="text-center form-material">
     <div class="row">
@@ -236,16 +237,16 @@
       </div>
     </div>
     <div class="row">
-      <button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block">Save</button>
-      <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
+      <button type="button" (click)="saveNewMember()" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block">Save</button>
+      <button (click)="closeNewMemberModal()" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
     </div>
   </div>
-  <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn">
+  <button (click)="closeNewMemberModal()" aria-label="Close" class="md-close-btn">
     <i class="icofont icofont-ui-close"></i>
   </button>
-</app-modal-animation>
+</app-modal-animation> -->
 
-<app-modal-basic #modalDefault>
+<app-modal-basic #modalDefault [containerClick]="'false'">
   <div class="app-modal-header">
     <h4 class="modal-title"># {{ userID }} - {{ userName }} Details</h4>
     <button type="button" class="close basic-close" (click)="modalDefault.hide()">

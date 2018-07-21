@@ -1,4 +1,7 @@
-import { sequence, trigger, stagger, animate, style, group, query, transition, keyframes, animateChild, AUTO_STYLE, state } from '@angular/animations';
+import { sequence, trigger, stagger,
+    animate, style, group, query, transition,
+    keyframes, animateChild, AUTO_STYLE, state
+} from '@angular/animations';
 
 export const notificationBottom = trigger('notificationBottom', [
     state('an-off, void',

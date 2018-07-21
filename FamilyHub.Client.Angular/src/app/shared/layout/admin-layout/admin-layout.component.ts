@@ -1,9 +1,9 @@
-import { LayoutService } from '../../../core/services/layout.service';
-import { Subscription } from 'rxjs/Subscription';
-import { element } from 'protractor';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 import {MenuItems} from '../../menu-items/menu-items';
+
+import { SharedService } from '../../services/shared.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-admin',
@@ -171,7 +171,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   }
 
   constructor(public menuItems: MenuItems
-    , private layoutService: LayoutService) {
+    , private sharedService: SharedService) {
     this.processTheme();
 
     // dark theme
@@ -189,11 +189,11 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
     this.setSidebarPosition();
     this.setVerticalLayout();*/
 
-    this.liveNotificationSub = this.layoutService.liveNotification$.subscribe((ele) => {
+    this.liveNotificationSub = this.sharedService.liveNotification$.subscribe((ele) => {
       this.notificationOutsideClick(ele);
     });
 
-    this.toggleLiveNotificationSub = this.layoutService.toggleLiveNotification$
+    this.toggleLiveNotificationSub = this.sharedService.toggleLiveNotification$
     .subscribe(() => {
       this.toggleLiveNotification();
     });

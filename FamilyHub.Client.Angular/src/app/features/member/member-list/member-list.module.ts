@@ -11,7 +11,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { SelectModule } from 'ng-select';
 
 import { NgIOptionService } from './../../../core/services/ng-option.service';
-import { SweetAlertPopupService } from '../../../core/services/sweet-alert-popup.service';
+import { MemberDetailPopupComponent } from './member-detail-popup/member-detail-popup.component';
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import { SweetAlertPopupService } from '../../../core/services/sweet-alert-popup
     TextMaskModule,
     SelectModule
   ],
-  declarations: [MemberListComponent],
-  providers: [NgIOptionService, SweetAlertPopupService]
+  declarations: [MemberListComponent, MemberDetailPopupComponent],
+  providers: [NgIOptionService]
 })
 export class MemberListModule { }

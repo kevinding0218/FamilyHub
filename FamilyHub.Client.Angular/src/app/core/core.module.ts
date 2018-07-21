@@ -1,16 +1,16 @@
-import { NgModule, ModuleWithProviders, APP_INITIALIZER , Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 
-import { services } from './services';
+import { apiServices } from './services';
 import { throwIfAlreadyLoaded } from './guards/module-import.guard';
 
 @NgModule({
     providers: [
-        ...services
+        ...apiServices
     ]
 })
 
 export class CoreModule {
-    constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+    constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
         throwIfAlreadyLoaded(parentModule, 'CoreModule');
       }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-modal-basic',
@@ -10,6 +10,7 @@ export class ModalBasicComponent implements OnInit {
   @Input() dialogClass: string;
   @Input() hideHeader = false;
   @Input() hideFooter = false;
+  @Input() containerClick = true;
   public visible = false;
   public visibleAnimate = false;
 
@@ -30,9 +31,8 @@ export class ModalBasicComponent implements OnInit {
   }
 
   public onContainerClicked(event: MouseEvent): void {
-    if ((<HTMLElement>event.target).classList.contains('modal')) {
+    if ((<HTMLElement>event.target).classList.contains('modal') && this.containerClick === true) {
       this.hide();
     }
   }
-
 }

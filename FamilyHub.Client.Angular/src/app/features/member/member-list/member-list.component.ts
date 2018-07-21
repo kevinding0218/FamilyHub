@@ -1,11 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { IOption } from 'ng-select';
 
-import { SweetAlertPopupService } from './../../../core/services/sweet-alert-popup.service';
-import { NgIOptionService } from '../../../core/services/ng-option.service';
-import { IResponseMessage } from '../../../core/config/api-response.config';
+import { MemberService } from '../../../core/services/member.service';
+import { SharedService } from '../../../shared/services/shared.service';
 
+import { ActionState } from '../../../core/config/action.config';
+import { MemberContactCreateRequest } from '../../../core/models';
 
 
 @Component({
@@ -33,24 +35,15 @@ export class MemberListComponent implements OnInit {
   public userContact: string;
   public userDate: string;
 
-  /* Text Mask */
-  public maskUsMobile = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-
   /* ng-select */
-  simpleOption: Array<IOption> = [
-    { value: '0', label: 'Alabama' },
-    { value: '1', label: 'Wyoming' },
-    { value: '2', label: 'Coming' },
-    { value: '3', label: 'Henry Die' },
-    { value: '4', label: 'John Doe' }
-  ];
+  simpleOption: Array<IOption> = [];
   selectedOption = null;
 
-  @Input('modalDefault') modalDefault: any;
+  // @Input('modalDefault') modalDefault: any;
 
   constructor(
-    private ngIOptionService: NgIOptionService,
-    private sapopup: SweetAlertPopupService,
+    private sharedService: SharedService,
+    private memberService: MemberService,
     public http: Http) { }
 
   ngOnInit() {
@@ -60,19 +53,21 @@ export class MemberListComponent implements OnInit {
       });
   }
 
-  openMyModal(event) {
-    document.querySelector('#' + event).classList.add('md-show');
+  openMemberDetailModal(action: string) {
+    if (action === ActionState.CREATE) {
+      const newMemberDetail: MemberContactCreateRequest = {} as any;
+      // const newMemberDetail: MemberContactCreateRequest = {
+      //   firstName: 'Ran',
+      //   lastName: 'Ding',
+      //   mobilePhone: '1234567890',
+      //   homePhone: '',
+      //   location: 'ATLANTA GA',
+      //   emailAddress: '123@123.com',
+      //   memberRelationshipID: '1'
+      // };
 
-    this.ngIOptionService.loadIOptionMembersRelationship()
-      .subscribe((response) => {
-        if (response.message !== IResponseMessage.Success) {
-          // this.sapopup.openSuccessSwal('Hooray', 'Get Success Response!');
-          this.simpleOption = response.model;
-        } else {
-          // this.closeMyModal();
-          this.sapopup.openErrorSwal('Oops!', 'Something wrong with the server!');
-        }
-      });
+      this.memberService.preloadMemberDetail(newMemberDetail);
+    }
   }
 
   openMyModalData(event) {
@@ -87,8 +82,12 @@ export class MemberListComponent implements OnInit {
     this.userDate = this.data[event]['date'];
   }
 
-  closeMyModal(event) {
-    console.log('event:', event);
-    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+  saveNewMember() {
+    this.sharedService.closeModalAnimation('memberDetailPopup');
+    this.sharedService.openSuccessSwal('Hooray', 'Saved Successfully!');
+  }
+
+  closeNewMemberModal() {
+    this.sharedService.closeModalAnimation('memberDetailPopup');
   }
 }

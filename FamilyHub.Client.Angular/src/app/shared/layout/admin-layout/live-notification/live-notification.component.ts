@@ -1,4 +1,4 @@
-import { LayoutService } from '../../../../core/services/layout.service';
+import { SharedService } from '../../../services/shared.service';
 import { notificationBottom } from '../../../utils/animations';
 import { Component, OnInit, Input } from '@angular/core';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
@@ -13,19 +13,17 @@ export class LiveNotificationComponent implements OnInit {
   @Input() liveNotification: string;
   @Input() liveNotificationClass: string;
 
-  // @Output() notificationOutsideEmitter = new EventEmitter<string>();
-  // @Output() toggleLiveNotificationEmitter = new EventEmitter<void>();
-
-  constructor(private layoutService: LayoutService) { }
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
   }
 
   notificationOutsideClick(ele: string) {
-    this.layoutService.notificationOutsideClick(ele);
+    console.log(ele);
+    this.sharedService.liveNotification$.next(ele);
   }
 
   toggleLiveNotification() {
-    this.layoutService.toggleLiveNotification$.next();
+    this.sharedService.toggleLiveNotification$.next();
   }
 }
