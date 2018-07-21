@@ -55,16 +55,16 @@ export class MemberListComponent implements OnInit {
 
   openMemberDetailModal(action: string) {
     if (action === ActionState.CREATE) {
-      const newMemberDetail: MemberContactCreateRequest = {} as any;
-      // const newMemberDetail: MemberContactCreateRequest = {
-      //   firstName: 'Ran',
-      //   lastName: 'Ding',
-      //   mobilePhone: '1234567890',
-      //   homePhone: '',
-      //   location: 'ATLANTA GA',
-      //   emailAddress: '123@123.com',
-      //   memberRelationshipID: '1'
-      // };
+      // const newMemberDetail: MemberContactCreateRequest = {} as any;
+      const newMemberDetail: MemberContactCreateRequest = {
+        firstName: 'Ran',
+        lastName: 'Ding',
+        mobilePhone: '1234567890',
+        homePhone: '',
+        location: 'Atlanta',
+        emailAddress: '123@123.com',
+        memberRelationshipID: '1'
+      };
 
       this.memberService.preloadMemberDetail(newMemberDetail);
     }

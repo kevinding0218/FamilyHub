@@ -4,6 +4,9 @@
     <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('CREATE')">
       <i class="icofont icofont-plus m-r-5"></i> Add Member
     </button>
+    <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('CREATE')">
+        <i class="icofont icofont-plus m-r-5"></i> Add Member Reactive
+      </button>
   </div>
   <div class="card-body">
     <div class="table-content crm-table">
@@ -134,117 +137,8 @@
   </div>
 </div>
 <!-- Add Contact Start Model -->
-<app-member-detail-popup></app-member-detail-popup>
-<!-- <app-modal-animation #memberDetailPopup [modalID]="'memberDetailPopup'" [modalClass]="'md-effect-11'" [containerClick]="'false'">
-  <h3 class="f-26 bg-primary waves-effect">Add Member</h3>
-  <div class="text-center form-material">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-ui-user"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input type="text" name="firstName" class="form-control" required="">
-            <span class="form-bar"></span>
-            <label class="float-label">First Name</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-ui-user"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input type="text" name="lastName" class="form-control" required>
-            <span class="form-bar"></span>
-            <label class="float-label">Last Name</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-ui-touch-phone"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input [textMask]="{mask: maskUsMobile}" type="text" name="mobilePhone" class="form-control" placeholder="(000) 000-0000"
-            />
-            <span class="form-bar"></span>
-            <label class="float-label">Mobile Phone</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-ui-dial-phone"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input [textMask]="{mask: maskUsMobile}" type="text" name="homePhone" class="form-control" placeholder="(000) 000-0000" />
-            <span class="form-bar"></span>
-            <label class="float-label">Home Phone</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-location-pin"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input type="text" name="location" class="form-control" required="">
-            <span class="form-bar"></span>
-            <label class="float-label">Location</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-email"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input type="text" name="email" class="form-control" required="">
-            <span class="form-bar"></span>
-            <label class="float-label">Email Address</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12" style="text-align: left;">
-        <div class="material-group material-group-primary">
-          <div class="material-addone" style="align-items: initial;">
-            <i class="icofont icofont-users"></i>
-          </div>
-          <div class="form-group form-primary">
-            <ng-select placeholder="Choose a relationship" [options]="simpleOption" [(ngModel)]="selectedOption">
-            </ng-select>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <button type="button" (click)="saveNewMember()" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block">Save</button>
-      <button (click)="closeNewMemberModal()" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
-    </div>
-  </div>
-  <button (click)="closeNewMemberModal()" aria-label="Close" class="md-close-btn">
-    <i class="icofont icofont-ui-close"></i>
-  </button>
-</app-modal-animation> -->
+<!-- <app-member-detail-popup></app-member-detail-popup> -->
+<app-member-detail-popup2></app-member-detail-popup2>
 
 <app-modal-basic #modalDefault [containerClick]="'false'">
   <div class="app-modal-header">

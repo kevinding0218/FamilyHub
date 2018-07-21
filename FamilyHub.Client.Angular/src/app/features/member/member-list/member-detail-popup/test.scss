@@ -1,0 +1,6 @@
+input:not([type]),
+input[type=text] {
+    &.ng-invalid.ng-touched {
+        border-bottom: 1px solid red;
+    } 
+}

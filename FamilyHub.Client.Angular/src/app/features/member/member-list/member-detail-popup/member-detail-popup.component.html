@@ -1,108 +1,112 @@
-<app-modal-animation #memberDetailPopup [modalID]="'memberDetailPopup'" [modalClass]="'md-effect-11'" [containerClick]="'false'">
+<app-modal-animation [modalID]="'memberDetailPopup'" [modalClass]="'md-effect-11'" [containerClick]="'false'">
   <h3 class="f-26 bg-primary waves-effect">Add Member</h3>
   <div class="text-center form-material">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-ui-user"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input [(ngModel)]="currentDetailInfo.firstName" type="text" name="firstName" class="form-control" required="">
-            <span class="form-bar"></span>
-            <label class="float-label">First Name</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-ui-user"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input [(ngModel)]="currentDetailInfo.lastName" type="text" name="lastName" class="form-control" required>
-            <span class="form-bar"></span>
-            <label class="float-label">Last Name</label>
+    <form (ngSubmit)="saveNewMember(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="material-group material-group-primary">
+            <div class="material-addone">
+              <i class="icofont icofont-ui-user"></i>
+            </div>
+            <div class="form-group form-primary">
+              <input type="text" name="firstName" class="form-control" ngModel required #firstName="ngModel">
+              <span class="form-bar"></span>
+              <label class="float-label">First Name</label>
+              <div class="text-left text-danger f-12 f-s-italic" *ngIf="firstName.invalid && firstName.touched">Please Enter First Name</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-ui-touch-phone"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input [(ngModel)]="maskedMobilePhone" [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="mobilePhone" class="form-control" placeholder="(000) 000-0000"
-            />
-            <span class="form-bar"></span>
-            <label class="float-label">Mobile Phone</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-ui-dial-phone"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input [(ngModel)]="maskedHomePhone" [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="homePhone" class="form-control" placeholder="(000) 000-0000" />
-            <span class="form-bar"></span>
-            <label class="float-label">Home Phone</label>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="material-group material-group-primary">
+            <div class="material-addone">
+              <i class="icofont icofont-ui-user"></i>
+            </div>
+            <div class="form-group form-primary">
+              <input type="text" name="lastName" class="form-control" ngModel required>
+              <span class="form-bar"></span>
+              <label class="float-label">Last Name</label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-location-pin"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input [(ngModel)]="currentDetailInfo.location" type="text" name="location" class="form-control" required="">
-            <span class="form-bar"></span>
-            <label class="float-label">Location</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="material-group material-group-primary">
-          <div class="material-addone">
-            <i class="icofont icofont-email"></i>
-          </div>
-          <div class="form-group form-primary">
-            <input [(ngModel)]="currentDetailInfo.emailAddress" type="text" name="email" class="form-control" required="">
-            <span class="form-bar"></span>
-            <label class="float-label">Email Address</label>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="material-group material-group-primary">
+            <div class="material-addone">
+              <i class="icofont icofont-ui-touch-phone"></i>
+            </div>
+            <div class="form-group form-primary">
+              <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="mobilePhone" class="form-control"
+                placeholder="(000) 000-0000" ngModel />
+              <span class="form-bar"></span>
+              <label class="float-label">Mobile Phone</label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12" style="text-align: left;">
-        <div class="material-group material-group-primary">
-          <div class="material-addone" style="align-items: initial;">
-            <i class="icofont icofont-users"></i>
-          </div>
-          <div class="form-group form-primary">
-            <ng-select placeholder="Choose a relationship" [options]="relationshipOption" [(ngModel)]="currentDetailInfo.memberRelationshipID">
-            </ng-select>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="material-group material-group-primary">
+            <div class="material-addone">
+              <i class="icofont icofont-ui-dial-phone"></i>
+            </div>
+            <div class="form-group form-primary">
+              <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="homePhone" class="form-control" placeholder="(000) 000-0000"
+                ngModel/>
+              <span class="form-bar"></span>
+              <label class="float-label">Home Phone</label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <button type="button" (click)="saveNewMember()" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block">Save</button>
-      <button (click)="closeModal()" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
-    </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="material-group material-group-primary">
+            <div class="material-addone">
+              <i class="icofont icofont-location-pin"></i>
+            </div>
+            <div class="form-group form-primary">
+              <input type="text" name="location" class="form-control" ngModel>
+              <span class="form-bar"></span>
+              <label class="float-label">Location</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="material-group material-group-primary">
+            <div class="material-addone">
+              <i class="icofont icofont-email"></i>
+            </div>
+            <div class="form-group form-primary">
+              <input type="text" name="email" class="form-control" ngModel>
+              <span class="form-bar"></span>
+              <label class="float-label">Email Address</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12" style="text-align: left;">
+          <div class="material-group material-group-primary">
+            <div class="material-addone" style="align-items: initial;">
+              <i class="icofont icofont-users"></i>
+            </div>
+            <div class="form-group form-primary">
+              <ng-select name="relationship" placeholder="Choose a relationship" [options]="relationshipOption" [(ngModel)]="currentDetailInfo.memberRelationshipID" required>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <button type="submit" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block">Save</button>
+        <button type="button" (click)="closeModal()" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
+      </div>
+    </form>
   </div>
   <button (click)="closeModal()" aria-label="Close" class="md-close-btn">
     <i class="icofont icofont-ui-close"></i>

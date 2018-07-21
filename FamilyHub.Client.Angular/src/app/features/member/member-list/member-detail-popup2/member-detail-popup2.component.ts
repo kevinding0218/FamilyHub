@@ -1,6 +1,5 @@
-
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup } from '@angular/forms';
 
 import { IOption } from 'ng-select';
 import { Subscription } from 'rxjs/Subscription';
@@ -15,15 +14,12 @@ import { ActionState } from '../../../../core/config/action.config';
 import { MemberContactCreateRequest } from '../../../../core/models/member/member.model';
 
 @Component({
-  selector: 'app-member-detail-popup',
-  templateUrl: './member-detail-popup.component.html',
-  styleUrls: [
-    '../../../../../assets/icon/icofont/css/icofont.scss',
-    './test.scss'
-  ]
+  selector: 'app-member-detail-popup2',
+  templateUrl: './member-detail-popup2.component.html'
 })
-export class MemberDetailPopupComponent implements OnInit, OnDestroy {
-  @ViewChild('f') memberDetailForm: NgForm;
+export class MemberDetailPopup2Component implements OnInit, OnDestroy {
+  memberDetailForm: FormGroup;
+
   currentDetailInfo: MemberContactCreateRequest = {
     firstName: '',
     lastName: '',
@@ -58,7 +54,7 @@ export class MemberDetailPopupComponent implements OnInit, OnDestroy {
               if (response.message === ResponseMessage.Success) {
                 this.relationshipOption = response.model;
 
-                this.sharedService.openModalAnimation('memberDetailPopup');
+                this.sharedService.openModalAnimation('memberDetailPopup2');
               } else {
                 this.sharedService.openErrorSwal('Oops!', 'Something wrong with the server!');
               }
@@ -79,21 +75,6 @@ export class MemberDetailPopupComponent implements OnInit, OnDestroy {
           this.maskedHomePhone = conformedHomePhone.conformedValue;
 
           this.currentDetailInfo = ele.dataModel;
-
-          this.memberDetailForm.form.setValue({
-            firstName: this.currentDetailInfo.firstName,
-            lastName: this.currentDetailInfo.lastName,
-            mobilePhone: this.maskedMobilePhone,
-            homePhone: this.maskedHomePhone,
-            location: this.currentDetailInfo.location,
-            email: this.currentDetailInfo.emailAddress,
-            relationship: this.currentDetailInfo.memberRelationshipID
-          });
-
-          // this.memberDetailForm.form.patchValue({
-          //   firstName: this.currentDetailInfo.firstName,
-          //   lastName: this.currentDetailInfo.lastName,
-          // });
         }
       }
     );
@@ -108,11 +89,10 @@ export class MemberDetailPopupComponent implements OnInit, OnDestroy {
 
     // this.sharedService.closeModalAnimation('memberDetailPopup');
     // this.sharedService.openSuccessSwal('Hooray', 'Saved Successfully!');
-    this.memberDetailForm.reset();
   }
 
   closeModal() {
-    this.sharedService.closeModalAnimation('memberDetailPopup');
+    this.sharedService.closeModalAnimation('memberDetailPopup2');
   }
 
   ngOnDestroy() {

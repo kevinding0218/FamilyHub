@@ -12,6 +12,7 @@ import { SelectModule } from 'ng-select';
 
 import { NgIOptionService } from './../../../core/services/ng-option.service';
 import { MemberDetailPopupComponent } from './member-detail-popup/member-detail-popup.component';
+import { MemberDetailPopup2Component } from './member-detail-popup2/member-detail-popup2.component';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { MemberDetailPopupComponent } from './member-detail-popup/member-detail-
     TextMaskModule,
     SelectModule
   ],
-  declarations: [MemberListComponent, MemberDetailPopupComponent],
+  declarations: [MemberListComponent, MemberDetailPopupComponent, MemberDetailPopup2Component],
   providers: [NgIOptionService]
 })
 export class MemberListModule { }
