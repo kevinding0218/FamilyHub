@@ -1,4 +1,5 @@
-export interface MemberContactCreateRequest {
+export interface MemberDetailRequest {
+    memberContactID: number;
     firstName: string;
     lastName: string;
     mobilePhone: string;

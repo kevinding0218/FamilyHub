@@ -1,7 +1,7 @@
-<app-modal-animation [modalID]="'memberDetailPopup2'" [modalClass]="'md-effect-11'" [containerClick]="'false'">
+<app-modal-animation [modalID]="'memberDetailPopupReactiveForm'" [modalClass]="'md-effect-11'" [containerClick]="'false'">
     <h3 class="f-26 bg-primary waves-effect">Add Member Reactive Form</h3>
     <div class="text-center form-material">
-      <form (ngSubmit)="saveNewMember(f)" #f="ngForm"(ngSubmit)="saveNewMember(f)" #f="ngForm">
+      <form [formGroup]="memberDetailForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-sm-12">
             <div class="material-group material-group-primary">
@@ -9,7 +9,7 @@
                 <i class="icofont icofont-ui-user"></i>
               </div>
               <div class="form-group form-primary">
-                <input type="text" name="firstName" class="form-control" />
+                <input type="text" name="firstName" formControlName="firstName" class="form-control" />
                 <span class="form-bar"></span>
                 <label class="float-label">First Name</label>
               </div>
@@ -23,7 +23,7 @@
                 <i class="icofont icofont-ui-user"></i>
               </div>
               <div class="form-group form-primary">
-                <input type="text" name="lastName" class="form-control" />
+                <input type="text" name="lastName" formControlName="lastName" class="form-control" />
                 <span class="form-bar"></span>
                 <label class="float-label">Last Name</label>
               </div>
@@ -37,7 +37,8 @@
                 <i class="icofont icofont-ui-touch-phone"></i>
               </div>
               <div class="form-group form-primary">
-                <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="mobilePhone" class="form-control"
+                <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" 
+                name="mobilePhone" formControlName="mobilePhone" class="form-control"
                   placeholder="(000) 000-0000" />
                 <span class="form-bar"></span>
                 <label class="float-label">Mobile Phone</label>
@@ -52,7 +53,8 @@
                 <i class="icofont icofont-ui-dial-phone"></i>
               </div>
               <div class="form-group form-primary">
-                <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="homePhone" class="form-control" placeholder="(000) 000-0000" />
+                <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" 
+                name="homePhone" formControlName="homePhone" class="form-control" placeholder="(000) 000-0000" />
                 <span class="form-bar"></span>
                 <label class="float-label">Home Phone</label>
               </div>
@@ -66,7 +68,7 @@
                 <i class="icofont icofont-location-pin"></i>
               </div>
               <div class="form-group form-primary">
-                <input type="text" name="location" class="form-control" />
+                <input type="text" name="location" formControlName="location" class="form-control" />
                 <span class="form-bar"></span>
                 <label class="float-label">Location</label>
               </div>
@@ -80,7 +82,7 @@
                 <i class="icofont icofont-email"></i>
               </div>
               <div class="form-group form-primary">
-                <input type="text" name="email" class="form-control" />
+                <input type="text" name="email" formControlName="emailAddress" class="form-control" />
                 <span class="form-bar"></span>
                 <label class="float-label">Email Address</label>
               </div>
@@ -94,14 +96,14 @@
                 <i class="icofont icofont-users"></i>
               </div>
               <div class="form-group form-primary">
-                <ng-select name="relationship" placeholder="Choose a relationship" [options]="relationshipOption" [(ngModel)]="currentDetailInfo.memberRelationshipID" required>
+                <ng-select name="memberRelationshipID" formControlName="memberRelationshipID" placeholder="Choose a relationship" [options]="relationshipOption" required>
                 </ng-select>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <button type="submit" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block">Save</button>
+          <button type="submit" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block" [disabled]="!memberDetailForm.valid">Save</button>
           <button type="button" (click)="closeModal()" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
         </div>
       </form>

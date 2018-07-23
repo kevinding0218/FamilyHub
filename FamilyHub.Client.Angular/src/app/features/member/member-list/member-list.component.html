@@ -4,9 +4,9 @@
     <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('CREATE')">
       <i class="icofont icofont-plus m-r-5"></i> Add Member
     </button>
-    <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('CREATE')">
-        <i class="icofont icofont-plus m-r-5"></i> Add Member Reactive
-      </button>
+    <button type="button" class="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('UPDATE')">
+      <i class="icofont icofont-plus m-r-5"></i> Edit Member
+    </button>
   </div>
   <div class="card-body">
     <div class="table-content crm-table">
@@ -137,8 +137,8 @@
   </div>
 </div>
 <!-- Add Contact Start Model -->
-<!-- <app-member-detail-popup></app-member-detail-popup> -->
-<app-member-detail-popup2></app-member-detail-popup2>
+<app-member-detail-popup></app-member-detail-popup>
+<!-- <app-member-detail-popup2></app-member-detail-popup2> -->
 
 <app-modal-basic #modalDefault [containerClick]="'false'">
   <div class="app-modal-header">

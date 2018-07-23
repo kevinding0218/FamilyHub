@@ -1,7 +1,8 @@
-<app-modal-animation [modalID]="'memberDetailPopup'" [modalClass]="'md-effect-11'" [containerClick]="'false'">
+<app-modal-animation [modalID]="'memberDetailPopupTemplateForm'" [modalClass]="'md-effect-11'" [containerClick]="'false'">
   <h3 class="f-26 bg-primary waves-effect">Add Member</h3>
   <div class="text-center form-material">
-    <form (ngSubmit)="saveNewMember(f)" #f="ngForm">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <input type="hidden" name="memberContactID" class="form-control" ngModel>
       <div class="row">
         <div class="col-sm-12">
           <div class="material-group material-group-primary">
@@ -24,9 +25,10 @@
               <i class="icofont icofont-ui-user"></i>
             </div>
             <div class="form-group form-primary">
-              <input type="text" name="lastName" class="form-control" ngModel required>
+              <input type="text" name="lastName" class="form-control" ngModel required #lastName="ngModel">
               <span class="form-bar"></span>
               <label class="float-label">Last Name</label>
+              <div class="text-left text-danger f-12 f-s-italic" *ngIf="lastName.invalid && lastName.touched">Please Enter Last Name</div>
             </div>
           </div>
         </div>
@@ -96,8 +98,10 @@
               <i class="icofont icofont-users"></i>
             </div>
             <div class="form-group form-primary">
-              <ng-select name="relationship" placeholder="Choose a relationship" [options]="relationshipOption" [(ngModel)]="currentDetailInfo.memberRelationshipID" required>
+              <ng-select name="memberRelationshipID" placeholder="Choose a relationship" [options]="relationshipOption" ngModel required
+                #memberRelationship="ngModel">
               </ng-select>
+              <div class="text-left text-danger f-12 f-s-italic" *ngIf="memberRelationship.invalid">Please Select a member relationship.</div>
             </div>
           </div>
         </div>

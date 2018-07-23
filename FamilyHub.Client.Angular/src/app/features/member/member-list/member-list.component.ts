@@ -7,7 +7,7 @@ import { MemberService } from '../../../core/services/member.service';
 import { SharedService } from '../../../shared/services/shared.service';
 
 import { ActionState } from '../../../core/config/action.config';
-import { MemberContactCreateRequest } from '../../../core/models';
+import { MemberDetailRequest } from '../../../core/models';
 
 
 @Component({
@@ -55,8 +55,22 @@ export class MemberListComponent implements OnInit {
 
   openMemberDetailModal(action: string) {
     if (action === ActionState.CREATE) {
-      // const newMemberDetail: MemberContactCreateRequest = {} as any;
-      const newMemberDetail: MemberContactCreateRequest = {
+      // const createMemberDetail: MemberDetailRequest = {} as any;
+      const createMemberDetail: MemberDetailRequest = {
+        memberContactID: 0,
+        firstName: '',
+        lastName: '',
+        mobilePhone: '',
+        homePhone: '',
+        location: '',
+        emailAddress: '',
+        memberRelationshipID: '1'
+      };
+
+      this.memberService.startCreateMemberDetail(createMemberDetail);
+    } else if (action === ActionState.UPDATE) {
+      const updateMemberDetail: MemberDetailRequest = {
+        memberContactID: 0,
         firstName: 'Ran',
         lastName: 'Ding',
         mobilePhone: '1234567890',
@@ -65,8 +79,7 @@ export class MemberListComponent implements OnInit {
         emailAddress: '123@123.com',
         memberRelationshipID: '1'
       };
-
-      this.memberService.preloadMemberDetail(newMemberDetail);
+      this.memberService.startCreateMemberDetail(updateMemberDetail);
     }
   }
 
