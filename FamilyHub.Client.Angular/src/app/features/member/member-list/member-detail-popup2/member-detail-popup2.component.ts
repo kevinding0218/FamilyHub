@@ -78,13 +78,14 @@ export class MemberDetailPopup2Component implements OnInit, OnDestroy {
 
   private initFormControl() {
     this.memberDetailForm = new FormGroup({
-      'firstName': new FormControl(this.currentDetailInfo.firstName, Validators.required),
-      'lastName': new FormControl(this.currentDetailInfo.lastName, Validators.required),
-      'mobilePhone': new FormControl(this.currentDetailInfo.mobilePhone),
-      'homePhone': new FormControl(this.currentDetailInfo.homePhone),
-      'location': new FormControl(this.currentDetailInfo.location),
-      'emailAddress': new FormControl(this.currentDetailInfo.emailAddress),
-      'memberRelationshipID': new FormControl(this.currentDetailInfo.memberRelationshipID, Validators.required)
+      'memberContactID': new FormControl(0),
+      'firstName': new FormControl(null, Validators.required),
+      'lastName': new FormControl(null, Validators.required),
+      'mobilePhone': new FormControl(null),
+      'homePhone': new FormControl(null),
+      'location': new FormControl(null),
+      'emailAddress': new FormControl(null),
+      'memberRelationshipID': new FormControl('1', Validators.required)
     });
   }
 
@@ -109,6 +110,17 @@ export class MemberDetailPopup2Component implements OnInit, OnDestroy {
       }
 
       this.currentDetailInfo = memberDetail;
+
+      this.memberDetailForm.setValue({
+        'memberContactID': this.currentDetailInfo.memberContactID,
+        'firstName': this.currentDetailInfo.firstName,
+        'lastName': this.currentDetailInfo.lastName,
+        'mobilePhone': this.currentDetailInfo.mobilePhone,
+        'homePhone': this.currentDetailInfo.homePhone,
+        'location': this.currentDetailInfo.location,
+        'emailAddress': this.currentDetailInfo.emailAddress,
+        'memberRelationshipID': this.currentDetailInfo.memberRelationshipID
+      });
     }
   }
 
