@@ -1,5 +1,5 @@
 <app-modal-animation [modalID]="'memberDetailPopupTemplateForm'" [modalClass]="'md-effect-11'" [containerClick]="'false'">
-  <h3 class="f-26 bg-primary waves-effect">Add Member</h3>
+  <h3 class="f-26 bg-primary waves-effect">{{ viewMode }} Member</h3>
   <div class="text-center form-material">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <input type="hidden" name="memberContactID" class="form-control" ngModel>
@@ -10,7 +10,7 @@
               <i class="icofont icofont-ui-user"></i>
             </div>
             <div class="form-group form-primary">
-              <input type="text" name="firstName" class="form-control" ngModel required #firstName="ngModel">
+              <input type="text" name="firstName" class="form-control" [ngClass]="{'fill': firstName.value !== ''}" ngModel required #firstName="ngModel">
               <span class="form-bar"></span>
               <label class="float-label">First Name</label>
               <div class="text-left text-danger f-12 f-s-italic" *ngIf="firstName.invalid && firstName.touched">Please Enter First Name</div>
@@ -25,7 +25,7 @@
               <i class="icofont icofont-ui-user"></i>
             </div>
             <div class="form-group form-primary">
-              <input type="text" name="lastName" class="form-control" ngModel required #lastName="ngModel">
+              <input type="text" name="lastName" class="form-control" [ngClass]="{'fill': lastName.value !== ''}" ngModel required #lastName="ngModel">
               <span class="form-bar"></span>
               <label class="float-label">Last Name</label>
               <div class="text-left text-danger f-12 f-s-italic" *ngIf="lastName.invalid && lastName.touched">Please Enter Last Name</div>
@@ -41,7 +41,7 @@
             </div>
             <div class="form-group form-primary">
               <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="mobilePhone" class="form-control"
-                placeholder="(000) 000-0000" ngModel />
+                [ngClass]="{'fill': mobilePhone.value !== ''}" ngModel #mobilePhone="ngModel" />
               <span class="form-bar"></span>
               <label class="float-label">Mobile Phone</label>
             </div>
@@ -55,8 +55,8 @@
               <i class="icofont icofont-ui-dial-phone"></i>
             </div>
             <div class="form-group form-primary">
-              <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="homePhone" class="form-control" placeholder="(000) 000-0000"
-                ngModel/>
+              <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="homePhone" class="form-control" [ngClass]="{'fill': homePhone.value !== ''}"
+                ngModel #homePhone="ngModel" />
               <span class="form-bar"></span>
               <label class="float-label">Home Phone</label>
             </div>
@@ -70,7 +70,7 @@
               <i class="icofont icofont-location-pin"></i>
             </div>
             <div class="form-group form-primary">
-              <input type="text" name="location" class="form-control" ngModel>
+              <input type="text" name="location" class="form-control" [ngClass]="{'fill': location.value !== ''}" ngModel #location="ngModel">
               <span class="form-bar"></span>
               <label class="float-label">Location</label>
             </div>
@@ -84,7 +84,7 @@
               <i class="icofont icofont-email"></i>
             </div>
             <div class="form-group form-primary">
-              <input type="text" name="email" class="form-control" ngModel>
+              <input type="text" name="email" class="form-control" [ngClass]="{'fill': email.value !== ''}" ngModel required #email="ngModel">
               <span class="form-bar"></span>
               <label class="float-label">Email Address</label>
             </div>
@@ -98,10 +98,10 @@
               <i class="icofont icofont-users"></i>
             </div>
             <div class="form-group form-primary">
-              <ng-select name="memberRelationshipID" placeholder="Choose a relationship" [options]="relationshipOption" ngModel required
-                #memberRelationship="ngModel">
+              <ng-select name="memberRelationshipID" placeholder="Choose a relationship" [options]="relationshipOptions" ngModel required
+                #memberRelationshipID="ngModel">
               </ng-select>
-              <div class="text-left text-danger f-12 f-s-italic" *ngIf="memberRelationship.invalid">Please Select a member relationship.</div>
+              <div class="text-left text-danger f-12 f-s-italic" *ngIf="memberRelationshipID.invalid">Please Select a member relationship.</div>
             </div>
           </div>
         </div>

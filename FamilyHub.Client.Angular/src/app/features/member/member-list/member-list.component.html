@@ -137,8 +137,16 @@
   </div>
 </div>
 <!-- Add Contact Start Model -->
-<app-member-detail-popup></app-member-detail-popup>
-<!-- <app-member-detail-popup2></app-member-detail-popup2> -->
+<!-- <app-member-detail-popup 
+[currentDetailInfo]="selectedMemberDetail"
+[viewMode]="memberDetailVideMode"
+[relationshipOptions]="relationshipOptions"
+></app-member-detail-popup> -->
+<app-member-detail-popup2
+[currentDetailInfo]="selectedMemberDetail"
+[viewMode]="memberDetailVideMode"
+[relationshipOptions]="relationshipOptions"
+></app-member-detail-popup2>
 
 <app-modal-basic #modalDefault [containerClick]="'false'">
   <div class="app-modal-header">

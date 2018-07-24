@@ -1,17 +1,15 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { IOption } from 'ng-select';
-import { Subscription } from 'rxjs/Subscription';
-
 import { conformToMask } from 'angular2-text-mask';
+import { MemberDetailRequest } from '../../../../core/models/member/member.model';
+
+import { Subscription } from 'rxjs/Subscription';
 import { SharedConfig } from './../../../../shared/utils/shared.config';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { NgIOptionService } from '../../../../core/services/ng-option.service';
-import { ResponseMessage } from '../../../../core/config/api-response.config';
-import { MemberService } from '../../../../core/services/member.service';
-import { ActionState } from '../../../../core/config/action.config';
-import { MemberDetailRequest } from '../../../../core/models/member/member.model';
+import { MemberService } from './../../../../core/services/member.service';
+
 
 @Component({
   selector: 'app-member-detail-popup',
@@ -21,82 +19,55 @@ import { MemberDetailRequest } from '../../../../core/models/member/member.model
     './test.scss'
   ]
 })
-export class MemberDetailPopupComponent implements OnInit, OnDestroy {
+export class MemberDetailPopupComponent implements OnChanges, OnInit {
   @ViewChild('f') memberDetailForm: NgForm;
-  currentDetailInfo: MemberDetailRequest = {
-    memberContactID: 0,
-    firstName: '',
-    lastName: '',
-    mobilePhone: '',
-    homePhone: '',
-    location: '',
-    emailAddress: '',
-    memberRelationshipID: '1'
-  };
-
-  /* ng-select */
-  relationshipOption: Array<IOption> = [];
-  selectedOption = null;
+  @Input() currentDetailInfo: MemberDetailRequest;
+  @Input() viewMode: string;
+  @Input() relationshipOptions: Array<IOption> = [];
 
   private memberServiceSub: Subscription;
   constructor(
     public sharedConfig: SharedConfig,
-    private memberService: MemberService,
-    private ngIOptionService: NgIOptionService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private memberService: MemberService
   ) { }
 
-  ngOnInit() {
-    this.memberServiceSub = this.memberService.memberDetailAction$.subscribe(
-      (ele) => {
-        if (ele.action === ActionState.CREATE) {
-          this.loadNgSelectMemberRelationship();
+  ngOnInit() { }
 
-          this.initFormValue(ele.dataModel);
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['currentDetailInfo']) {
+      // const detail: SimpleChange = changes.currentDetailInfo;
+      // if (detail.previousValue !== undefined) {
+      //   console.log('prev detail: ', detail.previousValue);
+      // }
+      // if (detail.currentValue !== undefined) {
+      //   console.log('current detail: ', detail.currentValue);
+      // }
 
-          // this.memberDetailForm.form.patchValue({
-          //   firstName: this.currentDetailInfo.firstName,
-          //   lastName: this.currentDetailInfo.lastName,
-          // });
-        }
-      }
-    );
+      this.initFormValue();
+    }
   }
 
-  loadNgSelectMemberRelationship() {
-    this.ngIOptionService.loadIOptionMembersRelationship()
-    .subscribe((response) => {
-      if (response.message === ResponseMessage.Success) {
-        this.relationshipOption = response.model;
-
-        this.sharedService.openModalAnimation('memberDetailPopupTemplateForm');
-      } else {
-        this.sharedService.openErrorSwal('Oops!', 'Something wrong with the server!');
-      }
-    });
-  }
-
-  initFormValue(memberDetail: MemberDetailRequest) {
-    if (memberDetail !== null) {
-      if (memberDetail['mobilePhone'] && memberDetail.mobilePhone.length === 10) {
+  initFormValue() {
+    if (this.currentDetailInfo['memberContactID'] !== undefined) {
+      if (this.currentDetailInfo['mobilePhone'] && this.currentDetailInfo.mobilePhone.length === 10) {
         const conformedMobilePhone = conformToMask(
-          memberDetail.mobilePhone,
+          this.currentDetailInfo.mobilePhone,
           this.sharedConfig.getMaskConfig().maskUsMobile,
           { guide: false }
         );
-        memberDetail.mobilePhone = conformedMobilePhone.conformedValue;
+        this.currentDetailInfo.mobilePhone = conformedMobilePhone.conformedValue;
       }
 
-      if (memberDetail['homePhone'] && memberDetail.homePhone.length === 10) {
+      if (this.currentDetailInfo['homePhone'] && this.currentDetailInfo.homePhone.length === 10) {
         const conformedHomePhone = conformToMask(
-          memberDetail.homePhone,
+          this.currentDetailInfo.homePhone,
           this.sharedConfig.getMaskConfig().maskUsMobile,
           { guide: false }
         );
-        memberDetail.homePhone = conformedHomePhone.conformedValue;
+        this.currentDetailInfo.homePhone = conformedHomePhone.conformedValue;
       }
-      console.log('memberDetail:', memberDetail);
-      this.currentDetailInfo = memberDetail;
+      console.log('memberDetail:', this.currentDetailInfo);
 
       this.memberDetailForm.form.setValue({
         memberContactID: this.currentDetailInfo.memberContactID,
@@ -123,9 +94,5 @@ export class MemberDetailPopupComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.sharedService.closeModalAnimation('memberDetailPopupTemplateForm');
-  }
-
-  ngOnDestroy() {
-    this.memberServiceSub.unsubscribe();
   }
 }

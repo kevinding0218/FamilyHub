@@ -996,7 +996,6 @@ $background-checkbox-bg-color: $primary-color, $warning-color, $default-color, $
             }
         }
     }
-
     .form-control {
         display: inline-block;
         height: 43px;
@@ -1022,20 +1021,18 @@ $background-checkbox-bg-color: $primary-color, $warning-color, $default-color, $
                 }
             }
         }
-
-        &:focus,
-        &:valid {
-            ~.float-label {
-                top: -14px;
-                font-size: 11px;
-            }
-        }
+        //
+        // &:focus,
+        // &:valid {
+        //     ~.float-label {
+        //         top: -14px;
+        //         font-size: 11px;
+        //     }
+        // }
     }
-
     textarea {
         height: 100px ;
     }
-
     .form-bar {
         position: relative;
         display: block;
@@ -1061,7 +1058,6 @@ $background-checkbox-bg-color: $primary-color, $warning-color, $default-color, $
             right: 50%;
         }
     }
-
     .float-label {
         pointer-events: none;
         position: absolute;
@@ -1073,7 +1069,6 @@ $background-checkbox-bg-color: $primary-color, $warning-color, $default-color, $
         -moz-transition: 0.2s ease all;
         -webkit-transition: 0.2s ease all;
     }
-
     .material-group {
         display: flex;
         margin-bottom: 1.25em;
@@ -1153,6 +1148,16 @@ $background-checkbox-bg-color: $primary-color, $warning-color, $default-color, $
                 font-size: 0.775rem;
             }
         }
+    }
+    .form-control:focus ~ .float-label, .form-material .form-control:valid ~ .float-label{
+        // top: 12px;
+        // font-size: 14px;
+        top: -14px;
+        font-size: 11px;
+    }
+    .form-control.fill ~ .float-label, .form-material .form-control.fill ~ .float-label {
+        top: -14px;
+        font-size: 11px;
     }
     $matrial-state: primary, warning, default, danger, success, inverse, info;
     $matrial-color: $primary-color, $warning-color, $default-color, $danger-color, $success-color, $inverse-color, $info-color;
