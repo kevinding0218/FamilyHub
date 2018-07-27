@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import 'rxjs/add/operator/map';
 
 import * as moment from 'moment';
 import { environment } from './../../../environments/environment';
