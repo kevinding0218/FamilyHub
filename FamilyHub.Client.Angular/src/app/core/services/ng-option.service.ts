@@ -21,11 +21,6 @@ export class NgIOptionService {
         { value: 'cn', label: '中文' }
     ];
 
-    loadIOptionMembersRelationship(): Observable<IOptionResponse> {
-        console.log(`Get Request From: ${environment.apiUrl}/api/member/IOptionMemberRelationship`);
-        return this.httpClient.get<IOptionResponse>(`${environment.apiUrl}/api/member/IOptionMemberRelationship`, httpOptions);
-    }
-
     getLanguages(): Observable<Array<IOption>> {
         return this.loadOptions(NgIOptionService.LANGUAGES);
     }
@@ -41,5 +36,10 @@ export class NgIOptionService {
 
     private cloneOptions(options: Array<IOption>): Array<IOption> {
         return options.map(option => ({ value: option.value, label: option.label }));
+    }
+
+    loadIOptionMembersRelationship(): Observable<IOptionResponse> {
+        // console.log(`NgIOptionService Get: ${environment.apiUrl}/api/member/IOptionMemberRelationship`);
+        return this.httpClient.get<IOptionResponse>(`${environment.apiUrl}/api/member/IOptionMemberRelationship`);
     }
 }

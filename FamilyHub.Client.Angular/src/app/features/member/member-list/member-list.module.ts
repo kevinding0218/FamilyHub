@@ -13,7 +13,7 @@ import { SelectModule } from 'ng-select';
 import { NgIOptionService } from './../../../core/services/ng-option.service';
 import { MemberDetailPopupComponent } from './member-detail-popup/member-detail-popup.component';
 import { MemberDetailPopup2Component } from './member-detail-popup2/member-detail-popup2.component';
-
+import { I18nModule } from './../../../shared/i18n/i18n.module';
 
 @NgModule({
   imports: [
@@ -25,7 +25,8 @@ import { MemberDetailPopup2Component } from './member-detail-popup2/member-detai
     HttpModule,
     DataTableModule,
     TextMaskModule,
-    SelectModule
+    SelectModule,
+    I18nModule
   ],
   declarations: [MemberListComponent, MemberDetailPopupComponent, MemberDetailPopup2Component],
   providers: [NgIOptionService]

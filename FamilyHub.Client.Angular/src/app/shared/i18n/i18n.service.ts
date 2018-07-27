@@ -19,15 +19,15 @@ export class I18nService {
 
     constructor(private localApiService: LocalApiService, private ref: ApplicationRef, private ngIOptionService: NgIOptionService) {
         this.state = new Subject();
-        this.getAllLanguages();
-
-        this.initLanguage(familyHubConfig.defaultLocale || 'us');
-        this.fetch(this.currentLanguage.value);
+        this.initLangulageOptions();
     }
 
-    getAllLanguages() {
+    initLangulageOptions() {
         this.ngIOptionService.getLanguages().subscribe(result => {
             this.languages = result;
+
+            this.initLanguage(familyHubConfig.defaultLocale || 'us');
+            this.fetch(this.currentLanguage.value);
         });
     }
 
@@ -52,9 +52,9 @@ export class I18nService {
         }
     }
 
-    setLanguage(language) {
-        this.currentLanguage = language;
-        this.fetch(language.key);
+    setLanguage(selctedlanguage: IOption) {
+        this.currentLanguage = selctedlanguage;
+        this.fetch(this.currentLanguage.value);
     }
 
     subscribe(sub: any, err: any) {

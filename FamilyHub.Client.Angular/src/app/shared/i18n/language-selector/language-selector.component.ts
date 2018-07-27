@@ -23,6 +23,6 @@ export class LanguageSelectorComponent implements OnInit {
     }
 
     onSelected(option: IOption) {
-        this.i18n.setLanguage(this.selectedLanguage);
+        this.i18n.setLanguage(option);
     }
 }

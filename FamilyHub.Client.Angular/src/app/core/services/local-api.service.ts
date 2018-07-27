@@ -13,7 +13,7 @@ export class LocalApiService {
     constructor(private http: HttpClient) { }
 
     public fetchLocalResource(url): Observable<any> {
-        return this.http.get(this.getBaseUrl() + familyHubConfig.API_URL + url)
+        return this.http.get(this.getBaseUrl() + familyHubConfig.CLIENT_API_URL + url)
             .pipe(
                 delay(100),
                 map((data: any) => (data.data || data)),

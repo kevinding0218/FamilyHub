@@ -1,12 +1,13 @@
 <div class="card">
   <div class="card-header">
-    <h5>Member</h5>
+    <h5>{{ 'Member' }}</h5>
     <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('CREATE')">
-      <i class="icofont icofont-plus m-r-5"></i> Add Member
+      <i class="icofont icofont-plus m-r-5"></i> {{ 'Add Member' }}
     </button>
     <button type="button" class="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('UPDATE')">
-      <i class="icofont icofont-plus m-r-5"></i> Edit Member
+      <i class="icofont icofont-plus m-r-5"></i> {{ 'Edit Member' }}
     </button>
+    <app-language-selector></app-language-selector>
   </div>
   <div class="card-body">
     <div class="table-content crm-table">
