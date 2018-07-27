@@ -41,7 +41,7 @@ namespace FamilyHub.API.Controllers.Member
         #endregion
 
         #region Member Contact
-        // GET: api/member/memberContactByCreated/5
+        // GET: api/member/memberContactByCreated/uid
         [HttpGet("memberContactByCreated/{uid}")]
         public async Task<IActionResult> ListMemberContactCreatedAsync(int uid)
         {
@@ -52,7 +52,7 @@ namespace FamilyHub.API.Controllers.Member
             return response.ToHttpResponse();
         }
 
-        // GET: api/member/memberContactByCreated/5/3
+        // GET: api/member/memberContactByRelationship/uid/relationshipID
         [HttpGet("memberContactByRelationship/{uid}/{relationshipID}")]
         public async Task<IActionResult> ListMemberContactByRelationshipAsync(int uid, int relationshipID)
         {
@@ -63,8 +63,9 @@ namespace FamilyHub.API.Controllers.Member
             return response.ToHttpResponse();
         }
 
+        // POST: api/member/createMemberContact
         [HttpPost("createMemberContact")]
-        public async Task<IActionResult> CreateMemberContactAsync([FromBody] vmMemberContactCreateRequest newMemberContactRequest)
+        public async Task<IActionResult> CreateMemberContactAsync([FromBody] vmMemberContactDetailRequest newMemberContactRequest)
         {
             // Get response from business logic
             var response = await _memberService.AddMemberContactAsync(newMemberContactRequest);
@@ -73,8 +74,9 @@ namespace FamilyHub.API.Controllers.Member
             return response.ToHttpResponse();
         }
 
-        [HttpPut("updateMemberContact")]
-        public async Task<IActionResult> UpdateMemberContactAsync(int memberContactId, [FromBody] vmMemberContactUpdateRequest updateMemberContactRequest)
+        // PUT: api/member/updateMemberContact/memberContactId
+        [HttpPut("updateMemberContact/{memberContactId}")]
+        public async Task<IActionResult> UpdateMemberContactAsync(int memberContactId, [FromBody] vmMemberContactDetailRequest updateMemberContactRequest)
         {
             // Get response from business logic
             var response = await _memberService.UpdateMemberContactAsync(memberContactId, updateMemberContactRequest);
@@ -83,7 +85,8 @@ namespace FamilyHub.API.Controllers.Member
             return response.ToHttpResponse();
         }
 
-        [HttpDelete("deleteMemberContact")]
+        // DELETE: api/member/deleteMemberContact/memberContactId
+        [HttpDelete("deleteMemberContact/{memberContactId}")]
         public async Task<IActionResult> DeleteMemberContactAsync(int memberContactId)
         {
             // Get response from business logic

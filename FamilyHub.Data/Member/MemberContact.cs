@@ -17,7 +17,7 @@ namespace FamilyHub.Data.Member
         public string Location { get; set; }
         public string EmailAddress { get; set; }
         public int MemberRelationshipID { get; set; }
-        public int ImageSourceID { get; set; }
+        public int? ImageSourceID { get; set; }
 
         public int? CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

@@ -1,9 +1,10 @@
-import { IOptionResponse } from './response extension/api-response.config';
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { IOption } from 'ng-select';
 import { Observable } from 'rxjs/Observable';
+import { IOptionResponse } from '../../core/services/response extension/api-response.config';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -14,12 +15,18 @@ const httpOptions = {
 
 @Injectable()
 export class NgIOptionService {
-    constructor(private httpClient: HttpClient) { }
-
     public static readonly LANGUAGES: Array<IOption> = [
         { value: 'us', label: 'English (US)' },
         { value: 'cn', label: '中文' }
     ];
+
+    private url: string;
+    private endpoint: string;
+
+    constructor(private httpClient: HttpClient) {
+        this.url = `${environment.REMOTE_API_URL}`;
+        this.endpoint = 'api/iOption';
+    }
 
     getLanguages(): Observable<Array<IOption>> {
         return this.loadOptions(NgIOptionService.LANGUAGES);
@@ -39,7 +46,6 @@ export class NgIOptionService {
     }
 
     loadIOptionMembersRelationship(): Observable<IOptionResponse> {
-        // console.log(`NgIOptionService Get: ${environment.apiUrl}/api/member/IOptionMemberRelationship`);
-        return this.httpClient.get<IOptionResponse>(`${environment.REMOTE_API_URL}/api/member/IOptionMemberRelationship`, httpOptions);
+        return this.httpClient.get<IOptionResponse>(`${this.url}/${this.endpoint}/memberRelationship`, httpOptions);
     }
 }

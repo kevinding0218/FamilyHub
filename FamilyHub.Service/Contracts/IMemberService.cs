@@ -16,11 +16,11 @@ namespace FamilyHub.Service.Contracts
         #endregion
 
         #region Member Contact        
-        Task<IListResponse<vmMemberContactListRequest>> GetMemberContactListByCreatedAsync(int createdBy);
-        Task<IListResponse<vmMemberContactListRequest>> GetMemberContactListByRelationshipAsync(int createdBy, int memberRelationshipID);
+        Task<IListResponse<vmMemberContactListResponse>> GetMemberContactListByCreatedAsync(int createdBy);
+        Task<IListResponse<vmMemberContactListResponse>> GetMemberContactListByRelationshipAsync(int createdBy, int memberRelationshipID);
 
-        Task<IResponse> AddMemberContactAsync(vmMemberContactCreateRequest newMemberContactRequest);
-        Task<IResponse> UpdateMemberContactAsync(int memberContactId, vmMemberContactUpdateRequest updateMemberContactRequest);
+        Task<ISingleResponse<vmMemberContactDetailResponse>> AddMemberContactAsync(vmMemberContactDetailRequest newMemberContactRequest);
+        Task<ISingleResponse<vmMemberContactDetailResponse>> UpdateMemberContactAsync(int memberContactId, vmMemberContactDetailRequest updateMemberContactRequest);
         Task<IResponse> DeleteMemberContactAsync(int memberContactId);
         #endregion
     }

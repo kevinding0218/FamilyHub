@@ -61,6 +61,7 @@ namespace FamilyHub.API
             services.AddScoped<IMemberService, MemberService>();
             services.AddScoped<ITransactionsService, TransactionsService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IIOptionService, IOptionService>();
             #endregion
 
             #region Inject Auth Service Layer

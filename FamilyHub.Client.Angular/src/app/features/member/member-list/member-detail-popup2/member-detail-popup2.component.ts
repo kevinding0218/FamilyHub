@@ -6,7 +6,9 @@ import { IOption } from 'ng-select';
 import { conformToMask } from 'angular2-text-mask';
 import { SharedConfig } from '../../../../shared/utils/shared.config';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { MemberDetailRequest } from '../../../../core/models/member/member.model';
+import { MemberService, MemberDetailRequest, MemberDetailResponse } from '../../../../core/services/member.service';
+import { ResponseMessage } from '../../../../core/services/response extension/api-response.config';
+import { ActionState } from '../../../../shared/services/action.config';
 
 @Component({
   selector: 'app-member-detail-popup2',
@@ -18,17 +20,19 @@ import { MemberDetailRequest } from '../../../../core/models/member/member.model
 export class MemberDetailPopup2Component implements OnInit, OnChanges {
   public memberDetailForm: FormGroup;
   @Input() currentDetailInfo: MemberDetailRequest;
+  @Input() currentDetailIndex: number;
   @Input() viewMode: string;
   @Input() relationshipOptions: Array<IOption> = [];
 
   constructor(
     public sharedConfig: SharedConfig,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private memberService: MemberService
   ) { }
 
   ngOnInit() {
     this.initFormControl();
-   }
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['currentDetailInfo']) {
@@ -84,13 +88,34 @@ export class MemberDetailPopup2Component implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    console.log('this.memberDetailForm:', this.memberDetailForm);
+    console.log('this.memberDetailForm:', <MemberDetailRequest>this.memberDetailForm.value);
     console.log('this.currentDetailInfo:', this.currentDetailInfo);
-
-    this.memberDetailForm.reset();
-
-    // this.sharedService.closeModalAnimation('memberDetailPopupReactiveForm');
-    // this.sharedService.openSuccessSwal('Hooray', 'Saved Successfully!');
+    if (this.viewMode === ActionState.CREATE) {
+      this.memberService.createMemberDetail(<MemberDetailRequest>this.memberDetailForm.value)
+        .subscribe(singleResponse => {
+          console.log(singleResponse);
+          if (singleResponse.message === ResponseMessage.Success) {
+            this.memberService.afterCreateMemberDetail(<MemberDetailResponse>singleResponse.model);
+          } else if (singleResponse.message === ResponseMessage.Error) {
+            this.sharedService.openErrorSwal('Something wrong',
+              singleResponse.errorMessage);
+          }
+        });
+    } else if (this.viewMode === ActionState.UPDATE) {
+      this.memberService.updateMemberDetail(+this.memberDetailForm.get('memberContactID').value,
+        <MemberDetailRequest>this.memberDetailForm.value)
+        .subscribe(singleResponse => {
+          console.log(singleResponse);
+          if (singleResponse.message === ResponseMessage.Success) {
+            this.memberService.afterUpdateMemberDetail(<MemberDetailResponse>singleResponse.model, this.currentDetailIndex);
+          } else if (singleResponse.message === ResponseMessage.Error) {
+            this.sharedService.openErrorSwal('Something wrong',
+              singleResponse.errorMessage);
+          }
+        });
+    }
+    // this.memberDetailForm.reset();
+    this.sharedService.closeModalAnimation('memberDetailPopupReactiveForm');
   }
 
   closeModal() {

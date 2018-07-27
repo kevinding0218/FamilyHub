@@ -25,7 +25,7 @@
               <i class="icofont icofont-ui-user"></i>
             </div>
             <div class="form-group form-primary">
-              <input type="text" name="lastName" formControlName="lastName" class="form-control" />
+              <input type="text" name="lastName" [ngClass]="{'fill': memberDetailForm.value['lastName'] !== ''}" formControlName="lastName" class="form-control" />
               <span class="form-bar"></span>
               <label class="float-label">Last Name</label>
               <div class="text-left text-danger f-12 f-s-italic" *ngIf="!memberDetailForm.get('lastName').valid && memberDetailForm.get('lastName').touched">Please Enter First Name</div>          
@@ -40,8 +40,8 @@
               <i class="icofont icofont-ui-touch-phone"></i>
             </div>
             <div class="form-group form-primary">
-              <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="mobilePhone" formControlName="mobilePhone"
-                class="form-control" placeholder="(000) 000-0000" />
+              <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="mobilePhone" [ngClass]="{'fill': memberDetailForm.value['mobilePhone'] !== ''}" formControlName="mobilePhone"
+                class="form-control" />
               <span class="form-bar"></span>
               <label class="float-label">Mobile Phone</label>
             </div>
@@ -55,8 +55,8 @@
               <i class="icofont icofont-ui-dial-phone"></i>
             </div>
             <div class="form-group form-primary">
-              <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="homePhone" formControlName="homePhone"
-                class="form-control" placeholder="(000) 000-0000" />
+              <input [textMask]="{mask: sharedConfig.getMaskConfig().maskUsMobile}" type="text" name="homePhone" [ngClass]="{'fill': memberDetailForm.value['homePhone'] !== ''}" formControlName="homePhone"
+                class="form-control" />
               <span class="form-bar"></span>
               <label class="float-label">Home Phone</label>
             </div>
@@ -70,7 +70,7 @@
               <i class="icofont icofont-location-pin"></i>
             </div>
             <div class="form-group form-primary">
-              <input type="text" name="location" formControlName="location" class="form-control" />
+              <input type="text" name="location" [ngClass]="{'fill': memberDetailForm.value['location'] !== ''}" formControlName="location" class="form-control" />
               <span class="form-bar"></span>
               <label class="float-label">Location</label>
             </div>
@@ -84,7 +84,7 @@
               <i class="icofont icofont-email"></i>
             </div>
             <div class="form-group form-primary">
-              <input type="text" name="email" formControlName="emailAddress" class="form-control" />
+              <input type="text" name="email" [ngClass]="{'fill': memberDetailForm.value['emailAddress'] !== ''}" formControlName="emailAddress" class="form-control" />
               <span class="form-bar"></span>
               <label class="float-label">Email Address</label>
             </div>

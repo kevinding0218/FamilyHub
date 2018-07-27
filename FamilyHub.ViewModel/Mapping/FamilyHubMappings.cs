@@ -37,21 +37,7 @@ namespace FamilyHub.ViewModel.Mapping
             #endregion
 
             #region Member
-            this.CreateMap<vmMemberContactCreateRequest, MemberContact>()
-                .ForMember(target => target.MemberContactID, source => source.Ignore())
-                .ForMember(target => target.MiddleInitial, source => source.Ignore())
-                .ForMember(target => target.ImageSourceID, source => source.Ignore())
-                .ForMember(target => target.MemberRelationshipFK, source => source.Ignore())
-                .ForMember(target => target.MemberImageSourceFK, source => source.Ignore())
-                .ForMember(target => target.PaymentPayorFK, source => source.Ignore())
-                .ForMember(target => target.CreatedBy, source => source.Ignore())
-                .ForMember(target => target.CreatedOn, source => source.Ignore())
-                .ForMember(target => target.LastUpdatedBy, source => source.Ignore())
-                .ForMember(target => target.LastUpdatedOn, source => source.Ignore())
-                .ForMember(target => target.MemberRelationshipID, source => source.MapFrom(s => Convert.ToInt32(s.MemberRelationshipID)))
-                .ForMember(target => target.Timestamp, source => source.Ignore());
-
-            this.CreateMap<vmMemberContactUpdateRequest, MemberContact>()
+            this.CreateMap<vmMemberContactDetailRequest, MemberContact>()
                 .ForMember(target => target.MiddleInitial, source => source.Ignore())
                 .ForMember(target => target.ImageSourceID, source => source.Ignore())
                 .ForMember(target => target.MemberRelationshipFK, source => source.Ignore())
@@ -158,7 +144,13 @@ namespace FamilyHub.ViewModel.Mapping
                 .ForMember(target => target.Value, source => source.MapFrom(s => s.MemberRelationshipID.ToString()))
                 .ForMember(target => target.Label, source => source.MapFrom(s => s.MemberRelationshipName));
 
-            this.CreateMap<MemberContact, vmMemberContactListRequest>()
+            this.CreateMap<MemberContact, vmMemberContactListResponse>()
+                .ForMember(target => target.FullName, source => source.MapFrom(s => s.FullName))
+                .ForMember(target => target.ContactPhone, source => source.MapFrom(s => s.MobilePhone ?? s.HomePhone ?? string.Empty))
+                .ForMember(target => target.MemberRelationshipName, source => source.MapFrom(s => s.MemberRelationshipFK.MemberRelationshipName))
+                .ForMember(target => target.ImageSource, source => source.MapFrom(s => s.MemberImageSourceFK.Source));
+
+            this.CreateMap<MemberContact, vmMemberContactDetailResponse>()
                 .ForMember(target => target.FullName, source => source.MapFrom(s => s.FullName))
                 .ForMember(target => target.ContactPhone, source => source.MapFrom(s => s.MobilePhone ?? s.HomePhone ?? string.Empty))
                 .ForMember(target => target.MemberRelationshipName, source => source.MapFrom(s => s.MemberRelationshipFK.MemberRelationshipName))

@@ -23,7 +23,13 @@ namespace FamilyHub.Repository.Repository.Member
         }
 
         public async Task<MemberContact> GetSingleMemberContactByIDAsync(int memberContactID)
-            => await GetSingleOrDefaultAsync(predicate: pm => pm.MemberContactID == memberContactID);
+        {
+            return await GetSingleOrDefaultAsync(
+                     predicate: (pm => pm.MemberContactID == memberContactID),
+                     include: obj => obj.Include(entity => entity.MemberRelationshipFK)
+                                     .Include(entity => entity.MemberImageSourceFK)
+                 );
+        }
 
         public async Task<MemberContact> GetSingleMemberContactByNameAsync(string contactFullName)
             => await GetSingleOrDefaultAsync(predicate: pm => pm.FullName == contactFullName);

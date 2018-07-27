@@ -1,14 +1,16 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { MemberContactListResponse } from './../../../core/services/member.service';
+import { Subscription } from 'rxjs/Subscription';
+import { Component, Input, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 import { IOption } from 'ng-select';
 
-import { MemberService } from '../../../core/services/member.service';
+import { MemberService, MemberDetailRequest } from '../../../core/services/member.service';
 import { SharedService } from '../../../shared/services/shared.service';
-import { NgIOptionService } from './../../../shared/services/ng-option.service';
+import { NgIOptionService } from '../../../shared/services/ng-option.service';
 
-import { MemberDetailRequest } from '../../../core/models';
-import { ResponseMessage } from '../../../shared/services/response extension/api-response.config';
+import { TableConfig } from '../../../shared/utils/table.config';
 import { ActionState } from '../../../shared/services/action.config';
+import { ResponseMessage } from '../../../core/services/response extension/api-response.config';
 
 
 @Component({
@@ -18,29 +20,23 @@ import { ActionState } from '../../../shared/services/action.config';
     '../../../../assets/icon/icofont/css/icofont.scss'
   ]
 })
-export class MemberListComponent implements OnInit {
 
-  public data: any;
-  public rowsOnPage = 10;
-  public filterQuery = '';
-  public sortBy = '';
-  public sortOrder = 'desc';
+export class MemberListComponent implements OnInit, OnDestroy {
 
-  public userName: string;
-  public userID: string;
-  public userProPic: string;
-  public userEmail: string;
-  public userPosition: string;
-  public userOffice: string;
-  public userAge: number;
-  public userContact: string;
-  public userDate: string;
+
+  public tableConfig: TableConfig<MemberContactListResponse> = {
+    data: [],
+    rowsOnPage: 10,
+    filterQuery: '',
+    sortBy: '',
+    sortOrder: 'desc'
+  };
 
   public relationshipOptions: Array<IOption> = [];
-  public memberDetailVideMode: string;
+  public memberDetailViewMode: string;
   public selectedMemberDetail: MemberDetailRequest = {} as any;
-
-  // @Input('modalDefault') modalDefault: any;
+  public selectedMemberDetailIndex: number;
+  private detailSubscription: Subscription;
 
   constructor(
     private ngIOptionService: NgIOptionService,
@@ -51,24 +47,51 @@ export class MemberListComponent implements OnInit {
   ngOnInit() {
     this.loadNgSelectMemberRelationship();
 
-    this.http.get(`assets/data/crm-contact.json`)
-      .subscribe((data) => {
-        this.data = data.json();
+    this.memberService.listMemberContact(0)
+      .subscribe((listResponse) => {
+        console.log('listResponse:', listResponse);
+        this.tableConfig.data = listResponse.model as Array<MemberContactListResponse>;
       });
+
+    this.detailSubscription = this.memberService.memberDetailAction$
+      .subscribe(
+        (message) => {
+          switch (message.action) {
+            case ActionState.CREATE:
+              console.log('After Create:', message.dataModel);
+              console.log('old this.tableConfig.data:', this.tableConfig.data);
+              this.tableConfig.data.push(<MemberContactListResponse>message.dataModel);
+              console.log('new this.tableConfig.data:', this.tableConfig.data);
+              setTimeout(() => {
+                this.sharedService.openSuccessSwal('Hooray',
+                  'New contact ' + message.dataModel.fullName + ' has been created successfully!');
+              }, 800);
+              break;
+            case ActionState.UPDATE:
+              console.log('After Update:', message.dataModel);
+              this.tableConfig.data[message.dataIndex] = <MemberContactListResponse>message.dataModel;
+              setTimeout(() => {
+                this.sharedService.openSuccessSwal('Hooray',
+                  'Contact ' + message.dataModel.fullName + ' has been updated successfully!');
+              }, 800);
+              break;
+          }
+        }
+      );
   }
 
   loadNgSelectMemberRelationship() {
     this.ngIOptionService.loadIOptionMembersRelationship()
-    .subscribe((response) => {
-      if (response.message === ResponseMessage.Success) {
-        this.relationshipOptions = response.model;
-      }
-    });
+      .subscribe((response) => {
+        if (response.message === ResponseMessage.Success) {
+          this.relationshipOptions = response.model;
+        }
+      });
   }
 
   openMemberDetailModal(action: string) {
     if (action === ActionState.CREATE) {
-      const createMemberDetail: MemberDetailRequest = {
+      this.selectedMemberDetail = {
         memberContactID: 0,
         firstName: '',
         lastName: '',
@@ -78,36 +101,39 @@ export class MemberListComponent implements OnInit {
         emailAddress: '',
         memberRelationshipID: '1'
       };
-
-      this.selectedMemberDetail = createMemberDetail;
-    } else if (action === ActionState.UPDATE) {
-      const updateMemberDetail: MemberDetailRequest = {
-        memberContactID: 0,
-        firstName: 'Ran',
-        lastName: 'Ding',
-        mobilePhone: '1234567890',
-        homePhone: '',
-        location: 'Atlanta',
-        emailAddress: '123@123.com',
-        memberRelationshipID: '1'
-      };
-
-      this.selectedMemberDetail = updateMemberDetail;
     }
-    this.memberDetailVideMode = action;
+
+    this.memberDetailViewMode = action;
     // this.sharedService.openModalAnimation('memberDetailPopupTemplateForm');
     this.sharedService.openModalAnimation('memberDetailPopupReactiveForm');
   }
 
-  openMyModalData(event) {
-    this.userName = this.data[event]['name'];
-    this.userID = this.data[event]['id'];
-    this.userProPic = this.data[event]['image'];
-    this.userEmail = this.data[event]['email'];
-    this.userPosition = this.data[event]['position'];
-    this.userOffice = this.data[event]['office'];
-    this.userAge = this.data[event]['age'];
-    this.userContact = this.data[event]['phone_no'];
-    this.userDate = this.data[event]['date'];
+  gridItemToDetail(selectedItem: MemberContactListResponse): void {
+    this.selectedMemberDetail = {
+      memberContactID: selectedItem.memberContactID,
+      firstName: selectedItem.firstName,
+      lastName: selectedItem.lastName,
+      mobilePhone: selectedItem.mobilePhone,
+      homePhone: selectedItem.homePhone,
+      location: selectedItem.location,
+      emailAddress: selectedItem.emailAddress,
+      memberRelationshipID: selectedItem.memberRelationshipID
+    };
+  }
+
+  viewMemberDetail(selectedItem: MemberContactListResponse, selectedIndex: number) {
+    this.gridItemToDetail(selectedItem);
+
+    this.openMemberDetailModal(ActionState.READ);
+  }
+
+  updateMemberDetail(selectedItem: MemberContactListResponse, selectedIndex: number) {
+    this.gridItemToDetail(selectedItem);
+
+    this.openMemberDetailModal(ActionState.UPDATE);
+  }
+
+  ngOnDestroy() {
+    this.detailSubscription.unsubscribe();
   }
 }

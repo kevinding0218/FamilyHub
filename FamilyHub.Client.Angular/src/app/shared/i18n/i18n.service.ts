@@ -3,7 +3,7 @@ import { Injectable, ApplicationRef } from '@angular/core';
 import { IOption } from 'ng-select';
 import { NgIOptionService } from '../services/ng-option.service';
 import { LocalApiService } from '../services/local-api.service';
-import { environment } from './../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 import { Subject } from 'rxjs';
 

@@ -3,12 +3,11 @@ import { NgForm } from '@angular/forms';
 
 import { IOption } from 'ng-select';
 import { conformToMask } from 'angular2-text-mask';
-import { MemberDetailRequest } from '../../../../core/models/member/member.model';
 
 import { Subscription } from 'rxjs/Subscription';
-import { SharedConfig } from './../../../../shared/utils/shared.config';
+import { SharedConfig } from '../../../../shared/utils/shared.config';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { MemberService } from './../../../../core/services/member.service';
+import { MemberService, MemberDetailRequest } from '../../../../core/services/member.service';
 
 
 @Component({
