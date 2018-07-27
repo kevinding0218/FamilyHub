@@ -1,16 +1,14 @@
-
-
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { IOption } from 'ng-select';
 
-import { NgIOptionService } from '../../../core/services/ng-option.service';
 import { MemberService } from '../../../core/services/member.service';
 import { SharedService } from '../../../shared/services/shared.service';
+import { NgIOptionService } from './../../../shared/services/ng-option.service';
 
-import { ActionState } from '../../../core/config/action.config';
 import { MemberDetailRequest } from '../../../core/models';
-import { ResponseMessage } from '../../../core/config/api-response.config';
+import { ResponseMessage } from '../../../shared/services/response extension/api-response.config';
+import { ActionState } from '../../../shared/services/action.config';
 
 
 @Component({

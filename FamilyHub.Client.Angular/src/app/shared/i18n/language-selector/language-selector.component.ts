@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { IOption } from 'ng-select';
 import { I18nService } from '../i18n.service';
-import { NgIOptionService } from '../../../core/services/ng-option.service';
+import { NgIOptionService } from '../../services/ng-option.service';
 
 @Component({
     selector: 'app-language-selector',

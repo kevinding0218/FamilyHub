@@ -1,10 +1,10 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { familyHubConfig } from '../config/familyhub.config';
 import { Observable } from 'rxjs';
 import { delay, map, catchError } from 'rxjs/operators';
+import { environment } from './../../../environments/environment';
+
 
 
 @Injectable()
@@ -13,7 +13,7 @@ export class LocalApiService {
     constructor(private http: HttpClient) { }
 
     public fetchLocalResource(url): Observable<any> {
-        return this.http.get(this.getBaseUrl() + familyHubConfig.CLIENT_API_URL + url)
+        return this.http.get(this.getBaseUrl() + `${environment.LOCAL_RESOURCE_URL}` + url)
             .pipe(
                 delay(100),
                 map((data: any) => (data.data || data)),

@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:58395' // 'https://localhost:44363'
+  defaultLocale: 'us',
+  LOCAL_RESOURCE_URL: 'assets/api',
+  REMOTE_API_URL: 'http://localhost:58395' // 'https://localhost:44363'
 };
 
 /*

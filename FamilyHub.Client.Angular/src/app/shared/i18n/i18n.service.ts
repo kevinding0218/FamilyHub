@@ -1,8 +1,9 @@
-import { IOption } from 'ng-select';
-import { NgIOptionService } from '../../core/services/ng-option.service';
-import { LocalApiService } from '../../core/services/local-api.service';
-import { familyHubConfig } from '../../core/config/familyhub.config';
 import { Injectable, ApplicationRef } from '@angular/core';
+
+import { IOption } from 'ng-select';
+import { NgIOptionService } from '../services/ng-option.service';
+import { LocalApiService } from '../services/local-api.service';
+import { environment } from './../../../environments/environment';
 
 import { Subject } from 'rxjs';
 
@@ -26,7 +27,7 @@ export class I18nService {
         this.ngIOptionService.getLanguages().subscribe(result => {
             this.languages = result;
 
-            this.initLanguage(familyHubConfig.defaultLocale || 'us');
+            this.initLanguage(`${environment.defaultLocale}` || 'us');
             this.fetch(this.currentLanguage.value);
         });
     }

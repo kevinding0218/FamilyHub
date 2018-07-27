@@ -1,7 +1,6 @@
-import { SharedService } from './services/shared.service';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccordionDirectiveModule } from './accordion/accordion.module';
@@ -16,6 +15,11 @@ import { SpinnerModule } from './spinner/spinner.module';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { PipesModule } from './pipes/pipes.module';
 import { I18nModule } from './i18n/i18n.module';
+
+import { TokenInterceptor } from './services/http-interceptor/token.interceptor';
+import { LoggingInterceptor } from './services/http-interceptor/logging.interceptor';
+import { sharedServices } from './services';
+import { throwIfAlreadyLoaded } from '../core/guards/module-import.guard';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -60,8 +64,20 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    SharedService
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoggingInterceptor,
+      multi: true
+    },
+    ...sharedServices
   ],
-  schemas: [ NO_ERRORS_SCHEMA ]
+  schemas: [NO_ERRORS_SCHEMA]
 })
-export class SharedModule { }
+export class SharedModule {
+
+}

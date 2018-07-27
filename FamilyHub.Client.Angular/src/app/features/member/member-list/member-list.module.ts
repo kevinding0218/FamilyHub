@@ -10,10 +10,11 @@ import { DataTableModule } from 'angular2-datatable';
 import { TextMaskModule } from 'angular2-text-mask';
 import { SelectModule } from 'ng-select';
 
-import { NgIOptionService } from './../../../core/services/ng-option.service';
+
 import { MemberDetailPopupComponent } from './member-detail-popup/member-detail-popup.component';
 import { MemberDetailPopup2Component } from './member-detail-popup2/member-detail-popup2.component';
 import { I18nModule } from './../../../shared/i18n/i18n.module';
+import { NgIOptionService } from './../../../shared/services/ng-option.service';
 
 @NgModule({
   imports: [

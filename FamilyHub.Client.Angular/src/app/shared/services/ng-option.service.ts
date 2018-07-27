@@ -1,8 +1,8 @@
+import { IOptionResponse } from './response extension/api-response.config';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { IOption } from 'ng-select';
-import { IOptionResponse } from '../config/api-response.config';
 import { Observable } from 'rxjs/Observable';
 
 const httpOptions = {
@@ -40,6 +40,6 @@ export class NgIOptionService {
 
     loadIOptionMembersRelationship(): Observable<IOptionResponse> {
         // console.log(`NgIOptionService Get: ${environment.apiUrl}/api/member/IOptionMemberRelationship`);
-        return this.httpClient.get<IOptionResponse>(`${environment.apiUrl}/api/member/IOptionMemberRelationship`);
+        return this.httpClient.get<IOptionResponse>(`${environment.REMOTE_API_URL}/api/member/IOptionMemberRelationship`, httpOptions);
     }
 }

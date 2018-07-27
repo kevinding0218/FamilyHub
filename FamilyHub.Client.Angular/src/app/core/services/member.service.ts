@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 // import { MemberContactCreateRequest } from './../models/member/member.model';
-import { ActionState } from '../config/action.config';
+
 import { MemberDetailRequest } from '../models';
+import { ActionState } from '../../shared/services/action.config';
 
 @Injectable()
 export class MemberService {
