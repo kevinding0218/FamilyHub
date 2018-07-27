@@ -13,7 +13,7 @@
               <input type="text" name="firstName" [ngClass]="{'fill': memberDetailForm.value['firstName'] !== ''}" formControlName="firstName" class="form-control" />
               <span class="form-bar"></span>
               <label class="float-label">First Name</label>  
-              <!-- <div class="text-left text-danger f-12 f-s-italic" *ngIf="f.firstName.errors && f.firstName.errors.required">Please Enter First Name</div>             -->
+              <div class="text-left text-danger f-12 f-s-italic" *ngIf="!memberDetailForm.get('firstName').valid && memberDetailForm.get('firstName').touched">Please Enter First Name</div>            
             </div>
           </div>
         </div>
@@ -28,6 +28,7 @@
               <input type="text" name="lastName" formControlName="lastName" class="form-control" />
               <span class="form-bar"></span>
               <label class="float-label">Last Name</label>
+              <div class="text-left text-danger f-12 f-s-italic" *ngIf="!memberDetailForm.get('lastName').valid && memberDetailForm.get('lastName').touched">Please Enter First Name</div>          
             </div>
           </div>
         </div>
@@ -96,16 +97,17 @@
             <div class="material-addone" style="align-items: initial;">
               <i class="icofont icofont-users"></i>
             </div>
-            <div class="form-group form-primary">
+            <div class="form-group form-primary"> 
               <ng-select name="memberRelationshipID" formControlName="memberRelationshipID" placeholder="Choose a relationship" [options]="relationshipOptions"
                 required>
               </ng-select>
+              <div class="text-left text-danger f-12 f-s-italic" *ngIf="!memberDetailForm.get('memberRelationshipID').valid">Please Select A Relationship.</div>
             </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <button type="submit" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block">Save</button>
+        <button type="submit" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block" [disabled]="memberDetailForm.invalid">Save</button>
         <button type="button" (click)="closeModal()" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
       </div>
     </form>

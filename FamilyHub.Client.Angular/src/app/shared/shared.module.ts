@@ -15,6 +15,7 @@ import { ModalAnimationComponent } from './modal-animation/modal-animation.compo
 import { SpinnerModule } from './spinner/spinner.module';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { PipesModule } from './pipes/pipes.module';
+import { I18nModule } from './i18n/i18n.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -36,7 +37,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FamilyHubLayoutModule,
     PerfectScrollbarModule,
     ClickOutsideModule,
-    SpinnerModule
+    SpinnerModule,
+    I18nModule
   ],
   exports: [
     NgbModule,

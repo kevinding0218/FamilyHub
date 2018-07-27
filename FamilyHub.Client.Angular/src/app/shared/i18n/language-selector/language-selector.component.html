@@ -1,0 +1,6 @@
+<ng-select [options]="languages" [(ngModel)]="selectedLanguage" (selected)="onSelected($event)">
+    <ng-template #optionTemplate let-option="option">
+        <div class="famfamfam-flags {{option?.value.toLowerCase()}}"></div>
+        {{option?.label}}
+    </ng-template>
+</ng-select>

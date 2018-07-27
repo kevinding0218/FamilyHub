@@ -4,7 +4,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { IOption } from 'ng-select';
 
-import { NgIOptionService } from './../../../core/services/ng-option.service';
+import { NgIOptionService } from '../../../core/services/ng-option.service';
 import { MemberService } from '../../../core/services/member.service';
 import { SharedService } from '../../../shared/services/shared.service';
 

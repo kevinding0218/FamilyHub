@@ -1,10 +1,11 @@
 export const enum ActionState {
-    PRELOAD = 'PRELOAD',
-    LOAD = 'LOAD',
+    PRE_LOAD = 'PRE_LOAD',
+    AFTER_LOAD = 'AFTER_LOAD',
     CREATE = 'CREATE',
     READ = 'READ',
     UPDATE = 'UPDATE',
     DELETE = 'DELETE',
     REFRESH = 'REFRESH',
-    QUEUE = 'QUEUE'
+    ENQUEUE = 'ENQUEUE',
+    DEQUEUE = 'DEQUEUE'
 }
