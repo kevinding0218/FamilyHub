@@ -70,7 +70,7 @@ namespace FamilyHub.Repository.Repository.Member
 
         public async Task<int> DeleteMemberContactAsync(MemberContact entity)
         {
-            Remove(entity);
+            // Remove(entity);
 
             return await CommitChangesAsync();
         }

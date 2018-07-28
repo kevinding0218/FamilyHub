@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 import * as moment from 'moment';
 import { environment } from './../../../environments/environment';
 import { ActionState } from '../../shared/services/action.config';
-import { ISingleResponse, IListResponse, ResponseMessage } from './response extension/api-response.config';
+import { IResponse, ISingleResponse, IListResponse, ResponseMessage } from './response extension/api-response.config';
 
 export interface MemberDetailRequest {
     memberContactID: number;
@@ -86,6 +86,15 @@ export class MemberService {
     afterUpdateMemberDetail(memberDetail: MemberDetailResponse, memberDetailIndex: number) {
         this.formatModel(memberDetail);
         this.memberDetailAction$.next({ action: ActionState.UPDATE, dataModel: memberDetail, dataIndex: memberDetailIndex });
+    }
+
+    deleteMemberDetail(memberContactId: number) {
+        console.log('deleteMemberDetail:', memberContactId);
+        return this.httpClient.delete<IResponse>(`${this.url}/${this.endpoint}/deleteMemberContact/${memberContactId}`, httpOptions);
+    }
+
+    afterDeleteMemberDetail(memberDetail: MemberDetailResponse, memberDetailIndex: number) {
+        this.memberDetailAction$.next({ action: ActionState.DELETE, dataModel: memberDetail, dataIndex: memberDetailIndex });
     }
 
     formatModel(memberContact: MemberContactListResponse | MemberDetailResponse): MemberContactListResponse | MemberDetailResponse {

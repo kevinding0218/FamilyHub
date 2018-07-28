@@ -1,51 +1,56 @@
 <div class="card">
   <div class="card-header">
-    <h5>{{ 'Member' }}</h5>
-    <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('CREATE')">
-      <i class="icofont icofont-plus m-r-5"></i> {{ 'Add Member' }}
-    </button>
-    <button type="button" class="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMemberDetailModal('UPDATE')">
-      <i class="icofont icofont-plus m-r-5"></i> {{ 'Edit Member' }}
-    </button>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="f-left">
+          <label>Search:
+            <input type="search" [(ngModel)]="tableConfig.filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+          </label>
+          <!-- <div class="float-right">
+            <button type="button" class="btn btn-outline-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="addMemberDetail()">
+              <i class="icofont icofont-plus m-r-5"></i> {{ 'Add Member' }}
+            </button>
+          </div> -->
+          <div class="right-icon-control">
+            <div class="form-icon ">
+              <button class="btn btn-outline-primary btn-icon ripple light" (click)="addMemberDetail()">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="card-body">
     <div class="table-content crm-table">
       <div class="project-table">
         <div id="crm-contact" class="dt-responsive">
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-              <div style="text-align: right;">
-                <label>Search:
-                  <input type="search" [(ngModel)]="tableConfig.filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
-                </label>
-              </div>
-            </div>
-          </div>          
           <div class="table-responsive">
             <table class="table table-striped table-bordered full-data-table" [mfData]="tableConfig.data | dataFilter : tableConfig.filterQuery:'fullName'"
               #mf="mfDataTable" [mfRowsOnPage]="tableConfig.rowsOnPage" [(mfSortBy)]="tableConfig.sortBy" [(mfSortOrder)]="tableConfig.sortOrder">
               <thead>
                 <tr>
                   <th>
-                    <mfDefaultSorter by="image">Profile</mfDefaultSorter>
+                    <mfDefaultSorter by="imageSource">Profile</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="full-name">Full Name</mfDefaultSorter>
+                    <mfDefaultSorter by="fullName">Full Name</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="contact-phone">Contact Phone</mfDefaultSorter>
+                    <mfDefaultSorter by="contactPhone">Contact Phone</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                    <mfDefaultSorter by="emailAddress">Email</mfDefaultSorter>
                   </th>
                   <th>
                     <mfDefaultSorter by="location">Location</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="relationship">Relationship</mfDefaultSorter>
+                    <mfDefaultSorter by="memberRelationshipName">Relationship</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="created-on">Created Date</mfDefaultSorter>
+                    <mfDefaultSorter by="createdOn">Created Date</mfDefaultSorter>
                   </th>
                   <th>
                     <mfDefaultSorter>Action</mfDefaultSorter>
@@ -72,7 +77,7 @@
                     <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="updateMemberDetail(item, i);">
                       <i class="fa fa-edit"></i>
                     </a>
-                    <a href="javascript:;" class="crm-action-delete text-danger">
+                    <a href="javascript:;" class="crm-action-delete text-danger" (click)="deleteMemberDetail(item, i);">
                       <i class="fa fa-trash"></i>
                     </a>
                   </td>
@@ -98,4 +103,5 @@
 [viewMode]="memberDetailVideMode"
 [relationshipOptions]="relationshipOptions"
 ></app-member-detail-popup> -->
-<app-member-detail-popup2 [currentDetailInfo]="selectedMemberDetail" [currentDetailIndex]="selectedMemberDetailIndex" [viewMode]="memberDetailViewMode" [relationshipOptions]="relationshipOptions"></app-member-detail-popup2>
+<app-member-detail-popup2 [currentDetailInfo]="selectedMemberDetail" [currentDetailIndex]="selectedMemberDetailIndex" [viewMode]="memberDetailViewMode"
+  [relationshipOptions]="relationshipOptions"></app-member-detail-popup2>

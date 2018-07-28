@@ -1154,10 +1154,14 @@ $background-checkbox-bg-color: $primary-color, $warning-color, $default-color, $
         // font-size: 14px;
         top: -14px;
         font-size: 11px;
+        font-weight: bold;
+        color: #448aff;
     }
     .form-control.fill ~ .float-label, .form-material .form-control.fill ~ .float-label {
         top: -14px;
         font-size: 11px;
+        font-weight: bold;
+        color: #448aff;
     }
     $matrial-state: primary, warning, default, danger, success, inverse, info;
     $matrial-color: $primary-color, $warning-color, $default-color, $danger-color, $success-color, $inverse-color, $info-color;

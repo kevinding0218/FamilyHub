@@ -123,7 +123,7 @@ export class SharedService {
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger mr-sm',
                 allowOutsideClick: false,
-                timer: 3000
+                timer: 30000
             }).then((result) => {
                 if (result.value) {
                     confirmCallback();

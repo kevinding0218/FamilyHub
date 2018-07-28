@@ -75,12 +75,21 @@ export class MemberListComponent implements OnInit, OnDestroy {
                   'Contact ' + message.dataModel.fullName + ' has been updated successfully!');
               }, 800);
               break;
+            case ActionState.DELETE:
+              console.log('After Delete:', message.dataIndex);
+              this.tableConfig.data.splice(message.dataIndex, 1);
+
+              setTimeout(() => {
+                this.sharedService.openSuccessSwal('Hooray',
+                  'Contact ' + message.dataModel.fullName + ' has been removed!');
+              }, 800);
+              break;
           }
         }
       );
   }
 
-  loadNgSelectMemberRelationship() {
+  loadNgSelectMemberRelationship(): void {
     this.ngIOptionService.loadIOptionMembersRelationship()
       .subscribe((response) => {
         if (response.message === ResponseMessage.Success) {
@@ -89,20 +98,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
       });
   }
 
-  openMemberDetailModal(action: string) {
-    if (action === ActionState.CREATE) {
-      this.selectedMemberDetail = {
-        memberContactID: 0,
-        firstName: '',
-        lastName: '',
-        mobilePhone: '',
-        homePhone: '',
-        location: '',
-        emailAddress: '',
-        memberRelationshipID: '1'
-      };
-    }
-
+  openMemberDetailModal(action: string): void {
     this.memberDetailViewMode = action;
     // this.sharedService.openModalAnimation('memberDetailPopupTemplateForm');
     this.sharedService.openModalAnimation('memberDetailPopupReactiveForm');
@@ -121,16 +117,45 @@ export class MemberListComponent implements OnInit, OnDestroy {
     };
   }
 
-  viewMemberDetail(selectedItem: MemberContactListResponse, selectedIndex: number) {
+  addMemberDetail(): void {
+    this.selectedMemberDetail = {
+      memberContactID: 0,
+      firstName: '',
+      lastName: '',
+      mobilePhone: '',
+      homePhone: '',
+      location: '',
+      emailAddress: '',
+      memberRelationshipID: '1'
+    };
+
+    this.openMemberDetailModal(ActionState.CREATE);
+  }
+
+  viewMemberDetail(selectedItem: MemberContactListResponse, selectedIndex: number): void {
     this.gridItemToDetail(selectedItem);
 
     this.openMemberDetailModal(ActionState.READ);
   }
 
-  updateMemberDetail(selectedItem: MemberContactListResponse, selectedIndex: number) {
+  updateMemberDetail(selectedItem: MemberContactListResponse, selectedIndex: number): void {
     this.gridItemToDetail(selectedItem);
 
     this.openMemberDetailModal(ActionState.UPDATE);
+  }
+
+  deleteMemberDetail(selectedItem: MemberContactListResponse, selectedIndex: number): void {
+    this.sharedService.openConfirmsSwal('Are you sure to remove ' + selectedItem.fullName + ' ?', 'You wont be able to revert',
+      'Yes, remove it!', 'Let me reconsider..', () => this.continueDelete(selectedItem, selectedIndex), () => { }
+    );
+  }
+
+  continueDelete(selectedItem: MemberContactListResponse, selectedIndex: number) {
+    this.memberService.deleteMemberDetail(selectedItem.memberContactID).subscribe(result => {
+      if (result.message === ResponseMessage.Success) {
+        this.memberService.afterDeleteMemberDetail(selectedItem, selectedIndex);
+      }
+    });
   }
 
   ngOnDestroy() {
