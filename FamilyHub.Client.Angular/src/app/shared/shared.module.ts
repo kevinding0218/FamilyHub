@@ -19,7 +19,6 @@ import { I18nModule } from './i18n/i18n.module';
 import { TokenInterceptor } from './services/http-interceptor/token.interceptor';
 import { LoggingInterceptor } from './services/http-interceptor/logging.interceptor';
 import { sharedServices } from './services';
-import { throwIfAlreadyLoaded } from '../core/guards/module-import.guard';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -42,7 +41,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     ClickOutsideModule,
     SpinnerModule,
-    I18nModule
+    I18nModule,
   ],
   exports: [
     NgbModule,
@@ -57,7 +56,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalAnimationComponent,
     SpinnerModule,
     ClickOutsideModule,
-    PipesModule
+    PipesModule,
   ],
   providers: [
     {

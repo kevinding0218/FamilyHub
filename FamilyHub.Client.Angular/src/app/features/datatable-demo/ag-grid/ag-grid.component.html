@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">
+    <h5><a (click)="RedirectDocumentation()">Ag Grid</a></h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <ag-grid-angular #agGrid style="width: 100%;" id="myGrid" class="ag-theme-material" [rowData]="rowData" [rowSelection]="rowSelection"
+          [columnDefs]="columnDefs" [enableSorting]="true" [enableFilter]="true" [enableColResize]="true" [enableRangeSelection]="true"
+          [domLayout]="'forPrint '" [pagination]="true" [paginationPageSize]="10" 
+          [suppressAutoSize]="true" [isFullWidthCell]="isFullWidthCell" [gridAutoHeight]="true"
+          (gridReady)="onGridReady($event)"></ag-grid-angular>
+      </div>
+    </div>
+  </div>
+</div>

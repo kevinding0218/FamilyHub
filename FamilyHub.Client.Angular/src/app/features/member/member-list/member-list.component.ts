@@ -1,7 +1,6 @@
-import { MemberContactListResponse } from './../../../core/services/member.service';
+import { MemberContactListResponse } from '../../../core/services/member.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Component, Input, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { Http } from '@angular/http';
 import { IOption } from 'ng-select';
 
 import { MemberService, MemberDetailRequest } from '../../../core/services/member.service';
@@ -12,7 +11,6 @@ import { TableConfig } from '../../../shared/utils/table.config';
 import { ActionState } from '../../../shared/services/action.config';
 import { ResponseMessage } from '../../../core/services/response extension/api-response.config';
 
-
 @Component({
   selector: 'app-member-list',
   templateUrl: './member-list.component.html',
@@ -22,8 +20,6 @@ import { ResponseMessage } from '../../../core/services/response extension/api-r
 })
 
 export class MemberListComponent implements OnInit, OnDestroy {
-
-
   public tableConfig: TableConfig<MemberContactListResponse> = {
     data: [],
     rowsOnPage: 10,
@@ -41,8 +37,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
   constructor(
     private ngIOptionService: NgIOptionService,
     private sharedService: SharedService,
-    private memberService: MemberService,
-    public http: Http) { }
+    private memberService: MemberService) { }
 
   ngOnInit() {
     this.loadNgSelectMemberRelationship();

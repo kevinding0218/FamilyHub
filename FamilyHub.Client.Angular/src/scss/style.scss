@@ -51,3 +51,13 @@ File: style.css
 
 //angular custom
 @import "partials/custom";
+
+@import "~ag-grid/dist/styles/ag-grid.css";
+@import "~ag-grid/dist/styles/ag-theme-material.css";
+
+$table_row_hover: rgba(68, 138, 255, 0.1);
+
+.ag-row-hover {
+	background-color: $table_row_hover !important;
+}
+

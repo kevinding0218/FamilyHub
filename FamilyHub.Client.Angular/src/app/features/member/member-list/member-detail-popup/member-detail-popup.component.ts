@@ -14,8 +14,7 @@ import { MemberService, MemberDetailRequest } from '../../../../core/services/me
   selector: 'app-member-detail-popup',
   templateUrl: './member-detail-popup.component.html',
   styleUrls: [
-    '../../../../../assets/icon/icofont/css/icofont.scss',
-    './test.scss'
+    '../../../../../assets/icon/icofont/css/icofont.scss'
   ]
 })
 export class MemberDetailPopupComponent implements OnChanges, OnInit {

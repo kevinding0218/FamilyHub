@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 export interface BadgeItem {
   type: string;
@@ -47,6 +47,31 @@ const MENUITEMS = [
         name: 'Member',
         type: 'link',
         icon: 'feather icon-users'
+      },
+      {
+        state: 'datatabledemos',
+        short_label: 'DT',
+        name: 'Datatable Demos',
+        type: 'sub',
+        icon: 'feather icon-inbox',
+        children: [
+          {
+            state: 'ag-grid',
+            name: 'AG Grid'
+          },
+          {
+            state: 'ng2-smart-table',
+            name: 'Ng2 Smart Table'
+          },
+          {
+            state: 'jq-datatable',
+            name: 'Jq Datatable'
+          },
+          {
+            state: 'prime-ng-table',
+            name: 'Prime Ng Table'
+          }
+        ]
       },
       {
         state: 'finance',

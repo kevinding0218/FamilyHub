@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: './features/member/member.module#MemberModule'
       },
       {
+        path: 'datatabledemos',
+        loadChildren: './features/datatable-demo/datatable-demos.module#DatatableDemosModule'
+      },
+      {
         path: 'finance',
         loadChildren: './features/finance/finance.module#FinanceModule'
       },

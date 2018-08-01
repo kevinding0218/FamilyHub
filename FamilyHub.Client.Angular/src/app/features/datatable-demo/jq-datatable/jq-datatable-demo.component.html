@@ -1,0 +1,207 @@
+<div class="card">
+  <div class="card-header">
+    <h5>
+      Standard Datatable
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <jq-datatable [options]="{
+          colReorder: true,
+        ajax: 'assets/api/tables/datatables.standard.json',
+        columns: [ {data: 'id'}, {data: 'name'}, {data: 'phone'}, {data: 'company'}, {data: 'zip'}, {data: 'city'}, {data: 'date'} ] }"
+          paginationLength="true" tableClass="table table-bordered table-hover" width="100%">
+          <thead>
+            <tr>
+              <th data-hide="phone">ID</th>
+              <th data-class="expand">
+                <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
+                Name
+              </th>
+              <th data-hide="phone">
+                <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                Phone
+              </th>
+              <th>Company</th>
+              <th data-hide="phone,tablet">
+                <i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i>
+                Zip
+              </th>
+              <th data-hide="phone,tablet">City</th>
+              <th data-hide="phone,tablet">
+                <i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i>
+                Date
+              </th>
+            </tr>
+          </thead>
+        </jq-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h5>
+      Column Filters
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <jq-datatable [options]="{
+    ajax: 'assets/api/tables/datatables.filters.json',
+    columns: [ {data: 'name'}, {data: 'position'}, {data: 'office'}, {data: 'age'}, {data: 'date'}, {data: 'salary'} ] }
+    " filter="true" tableClass="table table-condenced table-striped table-bordered">
+          <thead>
+            <tr>
+              <th class="hasinput" [ngStyle]="{width:'17%'}">
+                <input type="text" class="form-control" placeholder="Filter Name" />
+              </th>
+              <th class="hasinput" [ngStyle]="{width:'18%'}">
+                <input class="form-control" placeholder="Filter Position" type="text" />
+              </th>
+              <th class="hasinput" [ngStyle]="{width:'10%'}">
+                <input type="text" class="form-control" placeholder="Filter Office" />
+              </th>
+              <th class="hasinput" [ngStyle]="{width:'17%'}">
+                <input type="text" class="form-control" placeholder="Filter Age" />
+              </th>
+              <th class="hasinput icon-addon">
+                <input id="dateselect_filter" type="text" placeholder="Filter Date" class="form-control datepicker" data-dateformat="yy/mm/dd"
+                />
+              </th>
+              <th class="hasinput" [ngStyle]="{width:'16%'}">
+                <input type="text" class="form-control" placeholder="Filter Salary" />
+              </th>
+            </tr>
+            <tr>
+              <th data-class="expand">Name</th>
+              <th>Position</th>
+              <th data-hide="phone">Office</th>
+              <th data-hide="phone">Age</th>
+              <th data-hide="phone,tablet">Start date</th>
+              <th data-hide="phone,tablet">Salary</th>
+            </tr>
+          </thead>
+        </jq-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h5>
+      Hide / Show Columns
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <jq-datatable [options]="{
+    ajax: 'assets/api/tables/datatables.standard.json',
+columns: [
+{data: 'id'},
+{data: 'name'},
+{data: 'phone'},
+{data: 'company'},
+{data: 'zip'},
+{data: 'city'},
+{data: 'date'}
+],
+buttons: [
+'colvis'
+]
+}" tableClass="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th data-hide="phone">ID</th>
+              <th data-class="expand">Name</th>
+              <th>Phone</th>
+              <th data-hide="phone">Company</th>
+              <th data-hide="phone,tablet">Zip</th>
+              <th data-hide="phone,tablet">City</th>
+              <th data-hide="phone,tablet">Date</th>
+            </tr>
+          </thead>
+        </jq-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h5>
+      Export to PDF
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <jq-datatable [options]="{
+    ajax: 'assets/api/tables/datatables.standard.json',
+  columns: [
+  {data: 'id'},
+  {data: 'name'},
+  {data: 'phone'},
+  {data: 'company'},
+  {data: 'zip'},
+  {data: 'city'},
+  {data: 'date'}
+  ],
+  buttons: [
+  'copy', 'excel', 'pdf', 'print'
+  ]
+  }" tableClass="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th data-hide="mobile-p">ID</th>
+              <th data-class="expand">Name</th>
+              <th>Phone</th>
+              <th data-hide="mobile-p">Company</th>
+              <th data-hide="mobile-p,tablet-p">Zip</th>
+              <th data-hide="mobile-p,tablet-p">City</th>
+              <th data-hide="mobile-p,tablet-p">Date</th>
+            </tr>
+          </thead>
+        </jq-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h5>
+      Rest API
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <jq-datatable [options]="options" tableClass="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th [style.width]="'8%'" data-hide="mobile-p">User ID</th>
+              <th [style.width]="'8%'" data-hide="mobile-p">Post ID</th>
+              <th>Title</th>
+              <th data-class="expand">Body</th>
+            </tr>
+          </thead>
+
+          <tfoot>
+            <tr>
+              <th>User ID</th>
+              <th>Post ID</th>
+              <th>Title</th>
+              <th>Body</th>
+            </tr>
+          </tfoot>
+        </jq-datatable>
+      </div>
+    </div>
+  </div>
+</div>
