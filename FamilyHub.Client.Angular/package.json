@@ -70,6 +70,8 @@
     "ngx-quill-editor": "^2.2.2",
     "ngx-tour-ng-bootstrap": "^2.0.1",
     "nouislider": "^11.1.0",
+    "primeicons": "^1.0.0-beta.10",
+    "primeng": "^6.0.2",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.2",
     "screenfull": "^3.3.2",

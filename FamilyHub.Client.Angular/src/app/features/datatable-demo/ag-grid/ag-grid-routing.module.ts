@@ -8,7 +8,7 @@ const routes: Routes = [{
   data: {
     title: 'Ag Grid',
     icon: 'icon-settings',
-    caption: 'Ag grid demo',
+    caption: 'Ag Grid Demo',
     status: true
   }
 }];

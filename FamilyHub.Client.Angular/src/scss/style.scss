@@ -55,9 +55,14 @@ File: style.css
 @import "~ag-grid/dist/styles/ag-grid.css";
 @import "~ag-grid/dist/styles/ag-theme-material.css";
 
-$table_row_hover: rgba(68, 138, 255, 0.1);
+$table_row_hover: #448aff;
 
 .ag-row-hover {
 	background-color: $table_row_hover !important;
 }
 
+.ui-table .ui-table-tbody > tr:nth-child(even).ui-state-highlight,
+.ui-table .ui-table-tbody > tr.ui-state-highlight {
+    background-color: $table_row_hover !important;
+    color: #FFF !important;
+}
