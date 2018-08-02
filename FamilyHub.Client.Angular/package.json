@@ -29,6 +29,7 @@
     "@ngrx/store-devtools": "^6.0.1",
     "@nicky-lenaers/ngx-scroll-to": "^0.6.0",
     "@swimlane/ngx-datatable": "^11.3.2",
+    "@syncfusion/ej2-ng-grids": "^16.2.46",
     "ag-grid": "^18.1.2",
     "ag-grid-angular": "^18.1.0",
     "angular-bootstrap-md": "^6.0.1",

@@ -70,6 +70,10 @@ const MENUITEMS = [
           {
             state: 'prime-ng-table',
             name: 'Prime Ng Table'
+          },
+          {
+            state: 'ejs-datatable',
+            name: 'EJS Data Table'
           }
         ]
       },

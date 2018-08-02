@@ -23,6 +23,10 @@ const routes: Routes = [{
     {
       path: 'prime-ng-table',
       loadChildren: './prime-ng-table/prime-ng-table.module#PrimeNgTableModule'
+    },
+    {
+      path: 'ejs-datatable',
+      loadChildren: './ejs-datatable-demo/ejs-datatable-demo.module#EjsDatatableDemoModule'
     }
   ]
 }];

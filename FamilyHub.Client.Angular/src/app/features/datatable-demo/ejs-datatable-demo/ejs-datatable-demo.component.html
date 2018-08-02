@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header">
+    <h5>
+      <a (click)="RedirectDocumentation()">EJS Datatable</a>
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <ejs-grid [dataSource]='data' id="gridcomp">
+          <e-columns>
+            <e-column field='memberContactID' headerText='Member Contact ID' width='120' textAlign='Right' isPrimaryKey='true'></e-column>
+            <e-column field='fullName' headerText='Full Name' width='120'></e-column>
+            <e-column field='contactPhone' headerText='Contact Phone'></e-column>
+            <e-column field='emailAddress' headerText='Email'></e-column>
+            <e-column field='location' headerText='Location' width='200'></e-column>
+            <e-column field='memberRelationshipName' headerText='Relationship' width='150' editType='dropdownedit'></e-column>
+            <e-column field='createdOn' headerText='Created Date' width='150'></e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </div>
+  </div>
+</div>
