@@ -1,6 +1,6 @@
 import { MemberService, MemberContactListResponse } from './../../../core/services/member.service';
 import { Component, OnInit } from '@angular/core';
-import { ContextMenuItem, GroupSettingsModel, EditSettingsModel } from '@syncfusion/ej2-ng-grids';
+import { ContextMenuItem, GroupSettingsModel, EditSettingsModel, PageSettingsModel } from '@syncfusion/ej2-ng-grids';
 
 @Component({
   selector: 'app-ejs-datatable-demo',
@@ -10,10 +10,11 @@ import { ContextMenuItem, GroupSettingsModel, EditSettingsModel } from '@syncfus
 export class EjsDatatableDemoComponent implements OnInit {
 
   public data: Array<MemberContactListResponse>;
+  public pageSettings: PageSettingsModel;
   public contextMenuItems: ContextMenuItem[];
   public editing: EditSettingsModel;
 
-  constructor(private memberService: MemberService) {}
+  constructor(private memberService: MemberService) { }
 
   ngOnInit(): void {
     this.memberService.listMemberContact(0)
@@ -21,6 +22,7 @@ export class EjsDatatableDemoComponent implements OnInit {
         console.log('listResponse:', listResponse);
         this.data = listResponse.model as Array<MemberContactListResponse>;
       });
+
     this.contextMenuItems = ['AutoFit', 'AutoFitAll', 'SortAscending', 'SortDescending',
       'Copy', 'Edit', 'Delete', 'Save', 'Cancel',
       'PdfExport', 'ExcelExport', 'CsvExport', 'FirstPage', 'PrevPage',
@@ -29,6 +31,6 @@ export class EjsDatatableDemoComponent implements OnInit {
   }
 
   RedirectDocumentation() {
-    window.open('https://ej2.syncfusion.com/16.2.41/angular/demos/#/material/grid/over-view', '_blank');
+    window.open('https://ej2.syncfusion.com/angular/demos/?utm_source=npm&utm_campaign=grid#/material/grid/contextmenu', '_blank');
   }
 }
