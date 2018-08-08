@@ -6,7 +6,6 @@ import {
     HttpInterceptor
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import 'rxjs/add/operator/do';
 
 @Injectable()
@@ -27,8 +26,6 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(request);
     }
 
-
-
     handleApiRequest(request, next) {
         request = request.clone({
             setHeaders: {
@@ -36,18 +33,6 @@ export class TokenInterceptor implements HttpInterceptor {
             }
         });
 
-        const handler = next.handle(request).pipe(
-            catchError((error, caught) => {
-                if (error.status === 401 || error.status === 403) {
-
-                    //   this.store.dispatch(new fromAuth.LogoutAction());
-                    return throwError(error);
-                } else {
-                    return throwError(error);
-                }
-            })
-        );
-
-        return handler;
+        return next.handle(request);
     }
 }
