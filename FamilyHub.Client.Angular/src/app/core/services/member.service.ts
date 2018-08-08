@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 import * as moment from 'moment';
-import { environment } from './../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { ActionState } from '../../shared/services/action.config';
 import { IResponse, ISingleResponse, IListResponse, ResponseMessage } from './response extension/api-response.config';
 

@@ -45,8 +45,18 @@ const MENUITEMS = [
         state: 'member',
         short_label: 'M',
         name: 'Member',
-        type: 'link',
-        icon: 'feather icon-users'
+        type: 'sub',
+        icon: 'feather icon-users',
+        children: [
+          {
+            state: 'member-list',
+            name: 'Member List Simple'
+          },
+          {
+            state: 'member-ngrx-store',
+            name: 'Member List Advance'
+          }
+        ]
       },
       {
         state: 'datatabledemos',

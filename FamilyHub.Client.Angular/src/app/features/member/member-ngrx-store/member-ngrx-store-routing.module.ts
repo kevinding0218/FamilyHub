@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { MemberListComponent } from './member-list.component';
+import { MemberNgrxStoreComponent } from './member-ngrx-store.component';
 
 const routes: Routes = [{
   path: '',
-  component: MemberListComponent,
+  component: MemberNgrxStoreComponent,
   data: {
-    title: 'Member List Simple',
+    title: 'Member List Advance',
     icon: 'icon-users'
   }
 }];
@@ -16,4 +15,4 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MemberListRoutingModule { }
+export class MemberNgrxStoreRoutingModule { }

@@ -16,6 +16,10 @@ const routes: Routes = [{
     {
       path: 'member-list',
       loadChildren: './member-list/member-list.module#MemberListModule'
+    },
+    {
+      path: 'member-ngrx-store',
+      loadChildren: './member-ngrx-store/member-ngrx-store.module#MemberNgrxStoreModule'
     }
   ]
 }];

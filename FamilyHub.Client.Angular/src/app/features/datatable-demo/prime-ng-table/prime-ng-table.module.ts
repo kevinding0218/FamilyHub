@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PrimeNgTableRoutingModule } from './prime-ng-table-routing.module';
 import { PrimeNgTableComponent } from './prime-ng-table.component';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   imports: [
