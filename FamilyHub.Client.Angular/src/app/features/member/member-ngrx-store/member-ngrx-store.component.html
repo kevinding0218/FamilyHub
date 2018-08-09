@@ -3,6 +3,19 @@
     <h5>
       <a (click)="RedirectDocumentation()">Prime Ng Grid</a>
     </h5>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="f-left">
+          <div class="right-icon-control">
+            <div class="form-icon ">
+              <button class="btn btn-outline-primary btn-icon ripple light" (click)="addMemberDetail()">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="card-body">
     <div class="row">
@@ -40,3 +53,6 @@
     </div>
   </div>
 </div>
+
+<app-member-detail-reactive-popup [currentDetailInfo]="selectedMemberDetail" [currentDetailIndex]="selectedMemberDetailIndex" [viewMode]="memberDetailViewMode"
+  [relationshipOptions]="relationshipOptions"></app-member-detail-reactive-popup>

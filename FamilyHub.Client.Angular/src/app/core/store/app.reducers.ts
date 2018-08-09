@@ -9,14 +9,13 @@ import {
 
 import { environment } from '../../../environments/environment';
 
-import * as member from './member';
-
+// tslint:disable-next-line:no-empty-interface
 export interface AppState {
-    member: member.MemberState;
+    // member: member.MemberState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-    member: member.memberReducer
+    // member: member.memberReducer
 };
 
 // console.log all actions

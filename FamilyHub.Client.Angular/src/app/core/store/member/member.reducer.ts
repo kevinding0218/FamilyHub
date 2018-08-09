@@ -1,4 +1,4 @@
-import { MemberActions, MemberActionTypes, MemberContactCreateFailure } from './member.actions';
+import { MemberActions, MemberActionTypes } from './member.actions';
 
 import { MemberContactListResponse } from '../../services/member.service';
 
