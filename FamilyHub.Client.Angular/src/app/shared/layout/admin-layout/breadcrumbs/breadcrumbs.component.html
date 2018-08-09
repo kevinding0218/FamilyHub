@@ -4,13 +4,15 @@
       <div class="row align-items-center">
         <div class="col-md-8">
           <div class="page-header-title">
-            <span *ngFor="let breadcrumb of breadcrumbs; let last = last"><h4 *ngIf="last" class="m-b-10">{{ breadcrumb.label }}</h4></span>
+            <span *ngFor="let breadcrumb of breadcrumbs; let last = last">
+              <h4 *ngIf="last" class="m-b-10">{{ breadcrumb.label }}</h4>
+            </span>
             <!--<p class="m-b-0" *ngIf="breadcrumb.caption">{{ breadcrumb.caption }}</p>-->
           </div>
           <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a [routerLink]="['/dashboard/default/']">
-                <i class="feather icon-home"></i>
+            <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let last = last">
+              <a [routerLink]="['/dashboard/default/']" *ngIf="last">
+                <i class="feather {{ breadcrumb.icon }}"></i>
               </a>
             </li>
             <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs;">
