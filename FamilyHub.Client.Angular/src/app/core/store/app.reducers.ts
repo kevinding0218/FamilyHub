@@ -18,13 +18,12 @@ export const reducers: ActionReducerMap<AppState> = {
     // member: member.memberReducer
 };
 
-// console.log all actions
 export function logger(
     reducer: ActionReducer<AppState>
 ): ActionReducer<AppState> {
     return function (state: AppState, action: any): AppState {
-        console.log('\nstate', state);
-        console.log('+ action', action);
+        console.log('state: ', state);
+        console.log('action: ', action);
 
         return reducer(state, action);
     };
@@ -32,8 +31,6 @@ export function logger(
 
 export const metaReducers: MetaReducer<AppState>[] = [logger];
 
-// export const effects = [
-//     profile.ProfileEffects
-// ];
+export const effects = [
 
-// export const services = [notify.NotifyService];
+];

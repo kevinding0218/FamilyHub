@@ -18,6 +18,7 @@ import { I18nModule } from './i18n/i18n.module';
 
 import { TokenInterceptor } from './services/http-interceptor/token.interceptor';
 import { LoggingInterceptor } from './services/http-interceptor/logging.interceptor';
+import { ErrorInterceptor } from './services/http-interceptor/error.interceptor';
 import { sharedServices } from './services';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -71,6 +72,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoggingInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     },
     ...sharedServices

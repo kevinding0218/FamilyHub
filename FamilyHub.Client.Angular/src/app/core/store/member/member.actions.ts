@@ -2,7 +2,9 @@ import { Action } from '@ngrx/store';
 import { MemberDetailRequest, MemberDetailResponse, MemberContactListResponse } from '../../services/member.service';
 
 export enum MemberActionTypes {
-    MemberListFetch = '[MEMBER LIST Request] Fetch Action',
+    MemberListFetch = '[MEMBER List Request] Fetch Action',
+    MemberListFetchSuccess = '[MEMBER List Response] Fetch Action Success',
+    MemberListFetchFailure = '[MEMBER List Response] Fetch Action Failure',
     MemberContactCreate = '[Member Contact Request] Create Action',
     MemberContactCreateSuccess = '[Member Contact Response] Create Action Success',
     MemberContactCreateFailure = '[Member Contact Response] Create Action Failure',
@@ -16,7 +18,17 @@ export enum MemberActionTypes {
 
 export class MemberListFetch implements Action {
     readonly type = MemberActionTypes.MemberListFetch;
+    constructor(public payload: number) {}
+}
+
+export class MemberListFetchSuccess implements Action {
+    readonly type = MemberActionTypes.MemberListFetchSuccess;
     constructor(public payload: Array<MemberContactListResponse>) {}
+}
+
+export class MemberListFetchFailure implements Action {
+    readonly type = MemberActionTypes.MemberListFetchFailure;
+    constructor(public payload: string) {}
 }
 
 export class MemberContactCreate implements Action {
@@ -65,7 +77,7 @@ export class MemberContactDeleteFailure implements Action {
 }
 
 export type MemberActions =
-    | MemberListFetch
+    | MemberListFetch | MemberListFetchSuccess | MemberListFetchFailure
     | MemberContactCreate | MemberContactCreateSuccess | MemberContactCreateFailure
     | MemberContactUpdate | MemberContactUpdateSuccess | MemberContactUpdateFailure
     | MemberContactDelete | MemberContactDeleteSuccess | MemberContactDeleteFailure;

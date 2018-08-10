@@ -1,2 +1,2 @@
-export * from './member.reducer';
+export * from './member.reducers';
 export * from './member.actions';

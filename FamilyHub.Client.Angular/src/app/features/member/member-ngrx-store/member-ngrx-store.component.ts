@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IOption } from 'ng-select';
 
-import * as fromStore from '../../../core/store/member/member.reducer';
+import * as fromAction from '../../../core/store/member/member.actions';
+import * as fromStore from '../../../core/store/member/member.reducers';
 import * as fromSelector from '../../../core/store/member/member.selectors';
 
 import { SharedService } from '../../../shared/services/shared.service';
@@ -45,10 +46,18 @@ export class MemberNgrxStoreComponent implements OnInit {
       { field: 'createdOn', header: 'Created Date' }
     ];
 
-    this.store.select(fromSelector.getMemberList)
-      .subscribe((selectorState) => {
-        console.log('selectorState: ', selectorState);
-        this.rowData = selectorState;
+    this.store.dispatch(new fromAction.MemberListFetch(0));
+
+    // this.store.select('members')
+    this.store.select(fromSelector.getMemberListFetchSuccess)
+      .subscribe((componentSelector) => {
+        console.log('MemberNgrxStoreComponent store.select: ', componentSelector);
+        this.rowData = componentSelector;
+      });
+
+    this.store.select(fromSelector.getMemberListFetchFailure)
+      .subscribe((componentSelector) => {
+        console.log('getMemberListFetchFailure: ', componentSelector);
       });
   }
 

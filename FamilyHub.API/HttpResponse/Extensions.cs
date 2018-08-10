@@ -14,10 +14,10 @@ namespace FamilyHub.API
         {
             var status = HttpStatusCode.OK;
 
-            if (response.DidError)
-                status = HttpStatusCode.InternalServerError;
-            else if (response.Model == null)
-                status = HttpStatusCode.NoContent;
+            //if (response.DidError)
+            //    status = HttpStatusCode.InternalServerError;
+            //else if (response.Model == null)
+            //    status = HttpStatusCode.NoContent;
 
             return new ObjectResult(response)
             {
@@ -29,10 +29,10 @@ namespace FamilyHub.API
         {
             var status = HttpStatusCode.OK;
 
-            if (response.DidError)
-                status = HttpStatusCode.InternalServerError;
-            else if (response.Model == null)
-                status = HttpStatusCode.NotFound;
+            //if (response.DidError)
+            //    status = HttpStatusCode.InternalServerError;
+            //else if (response.Model == null)
+            //    status = HttpStatusCode.NotFound;
 
             return new ObjectResult(response)
             {
@@ -44,8 +44,8 @@ namespace FamilyHub.API
         {
             var status = HttpStatusCode.OK;
 
-            if (response.DidError)
-                status = HttpStatusCode.InternalServerError;
+            //if (response.DidError)
+            //    status = HttpStatusCode.InternalServerError;
 
             return new ObjectResult(response)
             {

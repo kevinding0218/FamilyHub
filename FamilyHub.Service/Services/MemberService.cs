@@ -59,9 +59,17 @@ namespace FamilyHub.Service.Services
 
             try
             {
-                var listMemberContactFromDb = await MemberContactRepository.GetListMemberContactAsync(createdBy);
-                response.Model = _mapper.Map<IEnumerable<MemberContact>, IEnumerable<vmMemberContactListResponse>>(listMemberContactFromDb);
-                response.Message = ResponseMessageDisplay.Success;
+                if (createdBy == 0)
+                {
+                    var listMemberContactFromDb = await MemberContactRepository.GetListMemberContactAsync(createdBy);
+                    response.Model = _mapper.Map<IEnumerable<MemberContact>, IEnumerable<vmMemberContactListResponse>>(listMemberContactFromDb);
+                    response.Message = ResponseMessageDisplay.Success;
+                }
+                else
+                {
+                    response.DidError = true;
+                    response.ErrorMessage = "createdBy must be greater than 0.";
+                }
             }
             catch (Exception ex)
             {

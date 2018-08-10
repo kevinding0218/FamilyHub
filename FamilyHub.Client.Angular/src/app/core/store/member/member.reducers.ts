@@ -21,16 +21,18 @@ const memberDefault: MemberContactListResponse = {
 const memberListDefault: Array<MemberContactListResponse> = [memberDefault];
 
 export interface MemberState {
+    userId: number;
     dataModel: Array<MemberContactListResponse>;
     errorMsg: string;
 }
 
 export const initialMemberState: MemberState = {
-    dataModel: memberListDefault,
+    userId: 0,
+    dataModel: [],
     errorMsg: ''
 };
 
-export function memberReducer(
+export function memberReducers(
     state = initialMemberState,
     action: MemberActions
 ): MemberState {
@@ -38,7 +40,17 @@ export function memberReducer(
         case MemberActionTypes.MemberListFetch:
             return {
                 ...state,
+                userId: action.payload
+            };
+        case MemberActionTypes.MemberListFetchSuccess:
+            return {
+                ...state,
                 dataModel: [...action.payload]
+            };
+        case MemberActionTypes.MemberListFetchFailure:
+            return {
+                ...state,
+                errorMsg: action.payload
             };
         case MemberActionTypes.MemberContactCreateSuccess:
             return {
