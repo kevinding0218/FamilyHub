@@ -10,10 +10,12 @@
             <!--<p class="m-b-0" *ngIf="breadcrumb.caption">{{ breadcrumb.caption }}</p>-->
           </div>
           <ul class="breadcrumb">
-            <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let last = last">
-              <a [routerLink]="['/dashboard/default/']" *ngIf="last">
-                <i class="feather {{ breadcrumb.icon }}"></i>
-              </a>
+            <li class="breadcrumb-item">
+              <span *ngFor="let breadcrumb of breadcrumbs; let last = last">
+                <a [routerLink]="['/dashboard/default/']">
+                  <i class="feather {{ breadcrumb.icon }}"></i>
+                </a>
+              </span>
             </li>
             <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs;">
               <a [ngClass]="breadcrumb.status === false ? 'not-active': ''" [routerLink]="breadcrumb.url">{{breadcrumb.label}}</a>
