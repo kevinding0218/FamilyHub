@@ -6,9 +6,10 @@ import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.css']
 })
+
 export class BreadcrumbsComponent {
   tempState = [];
-  breadcrumbs: Array<Object>;
+  breadcrumbs: Array<BreadCrumb>;
   constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events
       .filter(event => event instanceof NavigationEnd)
@@ -57,4 +58,12 @@ export class BreadcrumbsComponent {
         } while (currentRoute);
       });
   }
+}
+
+export class BreadCrumb {
+  status: boolean;
+  icon: boolean;
+  url: string;
+  label: string;
+  caption: boolean;
 }
